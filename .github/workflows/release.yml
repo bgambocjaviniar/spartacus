@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - name: Set @babel-bot as committer
+      - name: Set Spartacusbot
         run: |
           git config user.name "Spartacus[bot]"
           git config user.email "spartacus-sap@github.com"
@@ -43,7 +43,7 @@ jobs:
         id: changelog
         run: npx lerna-changelog --from=${{ github.event.inputs.fromTag }} --to=${{ github.event.inputs.toTag }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish pre-release
         uses: ./.github/publish-pre-release
         with:
