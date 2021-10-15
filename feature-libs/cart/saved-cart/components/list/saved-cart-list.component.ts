@@ -23,6 +23,7 @@ import { map, take } from 'rxjs/operators';
 })
 export class SavedCartListComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
+  anothercoolvar: string;
 
   @ViewChild('element') restoreButton: ElementRef;
 
