@@ -41,7 +41,7 @@ jobs:
           fetch-depth: 0
       - name: create changelogs
         id: changelog
-        run: npx lerna-changelog --from=${{ github.event.inputs.fromTag }} --to=${{ github.event.inputs.toTag }}
+        run: npx lerna-changelog --tag-from ${{ github.event.inputs.fromTag }} --tag-to ${{ github.event.inputs.toTag }}
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish pre-release
