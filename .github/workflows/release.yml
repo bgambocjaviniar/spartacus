@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
@@ -36,19 +36,19 @@ jobs:
     outputs:
       changelog: ${{ steps.changelog.outputs.changelog }}
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-    - name: create changelogs
-      id: changelog
-      run: npx lerna-changelog --from=${{ github.event.inputs.fromTag }} --to=${{ github.event.inputs.toTag }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Publish pre-release
-      uses: ./.github/publish-pre-release
-      with:
-        tag: ${{ github.event.inputs.toTag }} 
-        changelog: ${{ steps.changelog.outputs.changelog }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: create changelogs
+        id: changelog
+        run: npx lerna-changelog --from=${{ github.event.inputs.fromTag }} --to=${{ github.event.inputs.toTag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish pre-release
+        uses: ./.github/publish-pre-release
+        with:
+          tag: ${{ github.event.inputs.toTag }} 
+          changelog: ${{ steps.changelog.outputs.changelog }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
