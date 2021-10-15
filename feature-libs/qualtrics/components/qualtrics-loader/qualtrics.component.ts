@@ -14,6 +14,7 @@ export class QualtricsComponent {
     protected qualtricsLoader: QualtricsLoaderService,
     protected config: QualtricsConfig
   ) {
+    console.log('change 4');
     if (this.config.qualtrics?.scriptSource) {
       this.qualtricsLoader.addScript(this.config.qualtrics.scriptSource);
     } else if (isDevMode()) {

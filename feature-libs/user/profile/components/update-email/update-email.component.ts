@@ -15,6 +15,7 @@ export class UpdateEmailComponent {
   isUpdating$ = this.service.isUpdating$;
 
   onSubmit(): void {
+    console.log('change 10000');
     this.service.save();
   }
 }
