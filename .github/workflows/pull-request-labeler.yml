@@ -5,6 +5,8 @@ jobs:
   autoLabelPullRequest:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v3
-      with:
+    - uses: TimonVS/pr-labeler-action@v3
+      with: 
+        configuration-path: .github/pull-request.labeler.yml
+      env:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"

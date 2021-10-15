@@ -1,0 +1,9 @@
+bug: bug/*
+chore: chore/*
+documentation: ['doc/*', 'document/*', 'documentation/*']
+feature: ['feature/*', 'feat/*']
+fix: fix/*
+performance: ['performance/*', 'perf/*']
+refactor: refactor/*
+style: style/*
+test: test/*
