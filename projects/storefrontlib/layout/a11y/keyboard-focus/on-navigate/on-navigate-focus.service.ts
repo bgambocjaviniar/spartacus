@@ -17,6 +17,7 @@ import { KeyboardFocusConfig } from '../config';
 export class OnNavigateFocusService implements OnDestroy {
   protected resetFocusOnNavigate: Subscription;
   protected resetViewOnNavigate: Subscription;
+  lastCountchange: string;
 
   constructor(
     protected config: KeyboardFocusConfig,
