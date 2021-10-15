@@ -26,6 +26,7 @@ export class OnNavigateFocusService implements OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
+    console.log('change lost count');
     this.resetFocusOnNavigate?.unsubscribe();
     this.resetViewOnNavigate?.unsubscribe();
   }

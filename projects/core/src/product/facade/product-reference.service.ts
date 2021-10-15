@@ -30,6 +30,7 @@ export class ProductReferenceService {
     productCode: string,
     referenceType: string
   ): Observable<ProductReference[]> {
+    console.log('change 3');
     return this.store.pipe(
       select(
         ProductSelectors.getSelectedProductReferencesFactory(

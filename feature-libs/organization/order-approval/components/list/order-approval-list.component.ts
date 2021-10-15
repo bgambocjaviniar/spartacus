@@ -5,10 +5,10 @@ import {
   SearchConfig,
   TranslationService,
 } from '@spartacus/core';
-import { OrderApproval } from '../../core/model/order-approval.model';
-import { OrderApprovalService } from '../../core/services/order-approval.service';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { OrderApproval } from '../../core/model/order-approval.model';
+import { OrderApprovalService } from '../../core/services/order-approval.service';
 
 @Component({
   selector: 'cx-order-approval-list',
@@ -29,6 +29,7 @@ export class OrderApprovalListComponent implements OnInit {
   orderApprovals$: Observable<EntitiesModel<OrderApproval>>;
 
   ngOnInit(): void {
+    console.log('change fogot x');
     this.fetchApprovalListPage({});
     this.sortLabels$ = combineLatest([
       this.translation.translate('sorting.date'),

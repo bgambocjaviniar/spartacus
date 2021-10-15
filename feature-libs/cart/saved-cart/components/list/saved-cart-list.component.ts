@@ -48,6 +48,7 @@ export class SavedCartListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    console.log('changed one');
     this.isLoading$ = this.savedCartService.getSavedCartListProcessLoading();
     this.savedCartService.loadSavedCarts();
   }
