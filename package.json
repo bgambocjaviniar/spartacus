@@ -214,6 +214,16 @@
     "webpack-cli": "^3.3.12"
   },
   "changelog": {
-    "repo": "bgambocjaviniar/spartacus"
+    "repo": "bgambocjaviniar/spartacus",
+    "labels": {
+      "bug": "coolio bug",
+      "documentation": "coolio doc",
+      "feature": "coolio feature",
+      "fix": "coolio fix",
+      "performance": "coolio performance",
+      "refactor": "coolio refactor",
+      "style": "coolio style",
+      "test": "coolio test"
+    }
   }
 }
