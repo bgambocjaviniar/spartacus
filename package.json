@@ -212,5 +212,8 @@
     "ts-node": "~8.3.0",
     "typescript": "^4.2.4",
     "webpack-cli": "^3.3.12"
+  },
+  "changelog": {
+    "repo": "bgambocjaviniar/spartacus"
   }
 }

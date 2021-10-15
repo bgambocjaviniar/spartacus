@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch:
+    inputs:
+      release-version:
+        description: 'x.x.x'
+        required: true
+        default: 4.2.0
+      fromTag:
+        description: 'previous release tag version'
+        required: true
+        default: 'asm-3.4.3'
+      toTag:
+        description: 'current release tag version'
+        required: true
+        default: 'asm-4.0.0'
+name: "Release"
+jobs:
+  preRelease:
+    name: Create pre-release 
+    runs-on: ubuntu-latest
+    outputs:
+      changelog: ${{ steps.changelog.outputs.changelog }}
+    steps:
+    - name: create changelogs
+      id: changelog
+      run: npx lerna-changelog --from=${{ github.event.inputs.fromTag }} --to=${{ github.event.inputs.toTag }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish pre-release
+      uses: ./.github/publish-pre-release
+      with:
+        tag: ${{ github.event.inputs.toTag }} 
+        changelog: ${{ steps.changelog.outputs.changelog }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      

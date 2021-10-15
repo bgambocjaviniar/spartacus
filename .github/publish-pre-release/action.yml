@@ -1,0 +1,5 @@
+name: 'Release'
+description: 'Release bot'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
