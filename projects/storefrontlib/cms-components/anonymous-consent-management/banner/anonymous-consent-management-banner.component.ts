@@ -1,9 +1,9 @@
 import { Component, OnDestroy, ViewContainerRef } from '@angular/core';
 import { AnonymousConsentsService } from '@spartacus/core';
-import { LaunchDialogService } from '../../../layout/launch-dialog/services/launch-dialog.service';
-import { LAUNCH_CALLER } from '../../../layout/launch-dialog/config/launch-config';
 import { Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { LAUNCH_CALLER } from '../../../layout/launch-dialog/config/launch-config';
+import { LaunchDialogService } from '../../../layout/launch-dialog/services/launch-dialog.service';
 
 @Component({
   selector: 'cx-anonymous-consent-management-banner',
@@ -12,8 +12,7 @@ import { tap } from 'rxjs/operators';
 export class AnonymousConsentManagementBannerComponent implements OnDestroy {
   private subscriptions = new Subscription();
 
-  bannerVisible$: Observable<boolean> =
-    this.anonymousConsentsService.isBannerVisible();
+  bannerVisible$: Observable<boolean> = this.anonymousConsentsService.isBannerVisible();
 
   constructor(
     protected anonymousConsentsService: AnonymousConsentsService,
@@ -40,6 +39,12 @@ export class AnonymousConsentManagementBannerComponent implements OnDestroy {
         .pipe(tap(() => this.hideBanner()))
         .subscribe()
     );
+  }
+
+  coolFunction(): void {}
+
+  returnCoolFunctio(): string {
+    return '';
   }
 
   hideBanner(): void {
