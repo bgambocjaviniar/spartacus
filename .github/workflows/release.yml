@@ -42,7 +42,7 @@ jobs:
       - name: create changelogs
         id: changelog
         run: |
-          echo "::set-output name=changelog::$(npx lerna-changelog --tag-from ${{ github.event.inputs.fromTag }} --tag-to ${{ github.event.inputs.toTag }})"
+          echo "::set-output name=changelog::`npx lerna-changelog --tag-from ${{ github.event.inputs.fromTag }} --tag-to ${{ github.event.inputs.toTag }}`"
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish pre-release
