@@ -44,6 +44,7 @@ jobs:
         run: |
           TEMPLOG=`npx lerna-changelog --tag-from ${{ github.event.inputs.fromTag }} --tag-to ${{ github.event.inputs.toTag }}`
            echo "::set-output name=changelog::$TEMPLOG"
+           echo "what ${{ steps.changelog.outputs.changelog }}"
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish pre-release
