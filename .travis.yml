@@ -47,7 +47,3 @@ jobs:
     name: "E2E tests for Digital Payments"
   - script: "./ci-scripts/lhci.sh"
     name: "Lighthouse score validation"
-addons:
-  chrome: stable
-  sonarcloud:
-    organization: sap
