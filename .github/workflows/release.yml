@@ -50,8 +50,11 @@ jobs:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish pre-release
         uses: ./.github/publish-pre-release
+        with:
+          changelogtest: ${{ steps.changelog.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CHANGELOG: ${{ steps.changelog.outputs.changelog }}
           TAG: ${{ github.event.inputs.toTag }} 
-      
+      - name: Test changelog input from docker file
+        run: echo "test work ${{ steps.changelog.outputs.changelog }}"
