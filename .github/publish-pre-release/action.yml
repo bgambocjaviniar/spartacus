@@ -14,4 +14,4 @@ jobs:
     name: setup dependencies
     runs-on: ubuntu-latest
     steps: 
-      - run: echo "${{ inputs.changelogTest }}"
+      - run: echo "${{ inputs.changelogtest }}"
