@@ -9,9 +9,3 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.changelogtest }}
-jobs:
-  test-me:
-    name: setup dependencies
-    runs-on: ubuntu-latest
-    steps: 
-      - run: echo "${{ inputs.changelogtest }}"
