@@ -29,6 +29,8 @@ async function run() {
       pull_number: 13,
     }
   );
+  console.log('wow', whoamlol?.labels);
+  console.log('ok', JSON.stringify(whoamlol?.labels));
 
   console.log('colio', whoamlol);
 
