@@ -35,7 +35,25 @@ async function run() {
 
   console.log('colio', whoamlol);
 
-  await createRelease(context, octoKit, TAG, 'test');
+  await createRelease(
+    context,
+    octoKit,
+    TAG,
+    `#### coolio bug
+  * [#11](https://github.com/bgambocjaviniar/spartacus/pull/11) Bug/abc ([@bgambocjaviniar](https://github.com/bgambocjaviniar))
+  
+  #### Committers: 1
+  - Brian Gamboc-Javiniar ([@bgambocjaviniar](https://github.com/bgambocjaviniar))
+  
+  
+  ## 10.0.0-test (2021-10-15)
+  
+  #### coolio bug
+  * [#11](https://github.com/bgambocjaviniar/spartacus/pull/11) Bug/abc ([@bgambocjaviniar](https://github.com/bgambocjaviniar))
+  
+  #### Committers: 1
+  - Brian Gamboc-Javiniar ([@bgambocjaviniar](https://github.com/bgambocjaviniar))`
+  );
 }
 
 run();
