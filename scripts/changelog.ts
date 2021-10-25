@@ -33,6 +33,8 @@ export default async function run(
   args: ChangelogOptions,
   logger: logging.Logger
 ) {
+  console.log('who', args);
+
   const commits: JsonObject[] = [];
   let toSha: string | null = null;
   const breakingChanges: JsonObject[] = [];
@@ -98,11 +100,17 @@ export default async function run(
     _: unknown,
     callback: () => {}
   ) {
+    // console.log('chunk stuff', chunk);
     this.push(chunk);
     callback();
   });
 
   function getRawCommitsStream(to: string) {
+    console.log('help', [
+      to,
+      args.library,
+      path.join(__dirname, '..', libraryPaths[args?.library ?? '']),
+    ]);
     return gitRawCommits({
       from: fromToken,
       to,
@@ -134,9 +142,13 @@ export default async function run(
       .pipe(
         through((chunk: Buffer, _: string, callback: Function) => {
           // Replace github URLs with `@XYZ#123`
+
+          // console.log('b4a', chunk.toString('utf-8'));
           const commit = chunk
             .toString('utf-8')
             .replace(/https?:\/\/github.com\/(.*?)\/issues\/(\d+)/g, '@$1#$2');
+
+          // console.log('aft', commit);
 
           callback(undefined, new Buffer(commit));
         })
@@ -153,6 +165,7 @@ export default async function run(
       )
       .pipe(
         through.obj((chunk: JsonObject, _: string, cb: Function) => {
+          // console.log('chunk', chunk.gitTags);
           try {
             const maybeTag =
               chunk.gitTags && (chunk.gitTags as string).match(/tag: (.*)/);
@@ -161,15 +174,19 @@ export default async function run(
             if (tags && tags.find((x) => x == args.to)) {
               toSha = chunk.hash as string;
             }
+            // console.log('tf', chunk);
             const notes: any = chunk.notes;
             if (Array.isArray(notes)) {
               notes.forEach((note) => {
+                // console.log(note);
                 if (breakingChangesKeywords.includes(note.title)) {
+                  // console.log('br', chunk);
                   breakingChanges.push({
                     content: note.text,
                     commit: chunk,
                   });
                 } else if (deprecationsKeywords.includes(note.title)) {
+                  // console.log('dep', chunk);
                   deprecations.push({
                     content: note.text,
                     commit: chunk,
@@ -177,6 +194,7 @@ export default async function run(
                 }
               });
             }
+            console.log('chunk', chunk);
             commits.push(chunk);
             cb();
           } catch (err) {
@@ -204,17 +222,20 @@ export default async function run(
       });
 
       if (args.stdout || !githubToken) {
-        console.log(markdown);
+        // console.log(markdown);
         process.exit(0);
       }
-
+      // console.log('confused');
       // Check if we need to edit or create a new one.
       return ghGot('repos/SAP/spartacus/releases').then((x: JsonObject) => [
         x,
         markdown,
       ]);
+
+      // console.log('obv');
     })
     .then(([body, markdown]) => {
+      console.log('vat');
       const json = body.body;
       const maybeRelease = json.find((x: JsonObject) => x.tag_name == args.to);
       const id = maybeRelease ? `/${maybeRelease.id}` : '';
@@ -222,7 +243,7 @@ export default async function run(
       const semversion = (args.to && semver.parse(args.to)) || {
         prerelease: '',
       };
-
+      console.log('why is token empty', githubToken);
       return ghGot('repos/SAP/spartacus/releases' + id, {
         body: {
           body: markdown,
@@ -246,12 +267,11 @@ program
   .parse(process.argv);
 
 const config = {
-  from: program.from,
   to: program.to,
-  stdout: program.verbose || false,
   githubToken: program.githubToken,
   githubTokenFile: program.tokenFile,
   library: program.lib,
+  stdout: program.verbose || false,
 };
 
 if (typeof config.to === 'undefined') {

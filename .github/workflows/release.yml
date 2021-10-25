@@ -1,0 +1,60 @@
+on:
+  workflow_dispatch:
+    inputs:
+      release-version:
+        description: 'x.x.x'
+        required: true
+        default: 4.2.0
+      fromTag:
+        description: 'previous release tag version'
+        required: true
+        default: '3.0.0-test'
+      toTag:
+        description: 'current release tag version'
+        required: true
+        default: '5.0.0-test'
+name: "Release"
+jobs:
+  setup: 
+    name: setup dependencies
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - name: Set Spartacusbot
+        run: |
+          git config user.name "Spartacus[bot]"
+          git config user.email "spartacus-sap@github.com"
+  preRelease:
+    name: Create pre-release 
+    runs-on: ubuntu-latest
+    needs: setup
+    outputs:
+      changelog: ${{ steps.changelog.outputs.changelog }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: create changelogs
+        id: changelog
+        run: |
+          output=`npx lerna-changelog --tag-from ${{ github.event.inputs.fromTag }} --tag-to ${{ github.event.inputs.toTag }}` &
+          wait
+          echo "$output"
+          echo "::set-output name=changelog::`npx lerna-changelog --tag-from ${{ github.event.inputs.fromTag }} --tag-to ${{ github.event.inputs.toTag }}`"
+        env:
+          GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish pre-release
+        uses: ./.github/publish-pre-release
+        with:
+          changelogtest: ${{ steps.changelog.outputs.changelog }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANGELOG: ${{ steps.changelog.outputs.changelog }}
+          TAG: ${{ github.event.inputs.toTag }} 
+      - name: Test changelog input from docker file
+        run: echo "test work ${{ steps.changelog.outputs.changelog }}"

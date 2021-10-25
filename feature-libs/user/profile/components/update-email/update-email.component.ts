@@ -13,8 +13,10 @@ export class UpdateEmailComponent {
 
   form: FormGroup = this.service.form;
   isUpdating$ = this.service.isUpdating$;
+  coolvar: string;
 
   onSubmit(): void {
+    console.log('change 10000');
     this.service.save();
   }
 }

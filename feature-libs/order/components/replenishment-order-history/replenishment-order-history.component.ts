@@ -30,19 +30,19 @@ export class ReplenishmentOrderHistoryComponent implements OnDestroy {
   private PAGE_SIZE = 5;
   sortType: string;
 
-  replenishmentOrders$: Observable<ReplenishmentOrderList | undefined> =
-    this.userReplenishmentOrderService
-      .getReplenishmentOrderHistoryList(this.PAGE_SIZE)
-      .pipe(
-        tap((replenishmentOrders: ReplenishmentOrderList | undefined) => {
-          if (replenishmentOrders?.pagination?.sort) {
-            this.sortType = replenishmentOrders.pagination.sort;
-          }
-        })
-      );
+  replenishmentOrders$: Observable<
+    ReplenishmentOrderList | undefined
+  > = this.userReplenishmentOrderService
+    .getReplenishmentOrderHistoryList(this.PAGE_SIZE)
+    .pipe(
+      tap((replenishmentOrders: ReplenishmentOrderList | undefined) => {
+        if (replenishmentOrders?.pagination?.sort) {
+          this.sortType = replenishmentOrders.pagination.sort;
+        }
+      })
+    );
 
-  isLoaded$: Observable<boolean> =
-    this.userReplenishmentOrderService.getReplenishmentOrderHistoryListSuccess();
+  isLoaded$: Observable<boolean> = this.userReplenishmentOrderService.getReplenishmentOrderHistoryListSuccess();
 
   constructor(
     protected routing: RoutingService,
@@ -50,7 +50,9 @@ export class ReplenishmentOrderHistoryComponent implements OnDestroy {
     protected translation: TranslationService,
     protected vcr: ViewContainerRef,
     protected launchDialogService: LaunchDialogService
-  ) {}
+  ) {
+    console.log('changed 2');
+  }
 
   changeSortCode(sortCode: string): void {
     const event: { sortCode: string; currentPage: number } = {

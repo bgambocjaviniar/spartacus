@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BulkPricingService } from '@spartacus/product/bulk-pricing/core';
 import { RoutingService } from '@spartacus/core';
-import { BulkPrice } from '@spartacus/product/bulk-pricing/core';
+import {
+  BulkPrice,
+  BulkPricingService,
+} from '@spartacus/product/bulk-pricing/core';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -20,6 +22,7 @@ export class BulkPricingTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('change forgot x');
     this.priceTiers$ = this.getPrices();
   }
 

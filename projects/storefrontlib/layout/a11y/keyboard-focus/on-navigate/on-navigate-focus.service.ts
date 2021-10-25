@@ -17,6 +17,7 @@ import { KeyboardFocusConfig } from '../config';
 export class OnNavigateFocusService implements OnDestroy {
   protected resetFocusOnNavigate: Subscription;
   protected resetViewOnNavigate: Subscription;
+  lastCountchange: string;
 
   constructor(
     protected config: KeyboardFocusConfig,
@@ -26,6 +27,7 @@ export class OnNavigateFocusService implements OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
+    console.log('change lost count');
     this.resetFocusOnNavigate?.unsubscribe();
     this.resetViewOnNavigate?.unsubscribe();
   }
