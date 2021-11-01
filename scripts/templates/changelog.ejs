@@ -86,16 +86,17 @@
         continue;
     }
 %>
-<h2>
-<% if (scope) { %> 
-<% scope %> 
-  <% } else { %>
-Others
-  <% } %>
-</h2>
 <table>
 <tbody>
-
+  <tr><td colspan=3><h1>
+    
+<% if (scope) { %> 
+<%= scope %> 
+<% } else { %>
+Others
+<% } %>
+      
+  </h1></td></tr>
   <tr>
     <td><b>Commit</b>
     <td><b>Description</b>

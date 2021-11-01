@@ -5,6 +5,9 @@ async function run() {
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   const TAG = process.env.TAG;
   // const CHANGELOG_DIFFERENCES = process.env.CHANGELOG;
+  const octoKit = github.getOctokit(GITHUB_TOKEN);
+  const context = github.context;
+  const relatedPR = context.payload.pull_request;
 
   if (!GITHUB_TOKEN) {
     throw new Error('Github token missing in action');
@@ -18,10 +21,13 @@ async function run() {
   //   throw new Error('missing changelog');
   // }
 
-  const octoKit = github.getOctokit(GITHUB_TOKEN);
-  const context = github.context;
+  if (!relatedPR) {
+    throw new Error(
+      'Missing pull request context! Make sure to run this action only for pull_requests.'
+    );
+  }
 
-  const whoamlol = await octoKit.request(
+  const hm = await octoKit.request(
     'GET /repos/{owner}/{repo}/pulls/{pull_number}',
     {
       owner: 'bgambocjaviniar',
@@ -30,10 +36,10 @@ async function run() {
     }
   );
 
-  console.log('wow', typeof whoamlol?.data.labels);
-  console.log('ok', typeof JSON.stringify(whoamlol?.data.labels));
+  console.log('wow', typeof hm?.data.labels);
+  console.log('ok', typeof JSON.stringify(hm?.data.labels));
 
-  console.log('colio', whoamlol);
+  console.log('colio', hm);
 
   await createRelease(
     context,

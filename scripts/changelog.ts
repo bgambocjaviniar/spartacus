@@ -6,7 +6,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as semver from 'semver';
 import { packages } from './packages';
-import * as versionsHelper from './versions';
 
 const changelogTemplate = ejs.compile(
   fs.readFileSync(path.join(__dirname, './templates/changelog.ejs'), 'utf-8'),
@@ -19,7 +18,8 @@ const ghGot = require('gh-got');
 const through = require('through2');
 
 export interface ChangelogOptions {
-  to: string;
+  from: string;
+  to?: string;
   githubTokenFile?: string;
   githubToken?: string;
   library?: string;
@@ -33,35 +33,10 @@ export default async function run(
   args: ChangelogOptions,
   logger: logging.Logger
 ) {
-  console.log('who', args);
-
   const commits: JsonObject[] = [];
   let toSha: string | null = null;
   const breakingChanges: JsonObject[] = [];
   const deprecations: JsonObject[] = [];
-  const versionFromTag = args.to
-    .split('-')
-    .filter((_, i) => i !== 0)
-    .join('-');
-  const newVersion = semver.parse(versionFromTag, {
-    includePrerelease: true,
-    loose: true,
-  });
-  let fromToken: string;
-  try {
-    const packageVersions = await versionsHelper.fetchPackageVersions(
-      args.library!
-    );
-    const previousVersion = versionsHelper.extractPreviousVersionForChangelog(
-      packageVersions,
-      newVersion?.version!
-    );
-    fromToken = (previousVersion &&
-      args.to.split(newVersion?.version!).join(previousVersion)) as string;
-  } catch (err) {
-    // package not found - assuming first release
-    fromToken = '';
-  }
 
   const githubToken = (
     args.githubToken ||
@@ -69,68 +44,30 @@ export default async function run(
     ''
   ).trim();
 
-  const libraryPaths: Record<string, string> = {
-    '@spartacus/storefront': 'projects/storefrontlib',
-    '@spartacus/core': 'projects/core',
-    '@spartacus/styles': 'projects/storefrontstyles',
-    '@spartacus/assets': 'projects/assets',
-    '@spartacus/schematics': 'projects/schematics',
-    '@spartacus/incubator': 'projects/incubator',
-    '@spartacus/user': 'feature-libs/user',
-    '@spartacus/cds': 'integration-libs/cds',
-    '@spartacus/organization': 'feature-libs/organization',
-    '@spartacus/product': 'feature-libs/product',
-    '@spartacus/product-configurator': 'feature-libs/product-configurator',
-    '@spartacus/storefinder': 'feature-libs/storefinder',
-    '@spartacus/checkout': 'feature-libs/checkout',
-    '@spartacus/asm': 'feature-libs/asm',
-    '@spartacus/smartedit': 'feature-libs/smartedit',
-    '@spartacus/tracking': 'feature-libs/tracking',
-    '@spartacus/qualtrics': 'feature-libs/qualtrics',
-    '@spartacus/cdc': 'integration-libs/cdc',
-    '@spartacus/setup': 'core-libs/setup',
-    '@spartacus/cart': 'feature-libs/cart',
-    '@spartacus/order': 'feature-libs/order',
-    '@spartacus/digital-payments': 'integration-libs/digital-payments',
-  };
-
   const duplexUtil = through(function (
     this: NodeJS.ReadStream,
     chunk: unknown,
     _: unknown,
     callback: () => {}
   ) {
-    // console.log('chunk stuff', chunk);
     this.push(chunk);
     callback();
   });
 
   function getRawCommitsStream(to: string) {
-    console.log('help', [
-      to,
-      args.library,
-      path.join(__dirname, '..', libraryPaths[args?.library ?? '']),
-    ]);
     return gitRawCommits({
-      from: fromToken,
+      from: args.from,
       to,
-      path: args.library
-        ? path.join(__dirname, '..', libraryPaths[args.library])
-        : path.join(__dirname, '..'),
       format:
         '%B%n-hash-%n%H%n-gitTags-%n%D%n-committerDate-%n%ci%n-authorName-%n%aN%n',
     }) as NodeJS.ReadStream;
   }
 
   function getCommitsStream(): NodeJS.ReadStream {
-    getRawCommitsStream(args.to)
-      .on('error', () => {
-        getRawCommitsStream('HEAD')
-          .on('error', (err) => {
-            logger.fatal('An error happened: ' + err.message);
-            return '';
-          })
-          .pipe(duplexUtil);
+    getRawCommitsStream(args.to || 'HEAD')
+      .on('error', (err) => {
+        logger.fatal('Unexpected error occured: ' + err.message);
+        return '';
       })
       .pipe(duplexUtil);
 
@@ -142,15 +79,11 @@ export default async function run(
       .pipe(
         through((chunk: Buffer, _: string, callback: Function) => {
           // Replace github URLs with `@XYZ#123`
-
-          // console.log('b4a', chunk.toString('utf-8'));
           const commit = chunk
             .toString('utf-8')
             .replace(/https?:\/\/github.com\/(.*?)\/issues\/(\d+)/g, '@$1#$2');
 
-          // console.log('aft', commit);
-
-          callback(undefined, new Buffer(commit));
+          callback(undefined, Buffer.from(commit));
         })
       )
       .pipe(
@@ -165,28 +98,24 @@ export default async function run(
       )
       .pipe(
         through.obj((chunk: JsonObject, _: string, cb: Function) => {
-          // console.log('chunk', chunk.gitTags);
           try {
             const maybeTag =
               chunk.gitTags && (chunk.gitTags as string).match(/tag: (.*)/);
             const tags = maybeTag && maybeTag[1].split(/,/g);
             chunk['tags'] = tags;
-            if (tags && tags.find((x) => x == args.to)) {
+            if (tags && tags.find((x) => x === args.to)) {
               toSha = chunk.hash as string;
             }
-            // console.log('tf', chunk);
+
             const notes: any = chunk.notes;
             if (Array.isArray(notes)) {
               notes.forEach((note) => {
-                // console.log(note);
                 if (breakingChangesKeywords.includes(note.title)) {
-                  // console.log('br', chunk);
                   breakingChanges.push({
                     content: note.text,
                     commit: chunk,
                   });
                 } else if (deprecationsKeywords.includes(note.title)) {
-                  // console.log('dep', chunk);
                   deprecations.push({
                     content: note.text,
                     commit: chunk,
@@ -194,7 +123,7 @@ export default async function run(
                 }
               });
             }
-            console.log('chunk', chunk);
+
             commits.push(chunk);
             cb();
           } catch (err) {
@@ -222,20 +151,17 @@ export default async function run(
       });
 
       if (args.stdout || !githubToken) {
-        // console.log(markdown);
+        console.log(markdown);
         process.exit(0);
       }
-      // console.log('confused');
+
       // Check if we need to edit or create a new one.
       return ghGot('repos/SAP/spartacus/releases').then((x: JsonObject) => [
         x,
         markdown,
       ]);
-
-      // console.log('obv');
     })
     .then(([body, markdown]) => {
-      console.log('vat');
       const json = body.body;
       const maybeRelease = json.find((x: JsonObject) => x.tag_name == args.to);
       const id = maybeRelease ? `/${maybeRelease.id}` : '';
@@ -243,7 +169,7 @@ export default async function run(
       const semversion = (args.to && semver.parse(args.to)) || {
         prerelease: '',
       };
-      console.log('why is token empty', githubToken);
+
       return ghGot('repos/SAP/spartacus/releases' + id, {
         body: {
           body: markdown,
@@ -259,6 +185,7 @@ export default async function run(
 }
 
 program
+  .option('--from <commit>', 'From which commit/tag')
   .option('--to <commit>', 'To which commit/tag')
   .option('--verbose', 'Print output')
   .option('--githubToken <token>', 'Github token for release generation')
@@ -267,6 +194,7 @@ program
   .parse(process.argv);
 
 const config = {
+  from: program.from,
   to: program.to,
   githubToken: program.githubToken,
   githubTokenFile: program.tokenFile,
@@ -274,8 +202,8 @@ const config = {
   stdout: program.verbose || false,
 };
 
-if (typeof config.to === 'undefined') {
-  console.error(chalk.red('Missing --to option with end commit/tag'));
+if (typeof config.from === 'undefined') {
+  console.error(chalk.red('Missing --from option with end commit/tag'));
   process.exit(1);
 } else if (
   config.stdout === false &&
@@ -288,108 +216,6 @@ if (typeof config.to === 'undefined') {
     )
   );
   process.exit(1);
-} else if (typeof config.library === 'string') {
-  switch (config.library) {
-    case 'core':
-    case '@spartacus/core':
-      config.library = '@spartacus/core';
-      break;
-    case 'storefrontlib':
-    case 'storefront':
-    case '@spartacus/storefront':
-    case '@spartacus/storefrontlib':
-      config.library = '@spartacus/storefront';
-      break;
-    case 'styles':
-    case '@spartacus/styles':
-    case 'storefrontstyles':
-      config.library = '@spartacus/styles';
-      break;
-    case 'assets':
-    case '@spartacus/assets':
-      config.library = '@spartacus/assets';
-      break;
-    case 'schematics':
-    case '@spartacus/schematics':
-      config.library = '@spartacus/schematics';
-      break;
-    case 'incubator':
-    case '@spartacus/incubator':
-      config.library = '@spartacus/incubator';
-      break;
-    case 'user':
-    case '@spartacus/user':
-      config.library = '@spartacus/user';
-      break;
-    case 'cds':
-    case '@spartacus/cds':
-      config.library = '@spartacus/cds';
-      break;
-    case 'organization':
-    case '@spartacus/organization':
-      config.library = '@spartacus/organization';
-      break;
-    case 'product':
-    case '@spartacus/product':
-    case '@spartacus/product/configurators':
-    case '@spartacus/product/configurators/common':
-    case '@spartacus/product/configurators/cpq':
-    case '@spartacus/product/configurators/variant':
-    case '@spartacus/product/configurators/textfield':
-    case '@spartacus/product/variants':
-      config.library = '@spartacus/product';
-      break;
-    case 'product-configurator':
-    case '@spartacus/product-configurator':
-      config.library = '@spartacus/product-configurator';
-      break;
-    case 'cdc':
-    case '@spartacus/cdc':
-      config.library = '@spartacus/cdc';
-      break;
-    case 'digital-payments':
-    case '@spartacus/digital-payments':
-      config.library = '@spartacus/digital-payments';
-      break;
-    case 'storefinder':
-    case '@spartacus/storefinder':
-      config.library = '@spartacus/storefinder';
-      break;
-    case 'checkout':
-    case '@spartacus/checkout':
-      config.library = '@spartacus/checkout';
-      break;
-    case 'tracking':
-    case '@spartacus/tracking':
-      config.library = '@spartacus/tracking';
-      break;
-    case 'qualtrics':
-    case '@spartacus/qualtrics':
-      config.library = '@spartacus/qualtrics';
-      break;
-    case 'smartedit':
-    case '@spartacus/smartedit':
-      config.library = '@spartacus/smartedit';
-      break;
-    case 'setup':
-    case '@spartacus/setup':
-      config.library = '@spartacus/setup';
-      break;
-    case 'cart':
-    case '@spartacus/cart':
-      config.library = '@spartacus/cart';
-      break;
-    case 'order':
-    case '@spartacus/order':
-      config.library = '@spartacus/order';
-      break;
-    case 'digital-payments':
-    case '@spartacus/digital-payments':
-      config.library = '@spartacus/digital-payments';
-      break;
-    default:
-      config.library = undefined;
-  }
 }
 
 run(config, new logging.NullLogger());
