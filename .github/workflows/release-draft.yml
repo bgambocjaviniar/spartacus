@@ -16,7 +16,9 @@ jobs:
           node-version: '12'
       - name: Create changelogs
         id: changelog
-        uses: ./.github/generate-changelog
+        run: |
+          please=$(ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
+          echo "wow $please"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_TAG: 'user-4.1.1'
