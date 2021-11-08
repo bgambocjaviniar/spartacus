@@ -1,5 +1,5 @@
 import * as github from '@actions/github';
-import { createRelease } from './functions';
+import { publishReleaseDraft } from './functions';
 
 async function run() {
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -16,7 +16,7 @@ async function run() {
   const octoKit = github.getOctokit(GITHUB_TOKEN);
   const context = github.context;
 
-  await createRelease('test-tag-for-now-test', context, octoKit, CHANGELOG);
+  await publishReleaseDraft('5.0.0-test', context, octoKit, CHANGELOG);
 }
 
 run();

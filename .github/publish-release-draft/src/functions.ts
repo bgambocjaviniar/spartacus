@@ -1,4 +1,4 @@
-export async function createRelease(
+export async function publishReleaseDraft(
   tag_name: string,
   context: any,
   octoKit: any,
@@ -7,7 +7,20 @@ export async function createRelease(
   const owner = context.payload.repository.owner.login;
   const repo = context.payload.repository.name;
 
-  await octoKit.repos.createRelease({
+  const releases = await octoKit.repos.listReleases({
+    owner,
+    repo,
+  });
+
+  console.log([releases.length, releases]);
+
+  const releaseDrafts = releases.filter((release: any) => release.draft);
+
+  if (releaseDrafts && releaseDrafts.length) {
+    console.log([releaseDrafts.length, releaseDrafts]);
+  }
+
+  await octoKit.repos.publishReleaseDraft({
     tag_name,
     owner,
     repo,
