@@ -12,10 +12,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - name: Set Spartacusbot
-        run: |
-          git config user.name "Spartacus[bot]"
-          git config user.email "spartacus-sap@github.com"
   preReleaseDraft:
     name: Create pre-release draft
     runs-on: ubuntu-latest
@@ -25,15 +21,7 @@ jobs:
       - name: Create changelogs
         id: changelog
         uses: ./.github/create-changelog
-        with:
-          fromTag: 'user-4.1.1'
-          toTag: 'HEAD'
         env:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish pre-release
-        uses: ./.github/publish-pre-release
-        with:
-          changelog: ${{ steps.changelog.outputs.changelog }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CHANGELOG: ${{ steps.changelog.outputs.changelog }}
+          FROM_TAG: 'user-4.1.1'
+          TO_TAG: 'HEAD'
