@@ -21,9 +21,30 @@ async function run() {
   //   const octoKit = github.getOctokit(GITHUB_TOKEN);
   // const context = github.context;
 
+  let myOutput = '';
+  let myError = '';
+
+  const options = {
+    listeners: {
+      stdout: (data: Buffer) => {
+        myOutput += data.toString();
+      },
+      stderr: (data: Buffer) => {
+        myError += data.toString();
+      },
+    },
+  };
+
+  await exec.exec('yarn');
+
   await exec.exec(
-    'npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0'
+    'npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0',
+    options
   );
+
+  console.log(myOutput);
+  console.log('ojmerwiotmweiogioemgio');
+  console.log(myError);
 
   // if they don't exist 'tags' for to and from, then git describe for head and previous head. test for now
 
