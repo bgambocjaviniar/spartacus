@@ -26,19 +26,7 @@ async function run() {
     throw new Error('Not triggered by a pull request');
   }
 
-  await exec.exec('git status');
-  await exec.exec('ls -l');
   await exec.exec('sh', ['./.github/generate-changelog/clone-spartacus.sh']);
-  await exec.exec('git status');
-  await exec.exec('ls -l');
-
-  await exec.exec('cd ./fresh-devleop-spartacus');
-  await exec.exec('git describe --abbrev=0 --tags HEAD');
-
-  await exec.exec('git status');
-  await exec.exec('ls -l');
-
-  await exec.exec('ts-node scripts/changelog.ts --verbose --from asm-4.0.0');
 
   console.log(FROM_TAG);
   console.log(TO_TAG);
