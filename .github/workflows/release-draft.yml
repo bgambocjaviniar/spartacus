@@ -1,6 +1,4 @@
 on:
-  pull_request:
-    types: [opened, synchronize, reopened, edited]
   push:
     branches:
       - develop
@@ -27,3 +25,6 @@ jobs:
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
           FROM_TAG: 'user-4.1.1'
           TO_TAG: 'HEAD'
+      - name: Stuff from changelog
+        run: |
+          echo ${{ steps.changelog.outputs.changelog }}

@@ -1,3 +1,4 @@
+import * as core from '@actions/core';
 import * as github from '@actions/github';
 
 async function run() {
@@ -26,6 +27,8 @@ async function run() {
   console.log(FROM_TAG);
   console.log(TO_TAG);
   console.log(context.payload.pull_request.base.ref);
+
+  core.setOutput('changelog', 'coolio');
 }
 
 run();
