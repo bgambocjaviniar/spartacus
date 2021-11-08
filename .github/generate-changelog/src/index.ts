@@ -31,7 +31,13 @@ async function run() {
   await exec.exec('sh', ['./.github/generate-changelog/clone-spartacus.sh']);
   await exec.exec('git status');
   await exec.exec('ls -l');
-  await exec.exec('ts-node scripts/changelog.ts --verbose --from asm-4.0.0');
+  await exec.exec(
+    'ts-node ./fresh-devleop-spartacus/scripts/changelog.ts --verbose --from asm-4.0.0'
+  );
+
+  await exec.exec(
+    'cd ./fresh-devleop-spartacus && ts-node scripts/changelog.ts --verbose --from asm-4.0.0'
+  );
 
   console.log(FROM_TAG);
   console.log(TO_TAG);
