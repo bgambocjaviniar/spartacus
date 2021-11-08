@@ -1,4 +1,5 @@
 import * as core from '@actions/core';
+import * as exec from '@actions/exec';
 
 async function run() {
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -19,6 +20,10 @@ async function run() {
 
   //   const octoKit = github.getOctokit(GITHUB_TOKEN);
   // const context = github.context;
+
+  await exec.exec(
+    'npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0'
+  );
 
   // if they don't exist 'tags' for to and from, then git describe for head and previous head. test for now
 
