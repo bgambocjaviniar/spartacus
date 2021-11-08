@@ -1,4 +1,5 @@
 import * as core from '@actions/core';
+import * as exec from '@actions/exec';
 import * as github from '@actions/github';
 
 async function run() {
@@ -24,6 +25,9 @@ async function run() {
   if (!context.payload.pull_request) {
     throw new Error('Not triggered by a pull request');
   }
+
+  await exec.exec('ls -l');
+
   console.log(FROM_TAG);
   console.log(TO_TAG);
   console.log(context.payload.pull_request.base.ref);
