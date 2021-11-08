@@ -24,7 +24,7 @@ async function run() {
 
   core.setOutput('fromTag', '3.0.0-test');
   core.setOutput('toTag', '5.0.0-test');
-  core.setOutput('changelog', 'coolio');
+  core.setOutput('changelog', 'coolio nice');
 }
 
 run();
