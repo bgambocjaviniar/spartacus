@@ -8,9 +8,11 @@ on:
     inputs:
       FROM_TAG:
         description: 'previous release tag version'
+        required: true
         default: '3.0.0-test'
       TO_TAG:
         description: 'current release tag version'
+        required: true
         default: '5.0.0-test'
 name: "Publish Release Draft notes"
 jobs:
