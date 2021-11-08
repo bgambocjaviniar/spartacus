@@ -12,13 +12,13 @@ export async function publishReleaseDraft(
     repo,
   });
 
-  console.log([releases.length, releases]);
+  console.log(`${releases.length} o-o ${releases}`);
 
-  const releaseDrafts = releases.filter((release: any) => release.draft);
+  // const releaseDrafts = releases.filter((release: any) => release.draft);
 
-  if (releaseDrafts && releaseDrafts.length) {
-    console.log([releaseDrafts.length, releaseDrafts]);
-  }
+  // if (releaseDrafts && releaseDrafts.length) {
+  //   console.log([releaseDrafts.length, releaseDrafts]);
+  // }
 
   await octoKit.repos.publishReleaseDraft({
     tag_name,
