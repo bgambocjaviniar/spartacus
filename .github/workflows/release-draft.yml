@@ -1,7 +1,9 @@
 on:
-  push:
-    branches:
-      - develop
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+  # push:
+  #   branches:
+  #     - develop
 name: "Publish Release Draft notes"
 jobs:
   setup: 
