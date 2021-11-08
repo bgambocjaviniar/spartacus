@@ -31,6 +31,7 @@ jobs:
         run: | 
           please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
           echo "$please"
+        shell: bash
       # - name: Create changelogs
       #   id: changelog
       #   uses: ./.github/generate-changelog
