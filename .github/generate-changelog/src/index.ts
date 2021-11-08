@@ -27,7 +27,7 @@ async function run() {
   }
 
   await exec.exec('ls -l');
-  await exec.exec('ts-node scripts/changelog.ts --verbose --from asm-4.0.0');
+  await exec.exec('git status');
 
   console.log(FROM_TAG);
   console.log(TO_TAG);
