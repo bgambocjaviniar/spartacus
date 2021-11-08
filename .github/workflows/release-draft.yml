@@ -28,10 +28,7 @@ jobs:
         run: yarn install
       - name: npx changelog
         id: coolio
-        run: | 
-          npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
-          please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
-          echo "::set-output name=CHANGELOG"
+        run: npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
       - name: test output
         run: |
           echo ${{ steps.coolio.outputs.CHANGELOG }}
