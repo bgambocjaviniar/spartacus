@@ -24,14 +24,13 @@ async function run() {
   let myOutput = '';
   let myError = '';
 
-  const options = {
-    listeners: {
-      stdout: (data: Buffer) => {
-        myOutput += data.toString();
-      },
-      stderr: (data: Buffer) => {
-        myError += data.toString();
-      },
+  const options = {};
+  options.listeners = {
+    stdout: (data: Buffer) => {
+      myOutput += data.toString();
+    },
+    stderr: (data: Buffer) => {
+      myError += data.toString();
     },
   };
 
