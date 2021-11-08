@@ -21,7 +21,7 @@ export async function publishReleaseDraft(
   );
 
   if (releaseDrafts && releaseDrafts.length) {
-    await octoKit.issues.deleteRelease({
+    await octoKit.repos.deleteRelease({
       owner,
       repo,
       release_id: releaseDrafts[0].id,
