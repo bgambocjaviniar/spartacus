@@ -1,5 +1,5 @@
 {
-  "name": "pull-request-checker-action",
+  "name": "publish-release-draft-action",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,8 +10,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@actions/github": "^4.0.0",
-    "@types/node": "^12.11.1",
-    "@actions/core": "^1.2.6"
+    "@types/node": "^12.11.1"
   },
   "devDependencies": {
     "typescript": "^4.2.4"

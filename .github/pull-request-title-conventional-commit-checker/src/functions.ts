@@ -1,15 +1,20 @@
+import * as core from '@actions/core';
 import { Context } from '@actions/github/lib/context';
+
 const COMMENT_HEADER = '## Pull request checker: Conventional commits';
 
-export function checkPullRequestTitle(title: string): {
+export function checkPullRequestTitle(
+  title: string
+): {
   isTypeValid: boolean;
   isScopeValid: boolean;
 } {
   const commonTypeRegex =
     '^(?<type>feat|fix|perf|refactor|style|test|chore|docs)';
-  const typeRegex = new RegExp(`${commonTypeRegex}`);
+  const typeRegex = new RegExp(`${commonTypeRegex}:`);
+  // Most likely changing to split on first word instead of regex as it is heavy maintenance
   const scopeRegex = new RegExp(
-    `${commonTypeRegex}(?<scope>:|((@spartacus/core)|(@spartacus/storefront)|(@spartacus/styles)|(@spartacus/assets)|(@spartacus/schematics)|(@spartacus/incubator)|(@spartacus/user)|(@spartacus/cds)|(@spartacus/organization)|(@spartacus/product)|(@spartacus/product-configurator)|(@spartacus/storefinder)|(@spartacus/checkout)|(@spartacus/asm)|(@spartacus/smartedit)|(@spartacus/cdc)|(@spartacus/digital-payments)|(@spartacus/tracking)|(@spartacus/cart)|(@spartacus/order)|(@spartacus/setup)|(@spartacus/core)|(@spartacus/qualtrics))):`
+    `${commonTypeRegex}(: |((?<scope>\(@spartacus\/core\)|\(@spartacus\/storefront\)|\(@spartacus\/styles\)|\(@spartacus\/assets\)|\(@spartacus\/schematics\)|\(@spartacus\/incubator\)|\(@spartacus\/user\)|\(@spartacus\/cds\)|\(@spartacus\/organization\)|\(@spartacus\/product\)|\(@spartacus\/product-configurator\)|\(@spartacus\/storefinder\)|\(@spartacus\/checkout\)|\(@spartacus\/asm\)|\(@spartacus\/smartedit\)|\(@spartacus\/cdc\)|\(@spartacus\/digital-payments\)|\(@spartacus\/tracking\)|\(@spartacus\/cart\)|\(@spartacus\/order\)|\(@spartacus\/setup\)|\(@spartacus\/core\)|\(@spartacus\/qualtrics\))): )`
   );
 
   const isTypeValid = typeRegex.test(title);
@@ -25,7 +30,7 @@ function generateTextForType(isTypeValid: boolean): string {
     body = `No **type** format error`;
   } else {
     body = `
-    :boom: **type** must be one of the following:
+    **type** must be one of the following:
       - feat
       - fix
       - perf
@@ -35,6 +40,8 @@ function generateTextForType(isTypeValid: boolean): string {
       - chore
       - docs
     `;
+
+    core.setFailed('Type is not proper');
   }
 
   return `## Is the pull request **type** text valid\n${body}`;
@@ -47,7 +54,7 @@ function generateTextForScope(isScopeValid: boolean): string {
     body = `No **scope** format error and **scope** is optional`;
   } else {
     body = `
-    :boom: **scope** must be one of the following right after the type between (scope):
+    **scope** is optional, but choose one of the following:
      - @spartacus/core
      - @spartacus/storefront
      - @spartacus/styles
@@ -71,9 +78,11 @@ function generateTextForScope(isScopeValid: boolean): string {
      - @spartacus/order
      - @spartacus/setup
     `;
+
+    core.setFailed('Scope is not proper');
   }
 
-  return `## Is the pull request **type** text valid\n${body}`;
+  return `## Is the pull request **scope** text valid\n${body}`;
 }
 
 function generateCommentBody(
@@ -81,9 +90,9 @@ function generateCommentBody(
   isScopeValid: boolean
 ): string {
   const content = `
-  # Please remember to follow the conventional commits format as explained in here https://sap.github.io/spartacus-docs/commit-guidelines/#commit-message-format
+  ## Please remember to follow the conventional commits format as explained in here https://sap.github.io/spartacus-docs/commit-guidelines/#commit-message-format\n
   - Make sure the pull request title and commit header matches as well
-  - Do not forget to put meaning commit body messages
+  - Do not forget to put meaningful commit body messages
   - Do not forgot to put **closes GH-issueNumber** in the pull request body and commit footer 
   - <type>(<scope>): <subject> <----- format for pull request title and commit header. However, scope is optional.
   
