@@ -41,9 +41,14 @@ async function run() {
     options
   );
 
-  console.log(myOutput);
+  console.log('vanilla');
+  console.log(JSON.stringify(myOutput));
+  console.log('toString');
+  console.log(myOutput.toString());
+  console.log('ok');
+  console.log(JSON.stringify(myOutput.toString()));
   console.log('ojmerwiotmweiogioemgio');
-  console.log(myError);
+  console.log(myError.toString());
 
   // if they don't exist 'tags' for to and from, then git describe for head and previous head. test for now
 
