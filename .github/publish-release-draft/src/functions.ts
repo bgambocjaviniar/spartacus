@@ -20,13 +20,11 @@ export async function publishReleaseDraft(
       release.name
   );
 
-  console.log(releaseDrafts);
-
   if (releaseDrafts && releaseDrafts.length) {
-    await octoKit.issues.deleteComment({
-      release_id: releaseDrafts[0].id,
+    await octoKit.issues.deleteRelease({
       owner,
       repo,
+      release_id: releaseDrafts[0].id,
     });
   }
 
