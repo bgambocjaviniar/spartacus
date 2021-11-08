@@ -22,7 +22,7 @@ jobs:
         id: changelog
         uses: ./.github/generate-changelog
         env:
-          GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_TAG: 'user-4.1.1'
           TO_TAG: 'HEAD'
       - name: Stuff from changelog
