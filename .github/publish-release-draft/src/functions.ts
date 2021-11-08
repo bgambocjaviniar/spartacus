@@ -14,7 +14,10 @@ export async function publishReleaseDraft(
 
   const releaseDrafts = releases.data.filter(
     (release: any) =>
-      release.draft && release.author.login === 'github-actions[bot]' && release.
+      release.draft &&
+      release.author.login === 'github-actions[bot]' &&
+      release.tag_name &&
+      release.name
   );
 
   if (releaseDrafts && releaseDrafts.length) {
