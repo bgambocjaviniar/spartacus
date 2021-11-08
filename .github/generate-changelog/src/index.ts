@@ -21,8 +21,8 @@ async function run() {
   //   const octoKit = github.getOctokit(GITHUB_TOKEN);
   // const context = github.context;
 
-  let myOutput: any = '';
-  let myError: any = '';
+  let myOutput = '';
+  let myError = '';
 
   const options: any = {};
   options.listeners = {
@@ -54,7 +54,7 @@ async function run() {
 
   core.setOutput('fromTag', '3.0.0-test');
   core.setOutput('toTag', '5.0.0-test');
-  core.setOutput('changelog', 'coolio nice');
+  core.setOutput('changelog', JSON.stringify(myOutput.toString()));
 }
 
 run();

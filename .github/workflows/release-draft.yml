@@ -36,9 +36,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
           TO_TAG: ${{ github.event.inputs.TO_TAG }}
-      - name: Create release draft
-        uses: ./.github/publish-release-draft
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CHANGELOG: ${{ steps.changelog.outputs.changelog }}
-          TO_TAG: ${{ steps.changelog.outputs.toTag }}
+      # - name: Create release draft
+      #   uses: ./.github/publish-release-draft
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     CHANGELOG: ${{ steps.changelog.outputs.changelog }}
+      #     TO_TAG: ${{ steps.changelog.outputs.toTag }}
+      - name: release draft
+        run: |
+          echo "cool ${{ steps.changelog.utputs.changelog }}"
+          echo ${{ steps.changelog.utputs.changelog }}
