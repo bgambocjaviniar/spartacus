@@ -24,25 +24,27 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      # - name: npx changelog
-      #   id: coolio
-      #   run: | 
-      #     please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
-      #     echo "$please"
-      - name: Create changelogs
-        id: changelog
-        uses: ./.github/generate-changelog
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
-          TO_TAG: ${{ github.event.inputs.TO_TAG }}
+      - name: Yarn
+        run: yarn install
+      - name: npx changelog
+        id: coolio
+        run: | 
+          please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
+          echo "$please"
+      # - name: Create changelogs
+      #   id: changelog
+      #   uses: ./.github/generate-changelog
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
+      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
       # - name: Create release draft
       #   uses: ./.github/publish-release-draft
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     CHANGELOG: ${{ steps.changelog.outputs.changelog }}
       #     TO_TAG: ${{ steps.changelog.outputs.toTag }}
-      - name: release draft
-        run: |
-          echo "cool ${{ steps.changelog.utputs.changelog }}"
-          echo ${{ steps.changelog.utputs.changelog }}
+      # - name: release draft
+      #   run: |
+      #     echo "cool ${{ steps.changelog.utputs.changelog }}"
+      #     echo ${{ steps.changelog.utputs.changelog }}
