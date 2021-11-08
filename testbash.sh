@@ -8,3 +8,5 @@ echo "cool"
 echo "wow $please"
 
 echo "did it work"
+
+echo "$please"

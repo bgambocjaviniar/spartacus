@@ -48,7 +48,6 @@ async function run() {
   console.log('ok');
   console.log(JSON.stringify(myOutput.toString()));
   console.log('ojmerwiotmweiogioemgio');
-  console.log(myError.toString());
 
   // if they don't exist 'tags' for to and from, then git describe for head and previous head. test for now
 
