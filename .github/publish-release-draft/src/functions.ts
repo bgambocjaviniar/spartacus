@@ -11,7 +11,7 @@ export async function publishReleaseDraft(
     owner,
     repo,
   });
-
+  console.log(releases);
   console.log(`${releases.length} o-o ${releases}`);
 
   // const releaseDrafts = releases.filter((release: any) => release.draft);
@@ -20,7 +20,7 @@ export async function publishReleaseDraft(
   //   console.log([releaseDrafts.length, releaseDrafts]);
   // }
 
-  await octoKit.repos.publishReleaseDraft({
+  await octoKit.repos.createRelease({
     tag_name,
     owner,
     repo,
