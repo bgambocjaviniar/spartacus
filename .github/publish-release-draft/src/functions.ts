@@ -12,18 +12,24 @@ export async function publishReleaseDraft(
     repo,
   });
 
-  const releaseDrafts = releases.data.filter((release: any) => release.draft);
+  const releaseDrafts = releases.data.filter(
+    (release: any) =>
+      release.draft && release.author.login === 'github-actions[bot]' && release.
+  );
 
   if (releaseDrafts && releaseDrafts.length) {
-    console.log(releaseDrafts);
-    console.log('o');
-    console.log(releaseDrafts.length);
+    await octoKit.issues.deleteComment({
+      release_id: releaseDrafts[0].id,
+      owner,
+      repo,
+    });
   }
 
   await octoKit.repos.createRelease({
     tag_name,
     owner,
     repo,
+    name: tag_name,
     body,
     draft: true,
   });
