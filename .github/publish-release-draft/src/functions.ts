@@ -1,7 +1,7 @@
 export async function createRelease(
+  tag_name: string,
   context: any,
   octoKit: any,
-  tag_name: string,
   body: string
 ) {
   const owner = context.payload.repository.owner.login;

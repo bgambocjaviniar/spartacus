@@ -1,6 +1,4 @@
 import * as core from '@actions/core';
-import * as exec from '@actions/exec';
-import * as github from '@actions/github';
 
 async function run() {
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -20,20 +18,7 @@ async function run() {
   }
 
   //   const octoKit = github.getOctokit(GITHUB_TOKEN);
-  const context = github.context;
-
-  if (!context.payload.pull_request) {
-    throw new Error('Not triggered by a pull request');
-  }
-
-  await exec.exec('git pull');
-  await exec.exec('git checkout develop');
-  await exec.exec('git describe --abbrev=0 --tags HEAD');
-  await exec.exec('sh', ['./.github/generate-changelog/clone-spartacus.sh']);
-
-  console.log(FROM_TAG);
-  console.log(TO_TAG);
-  console.log(context.payload.pull_request.base.ref);
+  // const context = github.context;
 
   core.setOutput('changelog', 'coolio');
 }
