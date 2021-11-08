@@ -26,8 +26,8 @@ async function run() {
     throw new Error('Not triggered by a pull request');
   }
 
-  await exec.exec('git checkout develop');
   await exec.exec('git pull');
+  await exec.exec('git checkout develop');
   await exec.exec('git describe --abbrev=0 --tags HEAD');
   await exec.exec('sh', ['./.github/generate-changelog/clone-spartacus.sh']);
 
