@@ -27,7 +27,7 @@ async function run() {
   }
 
   await exec.exec('ls -l');
-  const currentTag = exec.exec(`git describe --abbrev=0 --tags HEAD`);
+  const currentTag = await exec.exec(`git describe --abbrev=0 --tags HEAD`);
   await exec.exec(`git describe --abbrev=0 --tags ${currentTag}`);
   await exec.exec('ts-node scripts/changelog.ts --verbose --from asm-4.0.0');
 
