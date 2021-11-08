@@ -22,6 +22,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
+      - name: Get tags (verify if wasn't dispatched from workflow)
       - name: Create changelogs
         id: changelog
         uses: ./.github/generate-changelog
@@ -34,4 +35,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CHANGELOG: ${{ steps.changelog.outputs.changelog }}
-          TO_TAG: ${{ github.event.inputs.TO_TAG }}
+          TO_TAG: ${{ steps.changelog.outputs.toTag }}
