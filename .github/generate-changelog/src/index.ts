@@ -25,9 +25,10 @@ async function run() {
   if (!context.payload.pull_request) {
     throw new Error('Not triggered by a pull request');
   }
-
+  await exec.exec('yarn', ['install']);
   await exec.exec('ls -l');
   await exec.exec('git status');
+  await exec.exec('ts-node scripts/changelog.ts --verbose --from asm-4.0.0');
 
   console.log(FROM_TAG);
   console.log(TO_TAG);
