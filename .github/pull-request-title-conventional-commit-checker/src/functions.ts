@@ -43,8 +43,6 @@ export function checkPullRequestTitle(title: string): {
   isTypeValid: boolean;
   isScopeValid: boolean;
 } {
-  const commitTypeAndScope = title.split(':')[0];
-
   const commonTypeRegex = `^(?<type>${commitType.join('|')})`;
   const typeRegex = new RegExp(`${commonTypeRegex}:`);
 
@@ -54,11 +52,11 @@ export function checkPullRequestTitle(title: string): {
 
   console.log(packagedScope);
   const scopeRegex = new RegExp(
-    `${commonTypeRegex}(:|((?<scope>${packagedScope})):)`
+    `${commonTypeRegex}(: |((?<scope>${packagedScope})): )`
   );
 
-  const isTypeValid = typeRegex.test(commitTypeAndScope);
-  const isScopeValid = scopeRegex.test(commitTypeAndScope);
+  const isTypeValid = typeRegex.test(title);
+  const isScopeValid = scopeRegex.test(title);
 
   return { isTypeValid, isScopeValid };
 }
