@@ -55,19 +55,19 @@ jobs:
       - name: test output inline bash script
         run: |
           echo ${{ steps.coolio.outputs.changelog }}
-      - name: Create changelogs
-        id: changelog
-        uses: ./.github/generate-changelog
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
-          TO_TAG: ${{ github.event.inputs.TO_TAG }}
-      # - name: Create release draft
-      #   uses: ./.github/publish-release-draft
+      # - name: Create changelogs
+      #   id: changelog
+      #   uses: ./.github/generate-changelog
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     CHANGELOG: ${{ steps.changelog.outputs.changelog }}
-      #     TO_TAG: ${{ steps.changelog.outputs.toTag }}
-      - name: test output for custom action
-        run: |
-          echo ${{ steps.changelog.outputs.changelog }}
+      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
+      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
+      - name: Create release draft
+        uses: ./.github/publish-release-draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANGELOG: ${{ steps.coolio.outputs.changelog }}
+          TO_TAG: 4.2
+      # - name: test output for custom action
+      #   run: |
+      #     echo ${{ steps.changelog.outputs.changelog }}
