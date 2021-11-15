@@ -4,7 +4,6 @@ import program from 'commander';
 import * as ejs from 'ejs';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as semver from 'semver';
 import { packages } from './packages';
 
 const changelogTemplate = ejs.compile(
@@ -14,7 +13,6 @@ const changelogTemplate = ejs.compile(
 
 const conventionalCommitsParser = require('conventional-commits-parser');
 const gitRawCommits = require('git-raw-commits');
-const ghGot = require('gh-got');
 const through = require('through2');
 
 export interface ChangelogOptions {
@@ -132,61 +130,35 @@ export default async function run(
         })
       )
       .on('finish', resolve);
-  })
-    .then(() => {
-      console.log('init markdown');
-      const markdown: string = changelogTemplate({
-        ...args,
-        include: (x: string, v: {}) =>
-          ejs.render(
-            fs.readFileSync(
-              path.join(__dirname, './templates', `${x}.ejs`),
-              'utf-8'
-            ),
-            v
+  }).then(() => {
+    console.log('init markdown');
+    const markdown: string = changelogTemplate({
+      ...args,
+      include: (x: string, v: {}) =>
+        ejs.render(
+          fs.readFileSync(
+            path.join(__dirname, './templates', `${x}.ejs`),
+            'utf-8'
           ),
-        commits,
-        packages,
-        breakingChanges,
-        deprecations,
-      });
-
-      console.log('created markdown before output');
-
-      if (args.stdout || !githubToken) {
-        console.log(markdown);
-        process.exit(0);
-      }
-
-      console.log('after markdown');
-
-      // Check if we need to edit or create a new one.
-      return ghGot('repos/SAP/spartacus/releases').then((x: JsonObject) => [
-        x,
-        markdown,
-      ]);
-    })
-    .then(([body, markdown]) => {
-      const json = body.body;
-      const maybeRelease = json.find((x: JsonObject) => x.tag_name == args.to);
-      const id = maybeRelease ? `/${maybeRelease.id}` : '';
-
-      const semversion = (args.to && semver.parse(args.to)) || {
-        prerelease: '',
-      };
-
-      return ghGot('repos/SAP/spartacus/releases' + id, {
-        body: {
-          body: markdown,
-          draft: true,
-          name: args.to,
-          prerelease: semversion.prerelease.length > 0,
-          tag_name: args.to,
-          ...(toSha ? { target_commitish: toSha } : {}),
-        },
-        token: githubToken,
-      });
+          v
+        ),
+      commits,
+      packages,
+      breakingChanges,
+      deprecations,
     });
+
+    console.log('created markdown before output');
+
+    console.log(markdown);
+
+    // if (args.stdout || !githubToken) {
+    //   console.log(markdown);
+    //   process.exit(0);
+    // }
+
+    console.log('after markdown');
+  });
 }
 
 program
