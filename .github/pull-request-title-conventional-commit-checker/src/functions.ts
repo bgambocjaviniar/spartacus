@@ -127,6 +127,7 @@ function generateCommentBody(
 ): string {
   const content = `
   ## Please remember to follow the conventional commits format as explained in here https://sap.github.io/spartacus-docs/commit-guidelines/#commit-message-format\n
+  - Example: <type>(<scope>): <subject> ----> fix: hello world or fix(@spartacus/core): hello world
   - Make sure the pull request title and commit header matches as well
   - Do not forget to put meaningful commit body messages
   - Do not forgot to put **closes GH-issueNumber** in the pull request body and commit footer 
