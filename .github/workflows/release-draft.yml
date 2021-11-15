@@ -28,8 +28,6 @@ jobs:
         run: yarn install
       - name: 1st log again.
         run: npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
-      - name: 2nd log again.
-        run: `npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
       - name: npx changelog
         id: coolio
         run: | 
