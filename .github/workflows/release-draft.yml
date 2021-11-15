@@ -26,12 +26,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      # - name: Yarn
-      #   run: yarn install
+      - name: Yarn
+        run: yarn install
       # - name: what is inside the script
       #   run: cat scripts/changelog.ts
       - name: 1st log again.
-        run: npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
+        run: ts-node scripts/changelog.ts --verbose --from asm-4.0.0
       # - name: try to generate changelog using custom action instead
       #   id: changelogaction
       #   uses: ./.github/generate-changelog
@@ -47,6 +47,8 @@ jobs:
         id: coolio
         run: | 
           please=`npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
+
+          echo "coolio $please"
 
           echo "::set-output name=CHANGELOG::${please}"
       - name: test output
