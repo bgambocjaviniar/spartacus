@@ -29,9 +29,9 @@ jobs:
       - name: npx changelog
         id: coolio
         run: | 
-          `npx --yes ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
-          npx --yes ts-node scripts/changelog.ts --verbose --from asm-4.0.0
-          please=`npx --yes ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
+          `npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
+          npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
+          please=`npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
 
           echo `$please`
           echo $please
