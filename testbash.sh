@@ -4,9 +4,9 @@ set -e
 please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
 wow=$(cat scripts/changelog.ts)
 
-echo "$wow"
+echo "${please}"
 
-echo "cool"
+# echo "cool"
 
 # echo "wow $please"
 

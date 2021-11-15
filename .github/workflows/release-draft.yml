@@ -26,10 +26,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - name: Yarn
-        run: yarn install
-      - name: what is inside the script
-        run: cat scripts/changelog.ts
+      # - name: Yarn
+      #   run: yarn install
+      # - name: what is inside the script
+      #   run: cat scripts/changelog.ts
       - name: 1st log again.
         run: npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
       # - name: try to generate changelog using custom action instead
@@ -48,9 +48,7 @@ jobs:
         run: | 
           please=`npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
 
-          echo `$please`
-          echo $please
-          echo "::set-output name=CHANGELOG::$please"
+          echo "::set-output name=CHANGELOG::${please}"
       - name: test output
         run: |
           echo ${{ steps.coolio.outputs.CHANGELOG }}
