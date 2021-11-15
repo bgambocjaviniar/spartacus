@@ -43,38 +43,36 @@ jobs:
       #   run: npx lerna-changelog --tag-from 3.0.0-test --tag-to 5.0.0-test
       #   env:
       #     GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
-      - name: npx changelog
-        id: coolio
-        run: | 
-          please=`npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0 &`
+      # - name: npx changelog
+      #   id: coolio
+      #   run: | 
+      #     please=`npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0 &`
 
-          wait
+      #     wait
 
-          echo "coolio $please"
-          echo "after"
+      #     echo "coolio $please"
+      #     echo "after"
 
-          echo "::set-output name=changelog::${please}"
-
-      - name: test output
-        run: |
-          echo ${{ steps.coolio.outputs.changelog }}
-      # - name: test output from custom action
+      #     echo "::set-output name=changelog::${please}"
+      # - name: test output
       #   run: |
-      #     echo ${{ steps.changelogaction.outputs.changelog }}
-      # - name: Create changelogs
-      #   id: changelog
-      #   uses: ./.github/generate-changelog
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
-      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
+      #     echo ${{ steps.coolio.outputs.changelog }}
+      - name: test output from custom action
+        run: |
+          echo ${{ steps.changelogaction.outputs.changelog }}
+      - name: Create changelogs
+        id: changelog
+        uses: ./.github/generate-changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
+          TO_TAG: ${{ github.event.inputs.TO_TAG }}
       # - name: Create release draft
       #   uses: ./.github/publish-release-draft
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     CHANGELOG: ${{ steps.changelog.outputs.changelog }}
       #     TO_TAG: ${{ steps.changelog.outputs.toTag }}
-      # - name: release draft
-      #   run: |
-      #     echo "cool ${{ steps.changelog.outputs.changelog }}"
-      #     echo ${{ steps.changelog.outputs.changelog }}
+      - name: release draft
+        run: |
+          echo ${{ steps.changelog.outputs.changelog }}
