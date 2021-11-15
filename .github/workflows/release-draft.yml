@@ -47,8 +47,10 @@ jobs:
         id: coolio
         run: | 
           please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
-
-          echo "::set-output name=changelog::$(echo "$please")"
+          please="${please//'%'/'%25'}"
+          please="${please//$'\n'/'%0A'}"
+          please="${please//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$(echo $please)"
       # - name: test output
       #   run: |
       #     echo ${{ steps.coolio.outputs.changelog }}
