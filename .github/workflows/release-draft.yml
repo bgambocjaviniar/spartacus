@@ -31,7 +31,8 @@ jobs:
       - name: 1st log again.
         run: npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
       - name: llerna jsut outputs logs too....
-        run: npx lerna-changelog --tag-from 3.0.0-test --tag-to 5.0.0-test
+        run: |
+          npx lerna-changelog --tag-from 3.0.0-test --tag-to 5.0.0-test
         env: 
           GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
       - name: npx changelog
