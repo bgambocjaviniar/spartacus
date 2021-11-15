@@ -9,7 +9,7 @@ yarn install
 chmod -R 777 .
 
 wow=$(cat scripts/changelog.ts)
-logs=$(ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
+logs=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
 
 echo "cat thing"
 echo "$wow"

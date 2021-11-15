@@ -33,15 +33,15 @@ export default async function run(
   logger: logging.Logger
 ) {
   const commits: JsonObject[] = [];
-  let toSha: string | null = null;
+  // let toSha: string | null = null;
   const breakingChanges: JsonObject[] = [];
   const deprecations: JsonObject[] = [];
 
-  const githubToken = (
-    args.githubToken ||
-    (args.githubTokenFile && fs.readFileSync(args.githubTokenFile, 'utf-8')) ||
-    ''
-  ).trim();
+  // const githubToken = (
+  //   args.githubToken ||
+  //   (args.githubTokenFile && fs.readFileSync(args.githubTokenFile, 'utf-8')) ||
+  //   ''
+  // ).trim();
 
   const duplexUtil = through(function (
     this: NodeJS.ReadStream,
@@ -102,9 +102,9 @@ export default async function run(
               chunk.gitTags && (chunk.gitTags as string).match(/tag: (.*)/);
             const tags = maybeTag && maybeTag[1].split(/,/g);
             chunk['tags'] = tags;
-            if (tags && tags.find((x) => x === args.to)) {
-              toSha = chunk.hash as string;
-            }
+            // if (tags && tags.find((x) => x === args.to)) {
+            //   toSha = chunk.hash as string;
+            // }
 
             const notes: any = chunk.notes;
             if (Array.isArray(notes)) {
@@ -131,44 +131,48 @@ export default async function run(
         })
       )
       .on('finish', resolve);
-  }).then(() => {
-    console.log('init markdown');
-    const markdown: string = changelogTemplate({
-      ...args,
-      include: (x: string, v: {}) =>
-        ejs.render(
-          fs.readFileSync(
-            path.join(__dirname, './templates', `${x}.ejs`),
-            'utf-8'
+  })
+    .then(() => {
+      console.log('init markdown');
+      const markdown: string = changelogTemplate({
+        ...args,
+        include: (x: string, v: {}) =>
+          ejs.render(
+            fs.readFileSync(
+              path.join(__dirname, './templates', `${x}.ejs`),
+              'utf-8'
+            ),
+            v
           ),
-          v
-        ),
-      commits,
-      packages,
-      breakingChanges,
-      deprecations,
+        commits,
+        packages,
+        breakingChanges,
+        deprecations,
+      });
+
+      console.log('created markdown before output');
+
+      console.log(markdown);
+      // if (args.stdout || !githubToken) {
+      //   console.log(markdown);
+      //   process.exit(0);
+      // }
+
+      console.log('after markdown');
+      let highlighted = highlight(markdown, {
+        language: 'Markdown',
+        theme: {
+          section: chalk.bold,
+          string: chalk.hex('#0366d6'),
+          link: chalk.dim,
+        },
+      });
+
+      console.log(highlighted);
+    })
+    .catch(() => {
+      console.log('wow it was an error all along or no ??? testing');
     });
-
-    console.log('created markdown before output');
-
-    console.log(markdown);
-    // if (args.stdout || !githubToken) {
-    //   console.log(markdown);
-    //   process.exit(0);
-    // }
-
-    console.log('after markdown');
-    let highlighted = highlight(markdown, {
-      language: 'Markdown',
-      theme: {
-        section: chalk.bold,
-        string: chalk.hex('#0366d6'),
-        link: chalk.dim,
-      },
-    });
-
-    console.log(highlighted);
-  });
 }
 
 program
