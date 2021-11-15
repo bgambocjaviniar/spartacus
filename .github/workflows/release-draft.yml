@@ -31,7 +31,7 @@ jobs:
       # - name: what is inside the script
       #   run: cat scripts/changelog.ts
       - name: 1st log again.
-        run: ts-node scripts/changelog.ts --verbose --from asm-4.0.0
+        run: npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
       # - name: try to generate changelog using custom action instead
       #   id: changelogaction
       #   uses: ./.github/generate-changelog
