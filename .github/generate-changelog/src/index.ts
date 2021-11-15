@@ -49,13 +49,13 @@ async function run() {
   // console.log(JSON.stringify(myOutput.toString()));
   // console.log('ojmerwiotmweiogioemgio');
 
-  await exec.exec('sh', ['./.github/generate-changelog/clone-spartacus.sh']);
-
-  // if they don't exist 'tags' for to and from, then git describe for head and previous head. test for now
-
   core.setOutput('fromTag', '3.0.0-test');
   core.setOutput('toTag', '5.0.0-test');
   core.setOutput('CHANGELOG', 'myoutput');
+
+  await exec.exec('sh', ['./.github/generate-changelog/clone-spartacus.sh']);
+
+  // if they don't exist 'tags' for to and from, then git describe for head and previous head. test for now
 }
 
 run();

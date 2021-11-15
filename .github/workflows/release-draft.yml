@@ -52,7 +52,7 @@ jobs:
           echo ${{ steps.coolio.outputs.CHANGELOG }}
       - name: test output from custom action
         run: |
-          echo ${{ steps.changelogaction.outputs.CHANGELOG }}
+          echo ${{ steps.changelogaction.outputs.changelog }}
       # - name: Create changelogs
       #   id: changelog
       #   uses: ./.github/generate-changelog
