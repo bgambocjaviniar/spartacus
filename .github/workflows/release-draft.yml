@@ -26,6 +26,8 @@ jobs:
           node-version: '12'
       - name: Yarn
         run: yarn install
+      - name: what is inside the script
+        run: cat scripts/changelog.ts
       - name: 1st log again.
         run: npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
       - name: llerna jsut outputs logs too....
