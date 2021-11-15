@@ -49,11 +49,13 @@ jobs:
           please=`npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
 
           echo "coolio $please"
+          echo "after"
 
-          echo "::set-output name=CHANGELOG::${please}"
+          echo "::set-output name=changelog::${please}"
+
       - name: test output
         run: |
-          echo ${{ steps.coolio.outputs.CHANGELOG }}
+          echo ${{ steps.coolio.outputs.changelog }}
       # - name: test output from custom action
       #   run: |
       #     echo ${{ steps.changelogaction.outputs.changelog }}
