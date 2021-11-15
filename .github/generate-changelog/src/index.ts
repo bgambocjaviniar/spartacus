@@ -21,39 +21,41 @@ async function run() {
   //   const octoKit = github.getOctokit(GITHUB_TOKEN);
   // const context = github.context;
 
-  let myOutput = '';
-  let myError = '';
+  // let myOutput = '';
+  // let myError = '';
 
-  const options: any = {};
-  options.listeners = {
-    stdout: (data: Buffer) => {
-      myOutput += data.toString();
-    },
-    stderr: (data: Buffer) => {
-      myError += data.toString();
-    },
-  };
+  // const options: any = {};
+  // options.listeners = {
+  //   stdout: (data: Buffer) => {
+  //     myOutput += data.toString();
+  //   },
+  //   stderr: (data: Buffer) => {
+  //     myError += data.toString();
+  //   },
+  // };
 
-  await exec.exec('yarn');
+  // await exec.exec('yarn');
 
-  await exec.exec(
-    'npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0',
-    options
-  );
+  // await exec.exec(
+  //   'npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0',
+  //   options
+  // );
 
-  console.log('vanilla');
-  console.log(JSON.stringify(myOutput));
-  console.log('toString');
-  console.log(myOutput.toString());
-  console.log('ok');
-  console.log(JSON.stringify(myOutput.toString()));
-  console.log('ojmerwiotmweiogioemgio');
+  // console.log('vanilla');
+  // console.log(JSON.stringify(myOutput));
+  // console.log('toString');
+  // console.log(myOutput.toString());
+  // console.log('ok');
+  // console.log(JSON.stringify(myOutput.toString()));
+  // console.log('ojmerwiotmweiogioemgio');
+
+  await exec.exec('sh', ['./.github/clone-spartacus.sh']);
 
   // if they don't exist 'tags' for to and from, then git describe for head and previous head. test for now
 
   core.setOutput('fromTag', '3.0.0-test');
   core.setOutput('toTag', '5.0.0-test');
-  core.setOutput('changelog', JSON.stringify(myOutput.toString()));
+  core.setOutput('CHANGELOG', 'myoutput');
 }
 
 run();
