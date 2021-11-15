@@ -54,9 +54,9 @@ jobs:
       # - name: test output
       #   run: |
       #     echo ${{ steps.coolio.outputs.changelog }}
-      - name: test output inline bash script
-        run: |
-          echo ${{ steps.coolio.outputs.changelog }}
+      # - name: test output inline bash script
+      #   run: |
+      #     echo ${{ steps.coolio.outputs.changelog }}
       # - name: Create changelogs
       #   id: changelog
       #   uses: ./.github/generate-changelog
