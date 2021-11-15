@@ -52,7 +52,7 @@ export function checkPullRequestTitle(title: string): {
     .map((scope) => (scope = `(${scope.replace('/', '\\/')})`))
     .join('|');
 
-  console.log(commitScope);
+  console.log(packagedScope);
   const scopeRegex = new RegExp(
     `${commonTypeRegex}(: |((?<scope>${packagedScope})): )`
   );
