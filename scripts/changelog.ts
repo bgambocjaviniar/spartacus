@@ -134,6 +134,7 @@ export default async function run(
       .on('finish', resolve);
   })
     .then(() => {
+      console.log('init markdown');
       const markdown: string = changelogTemplate({
         ...args,
         include: (x: string, v: {}) =>
@@ -150,10 +151,14 @@ export default async function run(
         deprecations,
       });
 
+      console.log('created markdown before output');
+
       if (args.stdout || !githubToken) {
         console.log(markdown);
         process.exit(0);
       }
+
+      console.log('after markdown');
 
       // Check if we need to edit or create a new one.
       return ghGot('repos/SAP/spartacus/releases').then((x: JsonObject) => [
