@@ -48,7 +48,7 @@ jobs:
         run: | 
           please=`npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
 
-          echo "::set-output name=changelog::${echo $please}"
+          echo "::set-output name=changelog::$(echo $please)"
       # - name: test output
       #   run: |
       #     echo ${{ steps.coolio.outputs.changelog }}
