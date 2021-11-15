@@ -49,7 +49,7 @@ async function run() {
   // console.log(JSON.stringify(myOutput.toString()));
   // console.log('ojmerwiotmweiogioemgio');
 
-  await exec.exec('sh', ['./.github/clone-spartacus.sh']);
+  await exec.exec('sh', ['./.github/generate-changelog/clone-spartacus.sh']);
 
   // if they don't exist 'tags' for to and from, then git describe for head and previous head. test for now
 
