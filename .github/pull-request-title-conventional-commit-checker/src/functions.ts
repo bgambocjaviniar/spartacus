@@ -44,13 +44,11 @@ export function checkPullRequestTitle(title: string): {
   isScopeValid: boolean;
 } {
   const commonTypeRegex = `^(?<type>${commitType.join('|')})`;
-  const typeRegex = new RegExp(`${commonTypeRegex}:`);
+  const typeRegex = new RegExp(`${commonTypeRegex}: `);
 
   const packagedScope = commitScope
     .map((scope) => (scope = `(${scope.replace('/', '\\/')})`))
     .join('|');
-
-  console.log(packagedScope);
   const scopeRegex = new RegExp(
     `${commonTypeRegex}(: |((?<scope>${packagedScope})): )`
   );
