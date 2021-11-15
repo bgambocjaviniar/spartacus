@@ -21,7 +21,7 @@ async function run() {
   const octoKit = github.getOctokit(GITHUB_TOKEN);
   const context = github.context;
 
-  await publishReleaseDraft(TO_TAG, context, octoKit, CHANGELOG);
+  await publishReleaseDraft('', context, octoKit, CHANGELOG);
 }
 
 run();
