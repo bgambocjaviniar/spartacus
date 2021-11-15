@@ -54,7 +54,7 @@ export function checkPullRequestTitle(title: string): {
 
   console.log(packagedScope);
   const scopeRegex = new RegExp(
-    `${commonTypeRegex}(: |((?<scope>${packagedScope})): )`
+    `${commonTypeRegex}(:|((?<scope>${packagedScope})):)`
   );
 
   const isTypeValid = typeRegex.test(commitTypeAndScope);
