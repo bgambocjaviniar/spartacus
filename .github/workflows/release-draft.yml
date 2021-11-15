@@ -43,23 +43,18 @@ jobs:
       #   run: npx lerna-changelog --tag-from 3.0.0-test --tag-to 5.0.0-test
       #   env:
       #     GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
-      # - name: npx changelog
-      #   id: coolio
-      #   run: | 
-      #     please=`npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0 &`
+      - name: npx changelog
+        id: coolio
+        run: | 
+          please=`npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0`
 
-      #     wait
-
-      #     echo "coolio $please"
-      #     echo "after"
-
-      #     echo "::set-output name=changelog::${please}"
+          echo "::set-output name=changelog::${echo $please}"
       # - name: test output
       #   run: |
       #     echo ${{ steps.coolio.outputs.changelog }}
-      - name: test output from custom action
+      - name: test output inline bash script
         run: |
-          echo ${{ steps.changelogaction.outputs.changelog }}
+          echo ${{ steps.coolio.outputs.changelog }}
       - name: Create changelogs
         id: changelog
         uses: ./.github/generate-changelog
@@ -73,6 +68,6 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     CHANGELOG: ${{ steps.changelog.outputs.changelog }}
       #     TO_TAG: ${{ steps.changelog.outputs.toTag }}
-      - name: release draft
+      - name: test output for custom action
         run: |
           echo ${{ steps.changelog.outputs.changelog }}
