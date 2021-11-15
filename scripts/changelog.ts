@@ -1,5 +1,6 @@
 import { JsonObject, logging } from '@angular-devkit/core';
 import chalk from 'chalk';
+import { highlight } from 'cli-highlight';
 import program from 'commander';
 import * as ejs from 'ejs';
 import * as fs from 'fs';
@@ -151,13 +152,22 @@ export default async function run(
     console.log('created markdown before output');
 
     console.log(markdown);
-
     // if (args.stdout || !githubToken) {
     //   console.log(markdown);
     //   process.exit(0);
     // }
 
     console.log('after markdown');
+    let highlighted = highlight(markdown, {
+      language: 'Markdown',
+      theme: {
+        section: chalk.bold,
+        string: chalk.hex('#0366d6'),
+        link: chalk.dim,
+      },
+    });
+
+    console.log(highlighted);
   });
 }
 
