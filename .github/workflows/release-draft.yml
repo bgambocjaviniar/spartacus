@@ -26,17 +26,22 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - name: Yarn
-        run: yarn install
+      # - name: Yarn
+      #   run: yarn install
       # - name: what is inside the script
       #   run: cat scripts/changelog.ts
-      - name: Get from and to tags
-        id: tags
-        uses: ./.github/get-tags
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
-          TO_TAG: ${{ github.event.inputs.TO_TAG }}
+      - name: again
+        id: again
+        run: |
+          test=$(echo ${{ github.event.inputs.FROM_TAG }})
+          echo $test
+      # - name: Get from and to tags
+      #   id: tags
+      #   uses: ./.github/get-tags
+      #   env: 
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
+      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
       # - name: try to generate changelog using custom action instead
       #   id: changelogaction
       #   uses: ./.github/generate-changelog
@@ -48,14 +53,14 @@ jobs:
       #   run: npx lerna-changelog --tag-from 3.0.0-test --tag-to 5.0.0-test
       #   env:
       #     GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
-      - name: npx changelog
-        id: coolio
-        run: | 
-          please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
-          please="${please//'%'/'%25'}"
-          please="${please//$'\n'/'%0A'}"
-          please="${please//$'\r'/'%0D'}"
-          echo "::set-output name=changelog::$(echo $please)"
+      # - name: npx changelog
+      #   id: coolio
+      #   run: | 
+      #     please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
+      #     please="${please//'%'/'%25'}"
+      #     please="${please//$'\n'/'%0A'}"
+      #     please="${please//$'\r'/'%0D'}"
+      #     echo "::set-output name=changelog::$(echo $please)"
       # - name: test output
       #   run: |
       #     echo ${{ steps.coolio.outputs.changelog }}
@@ -69,12 +74,12 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
       #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
-      - name: Create release draft
-        uses: ./.github/publish-release-draft
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CHANGELOG: ${{ steps.coolio.outputs.changelog }}
-          TO_TAG: 4.2
+      # - name: Create release draft
+      #   uses: ./.github/publish-release-draft
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     CHANGELOG: ${{ steps.coolio.outputs.changelog }}
+      #     TO_TAG: 4.2
       # - name: test output for custom action
       #   run: |
       #     echo ${{ steps.changelog.outputs.changelog }}
