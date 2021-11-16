@@ -33,14 +33,26 @@ jobs:
       - name: again
         id: again
         run: |
-          test=$(echo ${{ github.event.inputs.FROM_TAG }})
-          
-          if [ -z "$test" ]
+          from_tag=$(echo ${{ github.event.inputs.FROM_TAG }})
+          to_tag=$(echo ${{ github.event.inputs.TO_TAG }})
+
+          if [ -z "$from_tag" ]
           then
-                echo "who"
+                echo "::set-output name=from_tag::$(git describe --tags $(git rev-list --tags --max-count=1))"
           else
-                echo "bye"
+                echo "::set-output name=from_tag::$(echo $from_tag)"
           fi
+
+          if [ -z "$to_tag" ]
+          then
+                echo "::set-output name=to_tag::HEAD"
+          else
+                echo "::set-output name=to_tag::$(echo $to_tag)"
+          fi
+      - name: test output for custom action
+        run: |
+          echo ${{ steps.again.outputs.from_tag }}
+          echo ${{ steps.again.outputs.to_tag }}
       # - name: Get from and to tags
       #   id: tags
       #   uses: ./.github/get-tags
