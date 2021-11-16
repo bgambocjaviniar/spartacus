@@ -10,6 +10,8 @@ async function run() {
     throw new Error('Github token missing in action');
   }
 
+  console.log('FNMIWRMGIO', [FROM_TAG, TO_TAG]);
+
   if (!FROM_TAG) {
     let myOutput = '';
     let myError = '';
