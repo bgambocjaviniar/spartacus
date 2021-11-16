@@ -12,11 +12,15 @@ async function run() {
 
   if (!FROM_TAG) {
     let myOutput = '';
+    let myError = '';
 
     const options: any = {};
     options.listeners = {
       stdout: (data: Buffer) => {
         myOutput = data.toString();
+      },
+      stderr: (data: Buffer) => {
+        myError += data.toString();
       },
     };
 
@@ -24,9 +28,9 @@ async function run() {
       'git describe --tags $(git rev-list --tags --max-count=1)',
       options
     );
-    console.log('1', myOutput);
+    console.log('1', [myOutput, myError]);
     await exec.exec(`git describe --abbrev=0 --tags ${myOutput}^`, options);
-    console.log('2', myOutput);
+    console.log('2', [myOutput, myError]);
 
     FROM_TAG = myOutput;
   }
