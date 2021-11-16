@@ -176,7 +176,7 @@
     "eslint-plugin-prefer-arrow": "^1.2.2",
     "faker": "^4.1.0",
     "fs-extra": "^9.0.1",
-    "gh-got": "^8.0.1",
+    "cli-highlight": "^2.1.11",
     "gh-pages": "^2.1.1",
     "git-raw-commits": "^2.0.0",
     "glob": "^7.1.6",

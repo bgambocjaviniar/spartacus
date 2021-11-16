@@ -4,29 +4,82 @@ on:
   # push:
   #   branches:
   #     - develop
+  workflow_dispatch:
+    inputs:
+      FROM_TAG:
+        description: 'previous release tag version'
+        required: true
+        default: '3.0.0-test'
+      TO_TAG:
+        description: 'current release tag version'
+        required: true
+        default: '5.0.0-test'
 name: "Publish Release Draft notes"
 jobs:
-  setup: 
-    name: setup dependencies
-    runs-on: ubuntu-latest
-    steps: 
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '12'
   preReleaseDraft:
     name: Create pre-release draft
     runs-on: ubuntu-latest
-    needs: setup
     steps:
       - uses: actions/checkout@v2
-      - name: Create changelogs
-        id: changelog
-        uses: ./.github/generate-changelog
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FROM_TAG: 'user-4.1.1'
-          TO_TAG: 'HEAD'
-      - name: Stuff from changelog
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      # - name: Yarn
+      #   run: yarn install
+      # - name: what is inside the script
+      #   run: cat scripts/changelog.ts
+      - name: again
+        id: again
         run: |
-          echo ${{ steps.changelog.outputs.changelog }}
+          test=$(echo ${{ github.event.inputs.FROM_TAG }})
+          echo $test
+      # - name: Get from and to tags
+      #   id: tags
+      #   uses: ./.github/get-tags
+      #   env: 
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
+      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
+      # - name: try to generate changelog using custom action instead
+      #   id: changelogaction
+      #   uses: ./.github/generate-changelog
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
+      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
+      # - name: check lerna log
+      #   run: npx lerna-changelog --tag-from 3.0.0-test --tag-to 5.0.0-test
+      #   env:
+      #     GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
+      # - name: npx changelog
+      #   id: coolio
+      #   run: | 
+      #     please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
+      #     please="${please//'%'/'%25'}"
+      #     please="${please//$'\n'/'%0A'}"
+      #     please="${please//$'\r'/'%0D'}"
+      #     echo "::set-output name=changelog::$(echo $please)"
+      # - name: test output
+      #   run: |
+      #     echo ${{ steps.coolio.outputs.changelog }}
+      # - name: test output inline bash script
+      #   run: |
+      #     echo ${{ steps.coolio.outputs.changelog }}
+      # - name: Create changelogs
+      #   id: changelog
+      #   uses: ./.github/generate-changelog
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
+      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
+      # - name: Create release draft
+      #   uses: ./.github/publish-release-draft
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     CHANGELOG: ${{ steps.coolio.outputs.changelog }}
+      #     TO_TAG: 4.2
+      # - name: test output for custom action
+      #   run: |
+      #     echo ${{ steps.changelog.outputs.changelog }}

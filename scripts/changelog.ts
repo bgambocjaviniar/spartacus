@@ -4,7 +4,6 @@ import program from 'commander';
 import * as ejs from 'ejs';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as semver from 'semver';
 import { packages } from './packages';
 
 const changelogTemplate = ejs.compile(
@@ -14,7 +13,6 @@ const changelogTemplate = ejs.compile(
 
 const conventionalCommitsParser = require('conventional-commits-parser');
 const gitRawCommits = require('git-raw-commits');
-const ghGot = require('gh-got');
 const through = require('through2');
 
 export interface ChangelogOptions {
@@ -34,15 +32,15 @@ export default async function run(
   logger: logging.Logger
 ) {
   const commits: JsonObject[] = [];
-  let toSha: string | null = null;
+  // let toSha: string | null = null;
   const breakingChanges: JsonObject[] = [];
   const deprecations: JsonObject[] = [];
 
-  const githubToken = (
-    args.githubToken ||
-    (args.githubTokenFile && fs.readFileSync(args.githubTokenFile, 'utf-8')) ||
-    ''
-  ).trim();
+  // const githubToken = (
+  //   args.githubToken ||
+  //   (args.githubTokenFile && fs.readFileSync(args.githubTokenFile, 'utf-8')) ||
+  //   ''
+  // ).trim();
 
   const duplexUtil = through(function (
     this: NodeJS.ReadStream,
@@ -103,9 +101,9 @@ export default async function run(
               chunk.gitTags && (chunk.gitTags as string).match(/tag: (.*)/);
             const tags = maybeTag && maybeTag[1].split(/,/g);
             chunk['tags'] = tags;
-            if (tags && tags.find((x) => x === args.to)) {
-              toSha = chunk.hash as string;
-            }
+            // if (tags && tags.find((x) => x === args.to)) {
+            //   toSha = chunk.hash as string;
+            // }
 
             const notes: any = chunk.notes;
             if (Array.isArray(notes)) {
@@ -150,37 +148,14 @@ export default async function run(
         deprecations,
       });
 
-      if (args.stdout || !githubToken) {
-        console.log(markdown);
-        process.exit(0);
-      }
-
-      // Check if we need to edit or create a new one.
-      return ghGot('repos/SAP/spartacus/releases').then((x: JsonObject) => [
-        x,
-        markdown,
-      ]);
+      console.log(markdown);
+      // if (args.stdout || !githubToken) {
+      //   console.log(markdown);
+      //   process.exit(0);
+      // }
     })
-    .then(([body, markdown]) => {
-      const json = body.body;
-      const maybeRelease = json.find((x: JsonObject) => x.tag_name == args.to);
-      const id = maybeRelease ? `/${maybeRelease.id}` : '';
-
-      const semversion = (args.to && semver.parse(args.to)) || {
-        prerelease: '',
-      };
-
-      return ghGot('repos/SAP/spartacus/releases' + id, {
-        body: {
-          body: markdown,
-          draft: true,
-          name: args.to,
-          prerelease: semversion.prerelease.length > 0,
-          tag_name: args.to,
-          ...(toSha ? { target_commitish: toSha } : {}),
-        },
-        token: githubToken,
-      });
+    .catch(() => {
+      console.log('wow it was an error all along or no ??? testing');
     });
 }
 

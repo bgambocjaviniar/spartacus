@@ -3,19 +3,61 @@ import { Context } from '@actions/github/lib/context';
 
 const COMMENT_HEADER = '## Pull request checker: Conventional commits';
 
-export function checkPullRequestTitle(
-  title: string
-): {
+const commitType = [
+  'feat',
+  'fix',
+  'perf',
+  'refactor',
+  'style',
+  'test',
+  'chore',
+  'docs',
+];
+
+const commitScope = [
+  '@spartacus/core',
+  '@spartacus/storefront',
+  '@spartacus/styles',
+  '@spartacus/assets',
+  '@spartacus/schematics',
+  '@spartacus/incubator',
+  '@spartacus/user',
+  '@spartacus/cds',
+  '@spartacus/organization',
+  '@spartacus/product',
+  '@spartacus/product-configurator',
+  '@spartacus/storefinder',
+  '@spartacus/checkout',
+  '@spartacus/asm',
+  '@spartacus/smartedit',
+  '@spartacus/qualtrics',
+  '@spartacus/cdc',
+  '@spartacus/digital-payments',
+  '@spartacus/tracking',
+  '@spartacus/cart',
+  '@spartacus/order',
+  '@spartacus/setup',
+];
+
+export function checkPullRequestTitle(title: string): {
   isTypeValid: boolean;
   isScopeValid: boolean;
 } {
-  const commonTypeRegex =
-    '^(?<type>feat|fix|perf|refactor|style|test|chore|docs)';
-  const typeRegex = new RegExp(`${commonTypeRegex}:`);
-  // Most likely changing to split on first word instead of regex as it is heavy maintenance
+  const commonTypeRegex = `^(?<type>${commitType.join('|')})`;
+  const typeRegex = new RegExp(`${commonTypeRegex}: `, 'gm');
+
+  const packagedScope = commitScope
+    .map((scope) => (scope = `\\(${scope.replace('/', '\\/')}\\)`))
+    .join('|');
+
+  console.log(`${commonTypeRegex}(: |((?<scope>${packagedScope})): )`);
+
   const scopeRegex = new RegExp(
-    `${commonTypeRegex}(: |((?<scope>\(@spartacus\/core\)|\(@spartacus\/storefront\)|\(@spartacus\/styles\)|\(@spartacus\/assets\)|\(@spartacus\/schematics\)|\(@spartacus\/incubator\)|\(@spartacus\/user\)|\(@spartacus\/cds\)|\(@spartacus\/organization\)|\(@spartacus\/product\)|\(@spartacus\/product-configurator\)|\(@spartacus\/storefinder\)|\(@spartacus\/checkout\)|\(@spartacus\/asm\)|\(@spartacus\/smartedit\)|\(@spartacus\/cdc\)|\(@spartacus\/digital-payments\)|\(@spartacus\/tracking\)|\(@spartacus\/cart\)|\(@spartacus\/order\)|\(@spartacus\/setup\)|\(@spartacus\/core\)|\(@spartacus\/qualtrics\))): )`
+    `${commonTypeRegex}(: |((?<scope>${packagedScope})): )`,
+    'gm'
   );
+  console.log('vat', typeRegex);
+  console.log('coolio', scopeRegex);
 
   const isTypeValid = typeRegex.test(title);
   const isScopeValid = scopeRegex.test(title);
@@ -94,7 +136,7 @@ function generateCommentBody(
   - Make sure the pull request title and commit header matches as well
   - Do not forget to put meaningful commit body messages
   - Do not forgot to put **closes GH-issueNumber** in the pull request body and commit footer 
-  - <type>(<scope>): <subject> <----- format for pull request title and commit header. However, scope is optional.
+  - Example: \\<type\\>(\\<scope\\>): \\<subject\\> <----- format for pull request title and commit header. However, scope is optional.
   
   ${generateTextForType(isTypeValid)}
   
