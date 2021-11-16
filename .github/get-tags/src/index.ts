@@ -26,10 +26,9 @@ async function run() {
       },
     };
 
-    await exec.exec(
-      `git describe --tags $(git rev-list --tags --max-count=1)`,
-      options
-    );
+    await exec.exec('git rev-list --tags --max-count=1', options);
+    console.log('0', myOutput);
+    await exec.exec(`git describe --tags ${myOutput}`, options);
     console.log('1', [myOutput, myError]);
     await exec.exec(`git describe --abbrev=0 --tags ${myOutput}^`, options);
     console.log('2', [myOutput, myError]);

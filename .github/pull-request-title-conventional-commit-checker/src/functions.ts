@@ -46,8 +46,6 @@ export function checkPullRequestTitle(title: string): {
   const commonTypeRegex = `^(?<type>${commitType.join('|')})`;
   const typeRegex = new RegExp(`${commonTypeRegex}: `, 'gm');
 
-  console.log('vat', typeRegex);
-
   const packagedScope = commitScope
     .map((scope) => (scope = `\\(${scope.replace('/', '\\/')}\\)`))
     .join('|');
@@ -58,6 +56,8 @@ export function checkPullRequestTitle(title: string): {
     `${commonTypeRegex}(: |((?<scope>${packagedScope})): )`,
     'gm'
   );
+  console.log('vat', typeRegex);
+  console.log('coolio', scopeRegex);
 
   const isTypeValid = typeRegex.test(title);
   const isScopeValid = scopeRegex.test(title);
