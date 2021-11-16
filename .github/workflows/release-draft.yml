@@ -34,7 +34,13 @@ jobs:
         id: again
         run: |
           test=$(echo ${{ github.event.inputs.FROM_TAG }})
-          echo $test
+          
+          if [ -z "$test" ]
+          then
+                echo "who"
+          else
+                echo "bye"
+          fi
       # - name: Get from and to tags
       #   id: tags
       #   uses: ./.github/get-tags
