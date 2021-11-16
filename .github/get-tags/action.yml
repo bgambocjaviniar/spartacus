@@ -1,0 +1,5 @@
+name: 'Get tags'
+description: 'Get from and to tags for releases'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
