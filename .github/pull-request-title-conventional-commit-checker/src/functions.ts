@@ -47,7 +47,7 @@ export function checkPullRequestTitle(title: string): {
   const typeRegex = new RegExp(`${commonTypeRegex}: `);
 
   const packagedScope = commitScope
-    .map((scope) => (scope = `(${scope.replace('/', '\\/')})`))
+    .map((scope) => (scope = `\\(${scope.replace('/', '\\/')}\\)`))
     .join('|');
 
   console.log(`${commonTypeRegex}(: |((?<scope>${packagedScope})): )`);
