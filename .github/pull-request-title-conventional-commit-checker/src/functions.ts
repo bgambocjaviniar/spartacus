@@ -44,9 +44,9 @@ export function checkPullRequestTitle(title: string): {
   isScopeValid: boolean;
 } {
   const commonTypeRegex = `^(?<type>${commitType.join('|')})`;
-  const typeRegex = new RegExp(`${commonTypeRegex}:`);
+  const typeRegex = new RegExp(`${commonTypeRegex}: `);
 
-  console.log('vat', `${commonTypeRegex}: `);
+  console.log('vat', typeRegex);
 
   const packagedScope = commitScope
     .map((scope) => (scope = `\\(${scope.replace('/', '\\/')}\\)`))
