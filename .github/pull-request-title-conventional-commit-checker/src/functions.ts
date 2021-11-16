@@ -130,7 +130,7 @@ function generateCommentBody(
   - Make sure the pull request title and commit header matches as well
   - Do not forget to put meaningful commit body messages
   - Do not forgot to put **closes GH-issueNumber** in the pull request body and commit footer 
-  - Example: \<type\>(\<scope\>): \<subject\> <----- format for pull request title and commit header. However, scope is optional.
+  - Example: \\<type\\>(\\<scope\\>): \\<subject\\> <----- format for pull request title and commit header. However, scope is optional.
   
   ${generateTextForType(isTypeValid)}
   
