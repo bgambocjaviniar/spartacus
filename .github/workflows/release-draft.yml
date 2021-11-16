@@ -30,8 +30,13 @@ jobs:
         run: yarn install
       # - name: what is inside the script
       #   run: cat scripts/changelog.ts
-      - name: 1st log again.
-        run: npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0
+      - name: Get from and to tags
+        id: tags
+        uses: ./.github/get-tags
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
+          TO_TAG: ${{ github.event.inputs.TO_TAG }}
       # - name: try to generate changelog using custom action instead
       #   id: changelogaction
       #   uses: ./.github/generate-changelog
