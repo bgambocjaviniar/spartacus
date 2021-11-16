@@ -1,7 +1,7 @@
 on:
   pull_request:
     types: [opened, synchronize, reopened, edited]
-  # push:
+  # push: to remove above once test is ove
   #   branches:
   #     - develop
   workflow_dispatch:
@@ -9,11 +9,10 @@ on:
       FROM_TAG:
         description: 'previous release tag version'
         required: true
-        default: '3.0.0-test'
+        default: '5.0.0'
       TO_TAG:
         description: 'current release tag version'
-        required: true
-        default: '5.0.0-test'
+        default: 'HEAD'
 name: "Publish Release Draft notes"
 jobs:
   preReleaseDraft:
@@ -26,60 +25,45 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      # - name: Yarn
-      #   run: yarn install
-      # - name: what is inside the script
-      #   run: cat scripts/changelog.ts
-      - name: again
-        id: again
-        run: |
-          test=$(echo ${{ github.event.inputs.FROM_TAG }})
-          echo $test
+      - name: Install dependencies
+        run: yarn install
       # - name: Get from and to tags
       #   id: tags
-      #   uses: ./.github/get-tags
-      #   env: 
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
-      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
-      # - name: try to generate changelog using custom action instead
-      #   id: changelogaction
-      #   uses: ./.github/generate-changelog
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
-      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
-      # - name: check lerna log
-      #   run: npx lerna-changelog --tag-from 3.0.0-test --tag-to 5.0.0-test
-      #   env:
-      #     GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
-      # - name: npx changelog
-      #   id: coolio
-      #   run: | 
-      #     please=$(npx ts-node scripts/changelog.ts --verbose --from asm-4.0.0)
-      #     please="${please//'%'/'%25'}"
-      #     please="${please//$'\n'/'%0A'}"
-      #     please="${please//$'\r'/'%0D'}"
-      #     echo "::set-output name=changelog::$(echo $please)"
-      # - name: test output
       #   run: |
-      #     echo ${{ steps.coolio.outputs.changelog }}
-      # - name: test output inline bash script
-      #   run: |
-      #     echo ${{ steps.coolio.outputs.changelog }}
-      # - name: Create changelogs
-      #   id: changelog
-      #   uses: ./.github/generate-changelog
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     FROM_TAG: ${{ github.event.inputs.FROM_TAG }}
-      #     TO_TAG: ${{ github.event.inputs.TO_TAG }}
+      #     from_tag=$(echo ${{ github.event.inputs.FROM_TAG }})
+      #     to_tag=$(echo ${{ github.event.inputs.TO_TAG }})
+
+      #     if [ -z "$from_tag" ]
+      #     then
+      #           echo "::set-output name=from_tag::$(git describe --tags $(git rev-list --tags --max-count=1))"
+      #     else
+      #           echo "::set-output name=from_tag::$(echo $from_tag)"
+      #     fi
+
+      #     if [ -z "$to_tag" ]
+      #     then
+      #           echo "::set-output name=to_tag::HEAD"
+      #     else
+      #           echo "::set-output name=to_tag::$(echo $to_tag)"
+      #     fi
+      - name: Generate changelog
+        id: changelog
+        run: | 
+          changelog=$(npx ts-node scripts/changelog.ts --from 4.2.0 --to HEAD)
+
+          # Remove when support for multiline is available
+          # https://github.com/actions/toolkit/issues/403
+          # changelog="${changelog//'%'/'%25'}"
+          # changelog="${changelog//$'\n'/'%0A'}"
+          # changelog="${changelog//$'\r'/'%0D'}"
+
+          echo "::set-output name=changelog::$(echo $changelog)"
+      - name: why did it stop
+        run: |
+          echo ${{ steps.changelog.outputs.changelog }}
       # - name: Create release draft
       #   uses: ./.github/publish-release-draft
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     CHANGELOG: ${{ steps.coolio.outputs.changelog }}
-      #     TO_TAG: 4.2
-      # - name: test output for custom action
-      #   run: |
-      #     echo ${{ steps.changelog.outputs.changelog }}
+      #     CHANGELOG: ${{ steps.changelog.outputs.changelog }}
+      #     TO_TAG: ${{ steps.tags.outputs.to_tag }}

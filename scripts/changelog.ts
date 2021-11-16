@@ -180,17 +180,6 @@ const config = {
 if (typeof config.from === 'undefined') {
   console.error(chalk.red('Missing --from option with end commit/tag'));
   process.exit(1);
-} else if (
-  config.stdout === false &&
-  typeof config.githubToken === 'undefined' &&
-  typeof config.githubTokenFile === 'undefined'
-) {
-  console.error(
-    chalk.red(
-      'Missing --githubToken/--tokenFile option with correct github token'
-    )
-  );
-  process.exit(1);
 }
 
 run(config, new logging.NullLogger());
