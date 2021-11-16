@@ -19,7 +19,7 @@ async function run() {
     const options: any = {};
     options.listeners = {
       stdout: (data: Buffer) => {
-        myOutput = data.toString();
+        myOutput += data.toString();
       },
       stderr: (data: Buffer) => {
         myError += data.toString();
