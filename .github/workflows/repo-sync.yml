@@ -30,10 +30,10 @@ name: Sync develop branch to private PWA repo
 
 jobs:
   sync_public_repo_to_private:
-    runs-on: ubuntu-latest
     name: Force sync the develop branch to the private repository with current git history
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: push develop branch to the private repository
-      run: | 
-        git push -u ${{secrets.PWA_CX_COMMERCE}} develop -f
+      - uses: actions/checkout@v2
+      - name: push develop branch to the private repository
+        run: | 
+          git push -u ${{secrets.PWA_CX_COMMERCE}} develop -f
