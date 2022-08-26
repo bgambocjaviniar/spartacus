@@ -1,0 +1,90 @@
+on:
+  push:
+    branches:
+      - develop
+    schedule:
+    - cron:  '0 0 * * 1,3'
+    # scheduled at midnight every Monday and Wednesday
+  workflow_dispatch:  # click the button on Github repo!
+  env:
+    CYPRESS_KEY: ${{ secrets.CYPRESS_KEY }}
+    NODE_VERSION: '16'
+
+name: Sync with private PWA repo
+
+jobs:
+  sync_latest_from_upstream:
+    runs-on: ubuntu-latest
+    name: Sync latest commits from upstream repo
+    steps:
+    - name: Checkout target repo
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: Sync upstream changes
+      id: sync
+      uses: aormsby/Fork-Sync-With-Upstream-action@v3.2
+      with:
+        target_sync_branch: brian-sandbox
+        target_repo_token: ${{ secrets.BRIAN_PRIVATE_SYNC_TEST_PWA }}
+        upstream_sync_branch: develop
+        upstream_sync_repo: bgambocjaviniar/spartacus
+        upstream_repo_access_token: ${{ secrets.GITHUB_TOKEN }}
+      
+    # Step 3: Display a sample message based on the sync output var 'has_new_commits'
+    - name: New commits found
+      if: steps.sync.outputs.has_new_commits == 'true'
+      run: echo "New commits were found to sync."
+    
+    - name: No new commits
+      if: steps.sync.outputs.has_new_commits == 'false'
+      run: echo "There were no new commits."
+      
+    - name: Show value of 'has_new_commits'
+      run: echo ${{ steps.sync.outputs.has_new_commits }}
+on:
+  push:
+    branches:
+      - develop
+    schedule:
+    - cron:  '0 0 * * 1,3'
+    # scheduled at midnight every Monday and Wednesday
+  workflow_dispatch:  # click the button on Github repo!
+  env:
+    CYPRESS_KEY: ${{ secrets.CYPRESS_KEY }}
+    NODE_VERSION: '16'
+
+name: Sync with private PWA repo
+
+jobs:
+  sync_latest_from_upstream:
+    runs-on: ubuntu-latest
+    name: Sync latest commits from upstream repo
+    steps:
+    - name: Checkout target repo
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: Sync upstream changes
+      id: sync
+      uses: aormsby/Fork-Sync-With-Upstream-action@v3.2
+      with:
+        target_sync_branch: develop
+        upstream_repo_access_token: ${{ secrets.GITHUB_TOKEN }}
+        upstream_sync_branch: develop
+        upstream_sync_repo: bgambocjaviniar/spartacus
+        upstream_repo_access_token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
+      
+    # Step 3: Display a sample message based on the sync output var 'has_new_commits'
+    - name: New commits found
+      if: steps.sync.outputs.has_new_commits == 'true'
+      run: echo "New commits were found to sync."
+    
+    - name: No new commits
+      if: steps.sync.outputs.has_new_commits == 'false'
+      run: echo "There were no new commits."
+      
+    - name: Show value of 'has_new_commits'
+      run: echo ${{ steps.sync.outputs.has_new_commits }}
