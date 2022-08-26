@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          persist-credentials: false
+          fetch-depth: 1
       - name: push develop branch to the private repository
         run: | 
           git push -u https://I506207:${{secrets.BRIAN_PRIVATE_SYNC_TEST_PWA}}@github.tools.sap/cx-commerce/second-spartacus-test.git develop -f
