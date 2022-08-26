@@ -27,7 +27,6 @@ jobs:
   workflow_dispatch:
 
 name: Sync develop branch to private PWA repo
-
 jobs:
   sync_public_repo_to_private:
     name: Force sync the develop branch to the private repository with current git history
