@@ -24,7 +24,7 @@ jobs:
       uses: aormsby/Fork-Sync-With-Upstream-action@v3.2
       with:
         target_sync_branch: develop
-        upstream_repo_access_token: ${{ secrets.GITHUB_TOKEN }}
+        target_repo_token: ${{ secrets.GITHUB_TOKEN }}
         upstream_sync_branch: develop
         upstream_sync_repo: bgambocjaviniar/spartacus
         upstream_repo_access_token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
