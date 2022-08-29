@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-COMMITS_SHA=`git rev-list f7ea7a78b48ace061b17a81fa37d23bb21a62e2d..HEAD`
+COMMITS_SHA=`git rev-list $GITHUB_SHA..HEAD --reverse`
 
 
 for COMMIT_SHA in $COMMITS_SHA; do
