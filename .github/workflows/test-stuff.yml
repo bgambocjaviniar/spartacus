@@ -17,6 +17,6 @@ jobs:
         env: 
           WOW: ${{secrets.PWA_CX_COMMERCE}}
         run: |
-          ci-scripts/push-new-commits.sh
+          source ci-scripts/push-new-commits.sh
 
 
