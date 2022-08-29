@@ -6,6 +6,6 @@ COMMITS_SHA=`git rev-list $GITHUB_SHA..HEAD | sort -r`
 
 
 for COMMIT_SHA in $COMMITS_SHA; do
-    git push ${{secrets.PWA_CX_COMMERCE}} $COMMIT_SHA:wow -f
+    git push $WOW $COMMIT_SHA:wow -f
 done
 

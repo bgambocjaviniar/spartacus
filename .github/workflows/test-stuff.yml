@@ -14,5 +14,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: testing
+        env: 
+          WOW: ${{secrets.PWA_CX_COMMERCE}}
         run: |
           ci-scripts/push-new-commits.sh
+
+
