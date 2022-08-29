@@ -2,7 +2,6 @@
 set -e
 set -o pipefail
 
-echo "-----"
 
 echo "Running unit tests and code coverage for cds"
 exec 5>&1
