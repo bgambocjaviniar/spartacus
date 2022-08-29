@@ -2,10 +2,14 @@ on:
   push:
     branches:
       - develop
+      - brian-sandbox
     schedule:
     - cron:  '0 0 * * 1,3'
     # scheduled at midnight every Monday and Wednesday
   workflow_dispatch:  # click the button on Github repo!
+  env:
+    CYPRESS_KEY: ${{ secrets.CYPRESS_KEY }}
+    NODE_VERSION: '16'
 
 name: Sync with private PWA repo
 
@@ -23,13 +27,12 @@ jobs:
       id: sync
       uses: aormsby/Fork-Sync-With-Upstream-action@v3.2
       with:
-        target_sync_branch: develop
+        target_sync_branch: wow
         target_repo_token: ${{ secrets.GITHUB_TOKEN }}
         upstream_sync_branch: develop
         upstream_sync_repo: bgambocjaviniar/spartacus
-        upstream_repo_access_token: ${{ secrets.PUBLIC_REPO_ACCESS_TOKEN }}
-      
-    # Step 3: Display a sample message based on the sync output var 'has_new_commits'
+        upstream_repo_access_token: ${{ secrets.BRIAN_PRIVATE_SYNC_TEST_PWA }}
+
     - name: New commits found
       if: steps.sync.outputs.has_new_commits == 'true'
       run: echo "New commits were found to sync."
