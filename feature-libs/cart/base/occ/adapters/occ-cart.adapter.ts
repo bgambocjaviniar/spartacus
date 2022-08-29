@@ -15,7 +15,7 @@ import {
   OccEndpointsService,
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
-  USE_CLIENT_TOKEN,
+  USE_CLIENT_TOKEN
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { map, pluck } from 'rxjs/operators';
@@ -70,6 +70,7 @@ export class OccCartAdapter implements CartAdapter {
     }
     if (toMergeCartGuid) {
       params['toMergeCartGuid'] = toMergeCartGuid;
+      console.log('hi');
     }
 
     return this.http
