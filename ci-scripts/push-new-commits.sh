@@ -2,10 +2,10 @@
 set -e
 set -o pipefail
 
-COMMITS_SHA=`git rev-list fb606cd8289277648b818531ea349e1bf28a0558..HEAD`
+COMMITS_SHA=`git rev-list $GITHUB_SHA..HEAD | sort -r`
 
 
 for COMMIT_SHA in $COMMITS_SHA; do
-    echo $COMMIT_SHA
+    git push ${{secrets.PWA_CX_COMMERCE}} $COMMIT_SHA:develop -f
 done
 
