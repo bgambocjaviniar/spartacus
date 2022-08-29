@@ -70,7 +70,7 @@ export class OccCartAdapter implements CartAdapter {
     }
     if (toMergeCartGuid) {
       params['toMergeCartGuid'] = toMergeCartGuid;
-      console.log('hi');
+      console.log('stuff');
     }
 
     return this.http
