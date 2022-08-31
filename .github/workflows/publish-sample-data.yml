@@ -1,0 +1,21 @@
+on:
+  workflow_dispatch:
+    inputs:
+      sample_branch:
+        description: Publish spartacus sample data to standard Spartacus ccv2 repository
+        default: release/2105/next
+        required: true
+
+name: Publish Spartacus Sample Data to Spartacus CCv2 repository
+jobs:
+  publish_sample_data: 
+    name: Publishing Spartacus Sample Data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download the zip and tar files
+        run: |
+          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/release/2105/next.zip --output spartacussampledata-release-2105-next.zip
+          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/release/2105/next.tar.gz --output spartacussampledata-release-2105-next.tar.gz
+      - name: test
+        run: ls -al
