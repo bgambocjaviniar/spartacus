@@ -15,7 +15,15 @@ jobs:
       - uses: actions/checkout@v2
       - name: Download the zip and tar files
         run: |
-          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.zip --output spartacussampledata-"echo ${{ github.event.inputs.sample_branch }} | sed 's#/#-#g".zip
-          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.tar.gz --output spartacussampledata-"echo ${{ github.event.inputs.sample_branch }} | sed 's#/#-#g".tar.gz
-      - name: test
-        run: ls -al
+          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.zip --output spartacussampledata.zip
+          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.tar.gz --output spartacussampledata.tar.gz
+      - name: Create or update tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: bgambocjaviniar,
+              repo: npmrc-not-pickedup-with-yarn-for-private-repo-test,
+              ref: 'refs/tags/anything',
+              sha: context.sha
+            })
