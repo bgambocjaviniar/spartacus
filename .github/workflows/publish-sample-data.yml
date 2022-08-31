@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Download the zip and tar files
         run: |
-          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/release/2105/next.zip --output spartacussampledata-release-2105-next.zip
-          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/release/2105/next.tar.gz --output spartacussampledata-release-2105-next.tar.gz
+          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.zip --output spartacussampledata-release-2105-next.zip
+          curl -H "Authorization: token ${{secrets.BRIAN_PAT}}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.tar.gz --output spartacussampledata-release-2105-next.tar.gz
       - name: test
         run: ls -al
