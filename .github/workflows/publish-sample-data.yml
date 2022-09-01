@@ -17,18 +17,19 @@ jobs:
         run: |
           curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.zip --output spartacussampledata.zip
           curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.tar.gz --output spartacussampledata.tar.gz
-      - name: Create or update tag
-        uses: actions/github-script@v5
+      # - name: Create or update tag
+      #   uses: actions/github-script@v5
+      #   with:
+      #     github-token: ${{ secrets.BRIAN_PUB_ONE }}
+      #     script: |
+      #       github.rest.git.createRef({
+      #         owner: 'bgambocjaviniar',
+      #         repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+      #         ref: 'refs/tags/anything',
+      #         sha: '441aa94e16d072cc8e589356050725aad6ff5954'
+      #       })
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          github-token: ${{ secrets.BRIAN_PUB_ONE }}
-          script: |
-            console.log(JSON.stringify(context.sha))
-            github.rest.git.createRef({
-              owner: 'bgambocjaviniar',
-              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'refs/tags/anything',
-              sha: '441aa94e16d072cc8e589356050725aad6ff5954'
-            })
-      - name: Update tag with assets
-        run: |
-          echo "tbd"
+          files: spartacussampledata.zip
