@@ -22,9 +22,13 @@ jobs:
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
+            console.log(JSON.stringify(context.sha))
             github.rest.git.createRef({
               owner: bgambocjaviniar,
               repo: npmrc-not-pickedup-with-yarn-for-private-repo-test,
               ref: 'refs/tags/anything',
               sha: context.sha
             })
+        - name: Update tag with assets
+          run: |
+            echo "tbd"
