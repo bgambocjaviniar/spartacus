@@ -29,6 +29,6 @@ jobs:
               ref: 'refs/tags/anything',
               sha: context.sha
             })
-        - name: Update tag with assets
-          run: |
-            echo "tbd"
+      - name: Update tag with assets
+        run: |
+          echo "tbd"
