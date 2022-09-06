@@ -17,28 +17,23 @@ jobs:
         run: |
           curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.zip --output spartacussampledata.zip
           curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.tar.gz --output spartacussampledata.tar.gz
-      - name: Check ref
+      - name: Create Release / Update Release
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
-            const testA = await github.rest.git.getRef({
-              owner: 'bgambocjaviniar',
-              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'tags/anything'
-            })
-
-            console.log('wow', testA);
-      - name: Create Release
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.BRIAN_PUB_ONE }}
-          script: |
-            github.rest.repos.createRelease({
+            const response = await github.rest.repos.createRelease({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
               tag_name: 'anything'
             })
+
+            const { data: { id, upload_url }} = response;
+
+            core.setOutput('id', id);
+            core.setOutput('yes', upload_url);
+
+            console.log('test test', process.env.yes);
       - name: Create tag
         uses: actions/github-script@v5
         with:
