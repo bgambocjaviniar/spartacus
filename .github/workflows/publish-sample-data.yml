@@ -96,6 +96,7 @@ jobs:
             } catch (error) {
               if (error.message.includes('not found')) {
 
+                console.log(' out response', response);
                 const createReleaseResponse = await github.rest.repos.createRelease({
                   owner: 'bgambocjaviniar',
                   repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
@@ -108,7 +109,6 @@ jobs:
                 core.setOutput('id', id);
                 core.setOutput('yes', upload_url);
 
-                console.log(' out response', response);
               }
             }
 
@@ -144,7 +144,7 @@ jobs:
               file: `./spartacussampledata.tar.gz`
             });
 
-            const abc = await github.rest.repos.uploadReleaseAsset({
+            await github.rest.repos.uploadReleaseAsset({
               url: `${{steps.vat.outputs.yes }}`,
               release_id: `${{ steps.vat.outputs.id }}`,
               headers: zipHeaders,
@@ -152,7 +152,6 @@ jobs:
               file: fs.readFileSync(`./spartacussampledata.zip`)
             });
 
-            console.log('abc', abc);
 
       # - name: delete release
       #   uses: actions/github-script@v5
