@@ -28,7 +28,7 @@ jobs:
             github.rest.git.createRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'refs/tags/anything',
+              ref: 'refs/tags/abc',
               sha: '441aa94e16d072cc8e589356050725aad6ff5954'
             })
 
