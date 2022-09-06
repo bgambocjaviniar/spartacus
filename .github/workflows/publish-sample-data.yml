@@ -15,8 +15,11 @@ jobs:
       - uses: actions/checkout@v2
       - name: Download the zip and tar files
         run: |
-          curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.zip --output spartacussampledata.zip
-          curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.tar.gz --output spartacussampledata.tar.gz
+          curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.current_sample_branch }}.zip --output spartacussampledata-current.zip
+          curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.current_sample_branch }}.tar.gz --output spartacussampledata-current.tar.gz
+
+          curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.previous_sample_branch }}.zip --output spartacussampledata-previous.zip
+          curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.previous_sample_branch }}.tar.gz --output spartacussampledata-previous.tar.gz
 
           ls -al
           pwd
@@ -91,28 +94,40 @@ jobs:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
             const fs = require('fs');
-            const tarHeaders = { 'content-type': `application/x-tar`, 'content-length': fs.statSync(`./spartacussampledata.tar.gz`).size };
-            const zipHeaders = { 'content-type': `application/zip`, 'content-length': fs.statSync(`./spartacussampledata.zip`).size };
+            const currtarHeaders = { 'content-type': `application/x-tar`, 'content-length': fs.statSync(`./spartacussampledata-current.tar.gz`).size };
+            const currZipHeaders = { 'content-type': `application/zip`, 'content-length': fs.statSync(`./spartacussampledata-current.zip`).size };
 
-            console.log('__dirname why', process.cwd());
-
-            console.log(tarHeaders);
-            console.log(zipHeaders);
+            const prevTarHeaders = { 'content-type': `application/x-tar`, 'content-length': fs.statSync(`./spartacussampledata-previous.tar.gz`).size };
+            const prevZipHeaders = { 'content-type': `application/zip`, 'content-length': fs.statSync(`./spartacussampledata-previous.zip`).size };
 
             await github.rest.repos.uploadReleaseAsset({
-              url: `${{steps.vat.outputs.yes }}`,
-              release_id: `${{ steps.vat.outputs.id }}`,
-              headers: tarHeaders,
-              name: `spartacussampledata.tar.gz`,
-              file: `./spartacussampledata.tar.gz`
+              url: `${{steps.vat.outputs.upload_url }}`,
+              release_id: `${{steps.vat.outputs.release_id }}`,
+              headers: currtarHeaders,
+              name: `spartacussampledata-current.tar.gz`,
+              file: `fs.readFileSync(./spartacussampledata-current.tar.gz)`
+            });
+            await github.rest.repos.uploadReleaseAsset({
+              url: `${{steps.vat.outputs.upload_url }}`,
+              release_id: `${{steps.vat.outputs.release_id }}`,
+              headers: currZipHeaders,
+              name: `spartacussampledata-current.zip`,
+              file: fs.readFileSync(`./spartacussampledata-current.zip`)
             });
 
             await github.rest.repos.uploadReleaseAsset({
-              url: `${{steps.vat.outputs.yes }}`,
-              release_id: `${{ steps.vat.outputs.id }}`,
-              headers: zipHeaders,
-              name: `spartacussampledata.zip`,
-              file: fs.readFileSync(`./spartacussampledata.zip`)
+              url: `${{steps.vat.outputs.upload_url }}`,
+              release_id: `${{steps.vat.outputs.release_id }}`,
+              headers: prevTarHeaders,
+              name: `spartacussampledata-previous.tar.gz`,
+              file: `fs.readFileSync(./spartacussampledata-previous.tar.gz)`
+            });
+            await github.rest.repos.uploadReleaseAsset({
+              url: `${{steps.vat.outputs.upload_url }}`,
+              release_id: `${{steps.vat.outputs.release_id }}`,
+              headers: prevZipHeaders,
+              name: `spartacussampledata-previous.zip`,
+              file: fs.readFileSync(`./spartacussampledata-previous.zip`)
             });
 
 
