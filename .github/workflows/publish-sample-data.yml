@@ -98,7 +98,7 @@ jobs:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
             const fs = require('fs');
-            const currtarHeaders = { 'content-type': `application/x-tar`, 'content-length': fs.statSync(`./spartacussampledata-current.tar.gz`).size };
+            const currTarHeaders = { 'content-type': `application/x-tar`, 'content-length': fs.statSync(`./spartacussampledata-current.tar.gz`).size };
             const currZipHeaders = { 'content-type': `application/zip`, 'content-length': fs.statSync(`./spartacussampledata-current.zip`).size };
 
             const prevTarHeaders = { 'content-type': `application/x-tar`, 'content-length': fs.statSync(`./spartacussampledata-previous.tar.gz`).size };
