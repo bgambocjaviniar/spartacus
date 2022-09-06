@@ -65,6 +65,15 @@ jobs:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
             try {
+              const getReleaseResponse = await github.rest.repos.getReleaseByTag({
+                owner: 'bgambocjaviniar',
+                repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+                tag: 'anything'
+              });
+
+              const { data: { id: oldReleaseId } } = createReleaseResponse;
+
+              console.log('test', oldReleaseId);
             
               const createReleaseResponse = await github.rest.repos.createRelease({
                 owner: 'bgambocjaviniar',
