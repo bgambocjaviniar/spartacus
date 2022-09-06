@@ -114,18 +114,17 @@ jobs:
               file: fs.readFileSync(`./spartacussampledata.zip`)
             });
 
-      - name: delete release
-        uses: actions/github-script@v5
-        env:
-          RELEASE_ID: ${{ steps.vat.outputs.id}}
-          UPLOAD_URL: ${{ steps.vat.outputs.yes}}
-        with:
-          github-token: ${{ secrets.BRIAN_PUB_ONE }}
-          script: |
-
-            await github.rest.repos.deleteRelease({
-              owner: 'bgambocjaviniar',
-              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              release_id: `${{ steps.vat.outputs.id }}`
-            });
+      # - name: delete release
+      #   uses: actions/github-script@v5
+      #   env:
+      #     RELEASE_ID: ${{ steps.vat.outputs.id}}
+      #     UPLOAD_URL: ${{ steps.vat.outputs.yes}}
+      #   with:
+      #     github-token: ${{ secrets.BRIAN_PUB_ONE }}
+      #     script: |
+      #       await github.rest.repos.deleteRelease({
+      #         owner: 'bgambocjaviniar',
+      #         repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+      #         release_id: `${{ steps.vat.outputs.id }}`
+      #       });
 
