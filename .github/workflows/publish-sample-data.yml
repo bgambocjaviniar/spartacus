@@ -51,7 +51,7 @@ jobs:
           script: |
             const fs = require('fs');
 
-            const tarHeaders = { 'content-type': 'application/x-tar', 'content-length': contentLength(`${{ github.event.inputs.sample_branch }}`.tar.gz) };
+            const tarHeaders = { 'content-type': 'application/x-tar', 'content-length': fs.statSync(`${{ github.event.inputs.sample_branch }}`.tar.gz).size };
 
             console.log(fs);
             console.log('aabc', tarHeaders);
