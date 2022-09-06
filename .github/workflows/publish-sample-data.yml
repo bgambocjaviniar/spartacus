@@ -64,17 +64,6 @@ jobs:
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
-            try {
-              const getReleaseResponse = await github.rest.repos.getReleaseByTag({
-                owner: 'bgambocjaviniar',
-                repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-                tag: 'anything'
-              });
-
-
-              console.log('test', oldReleaseId);
-              console.log('vat', createReleaseResponse.data.id);
-            
               const createReleaseResponse = await github.rest.repos.createRelease({
                 owner: 'bgambocjaviniar',
                 repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
@@ -90,24 +79,6 @@ jobs:
               core.setOutput('yes', upload_url);
 
               console.log('in response', createReleaseResponse);
-            } catch (error) {
-              if (error.message.includes('Not found')) {
-                consoe.log('err in heo ut hre');
-
-                const createReleaseResponse = await github.rest.repos.createRelease({
-                  owner: 'bgambocjaviniar',
-                  repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-                  tag_name: 'anything',
-                  name: 'Spartacus sample data'
-                });
-
-                const { data: { id, upload_url }} = createReleaseResponse;
-
-                core.setOutput('id', id);
-                core.setOutput('yes', upload_url);
-
-              }
-            }
       - name: vat test
         uses: actions/github-script@v5
         env:
