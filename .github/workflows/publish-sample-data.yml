@@ -79,6 +79,7 @@ jobs:
                 id: currentReleaseId
               })
 
+              console.log('in here');
               
               const createReleaseResponse = await github.rest.repos.createRelease({
                 owner: 'bgambocjaviniar',
@@ -98,6 +99,8 @@ jobs:
 
             } catch (error) {
               if (error.message.includes('not found')) {
+                consoe.log('err in heo ut hre');
+
                 const createReleaseResponse = await github.rest.repos.createRelease({
                   owner: 'bgambocjaviniar',
                   repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
