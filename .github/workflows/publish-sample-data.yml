@@ -70,7 +70,7 @@ jobs:
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
               tag: 'b'
             })
-            const { data: { id }} = getReleaseResponse;
+            const { data: { id: currentReleaseId }} = getReleaseResponse;
 
 
 
