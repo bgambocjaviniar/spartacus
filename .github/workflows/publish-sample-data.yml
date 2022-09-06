@@ -20,6 +20,18 @@ jobs:
 
           ls -al
           pwd
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.BRIAN_PUB_ONE }}
+          script: |
+            github.rest.git.createRef({
+              owner: 'bgambocjaviniar',
+              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+              ref: 'refs/tags/anything',
+              sha: '441aa94e16d072cc8e589356050725aad6ff5954'
+            })
+
       - name: test release by tag
         id: vat
         uses: actions/github-script@v5
@@ -96,14 +108,3 @@ jobs:
             core.setOutput('yes', upload_url);
 
             console.log('test test', process.env.yes);
-      - name: Create tag
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.BRIAN_PUB_ONE }}
-          script: |
-            github.rest.git.createRef({
-              owner: 'bgambocjaviniar',
-              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'refs/tags/anything',
-              sha: '441aa94e16d072cc8e589356050725aad6ff5954'
-            })
