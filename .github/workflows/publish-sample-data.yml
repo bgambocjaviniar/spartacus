@@ -64,20 +64,19 @@ jobs:
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
-
+            const getReleaseResponse = await github.rest.repos.getReleaseByTag({
+              owner: 'bgambocjaviniar',
+              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+              tag: 'a'
+            });
+            const { data: { id: currentReleaseId }} = getReleaseResponse;
             try {
-              const getReleaseResponse = await github.rest.repos.getReleaseByTag({
-                owner: 'bgambocjaviniar',
-                repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-                tag: 'anything'
-              })
-              const { data: { id: currentReleaseId }} = getReleaseResponse;
 
               await github.rest.repos.deleteRelease({
                 owner: 'bgambocjaviniar',
                 repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
                 id: currentReleaseId
-              })
+              });
 
               console.log('in here');
               
@@ -88,7 +87,7 @@ jobs:
                 name: 'Spartacus sample data'
               });
 
-              const { data: { id, upload_url }} = createReleaseResponse;
+              const { data: { id, upload_url } } = createReleaseResponse;
 
 
 
@@ -96,7 +95,6 @@ jobs:
               core.setOutput('yes', upload_url);
 
               console.log('in response', createReleaseResponse);
-
             } catch (error) {
               if (error.message.includes('Not found')) {
                 consoe.log('err in heo ut hre');
