@@ -78,7 +78,7 @@ jobs:
               core.setOutput('id', id);
               core.setOutput('yes', upload_url);
 
-              console.log('in response', createReleaseResponse);
+              console.log('in response a', createReleaseResponse);
       - name: vat test
         uses: actions/github-script@v5
         env:
