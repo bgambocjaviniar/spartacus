@@ -69,7 +69,7 @@ jobs:
               const getReleaseResponse = await github.rest.repos.getReleaseByTag({
                 owner: 'bgambocjaviniar',
                 repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-                tag: 'a'
+                tag: 'anything'
               })
               const { data: { id: currentReleaseId }} = getReleaseResponse;
 
