@@ -105,30 +105,30 @@ jobs:
             const prevZipHeaders = { 'content-type': `application/zip`, 'content-length': fs.statSync(`./spartacussampledata-previous.zip`).size };
 
             await github.rest.repos.uploadReleaseAsset({
-              url: `${{steps.vat.outputs.upload_url }}`,
-              release_id: `${{steps.vat.outputs.release_id }}`,
-              headers: currtarHeaders,
+              url: `${{steps.vat.outputs.yes }}`,
+              release_id: `${{steps.vat.outputs.id }}`,
+              headers: currTarHeaders,
               name: `spartacussampledata-current.tar.gz`,
               file: `fs.readFileSync(./spartacussampledata-current.tar.gz)`
             });
             await github.rest.repos.uploadReleaseAsset({
-              url: `${{steps.vat.outputs.upload_url }}`,
-              release_id: `${{steps.vat.outputs.release_id }}`,
+              url: `${{steps.vat.outputs.yes }}`,
+              release_id: `${{steps.vat.outputs.id }}`,
               headers: currZipHeaders,
               name: `spartacussampledata-current.zip`,
               file: fs.readFileSync(`./spartacussampledata-current.zip`)
             });
 
             await github.rest.repos.uploadReleaseAsset({
-              url: `${{steps.vat.outputs.upload_url }}`,
-              release_id: `${{steps.vat.outputs.release_id }}`,
+              url: `${{steps.vat.outputs.yes }}`,
+              release_id: `${{steps.vat.outputs.id }}`,
               headers: prevTarHeaders,
               name: `spartacussampledata-previous.tar.gz`,
               file: `fs.readFileSync(./spartacussampledata-previous.tar.gz)`
             });
             await github.rest.repos.uploadReleaseAsset({
-              url: `${{steps.vat.outputs.upload_url }}`,
-              release_id: `${{steps.vat.outputs.release_id }}`,
+              url: `${{steps.vat.outputs.yes }}`,
+              release_id: `${{steps.vat.outputs.id }}`,
               headers: prevZipHeaders,
               name: `spartacussampledata-previous.zip`,
               file: fs.readFileSync(`./spartacussampledata-previous.zip`)
