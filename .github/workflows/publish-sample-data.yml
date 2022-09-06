@@ -49,6 +49,12 @@ jobs:
               });
               }
             }
+
+            await github.rest.git.createRef({
+                owner: 'bgambocjaviniar',
+                repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+                ref: 'refs/tags/anything',
+                sha
       - name: Create Release / Update Release
         uses: actions/github-script@v5
         with:
