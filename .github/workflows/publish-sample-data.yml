@@ -94,7 +94,7 @@ jobs:
             const tarHeaders = { 'content-type': `application/x-tar`, 'content-length': fs.statSync(`./spartacussampledata.tar.gz`).size };
             const zipHeaders = { 'content-type': `application/zip`, 'content-length': fs.statSync(`./spartacussampledata.zip`).size };
 
-            console.log('__dirname', process.cwd());
+            console.log('__dirname why', process.cwd());
 
             console.log(tarHeaders);
             console.log(zipHeaders);
