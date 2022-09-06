@@ -53,7 +53,10 @@ jobs:
             console.log('aaaa', process.env.RELEASE_ID);
             console.log(process.env.UPLOAD_URL);
             console.log(`${{ github.event.inputs.sample_branch }}`);
-            console.log('no need env', ${{ steps.vat.outputs.yes}});
+            console.log(`${{ steps.vat.outputs.yes}}`);
+
+            const wow =`${{ github.event.inputs.sample_branch }}`;
+            console.log('wow', wow);
        
  
 
