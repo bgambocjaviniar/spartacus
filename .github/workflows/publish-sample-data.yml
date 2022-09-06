@@ -59,14 +59,14 @@ jobs:
               url: `${{steps.vat.outputs.yes }}`,
               headers: tarHeaders,
               name: `spartacussampledata.tar.gz`,
-              file: `spartacussampledata.tar.gz`
+              file: `./spartacussampledata.tar.gz`
             });
 
             github.rest.repos.uploadReleaseAsset({
               url: `${{steps.vat.outputs.yes }}`,
               headers: zipHeaders,
               name: `spartacussampledata.zip`,
-              file: fs.readFileSync(`spartacussampledata.zip`)
+              file: fs.readFileSync(`./spartacussampledata.zip`)
             });
 
       - name: Create Release / Update Release
