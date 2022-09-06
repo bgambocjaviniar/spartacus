@@ -56,15 +56,18 @@ jobs:
               });
               }
             }
-
-      - name: sleep 123
+      
+      - name: wait
         run: sleep 5s
+
+    
       - name: Create Release / Update Release
         id: vat
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
+              
               const createReleaseResponse = await github.rest.repos.createRelease({
                 owner: 'bgambocjaviniar',
                 repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
@@ -75,11 +78,10 @@ jobs:
               const { data: { id, upload_url } } = createReleaseResponse;
 
 
-
               core.setOutput('id', id);
               core.setOutput('yes', upload_url);
 
-              console.log('in response a', createReleaseResponse);
+
       - name: vat test
         uses: actions/github-script@v5
         env:
