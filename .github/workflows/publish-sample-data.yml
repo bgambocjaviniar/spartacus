@@ -25,22 +25,13 @@ jobs:
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
-            const referenceResponse = github.rest.git.getRef({
+            const referenceResponse = await github.rest.git.getRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
               ref: 'refs/heads/main'
             })
 
-            const { object: { sha } } = referenceResponse;
-
-            console.log('sha', sha);
-
-            github.rest.git.getRef({
-              owner: 'bgambocjaviniar',
-              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'refs/tags/abc',
-              sha: '441aa94e16d072cc8e589356050725aad6ff5954'
-            })
+            console.log(referenceResponse);
 
       - name: test release by tag
         id: vat
