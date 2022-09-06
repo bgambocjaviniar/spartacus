@@ -40,7 +40,7 @@ jobs:
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
               ref: 'refs/tags/okay',
               sha
-            })
+            });
 
       - name: test release by tag
         id: vat
@@ -110,7 +110,7 @@ jobs:
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
               tag_name: 'anything'
-            })
+            });
 
             const { data: { id, upload_url }} = response;
 
