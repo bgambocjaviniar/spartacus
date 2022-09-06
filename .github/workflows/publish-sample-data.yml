@@ -35,7 +35,11 @@ jobs:
             core.setOutput('id', id);
             core.setOutput('yes', upload_url);
 
+
+
             console.log('test test', process.env.yes);
+            console.log(id);
+            console.log('ok', upload_url);
       - name: Create Release / Update Release
         uses: actions/github-script@v5
         with:
