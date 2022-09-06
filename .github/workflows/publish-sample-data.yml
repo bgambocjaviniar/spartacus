@@ -65,28 +65,56 @@ jobs:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
 
-            const getReleaseResponse = await github.rest.repos.getReleaseByTag({
-              owner: 'bgambocjaviniar',
-              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              tag: 'b'
-            })
-            const { data: { id: currentReleaseId }} = getReleaseResponse;
+            try {
+              const getReleaseResponse = await github.rest.repos.getReleaseByTag({
+                owner: 'bgambocjaviniar',
+                repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+              })
+              const { data: { id: currentReleaseId }} = getReleaseResponse;
+
+              await github.rest.repos.deleteRelease({
+                owner: 'bgambocjaviniar',
+                repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+                id: currentReleaseId
+              })
+
+              
+              const createReleaseResponse = await github.rest.repos.createRelease({
+                owner: 'bgambocjaviniar',
+                repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+                tag_name: 'anything',
+                name: 'Spartacus sample data'
+              });
+
+              const { data: { id, upload_url }} = response;
+
+              core.setOutput('id', id);
+              core.setOutput('yes', upload_url);
+
+              console.log('in response', response);
+
+            } catch (error) {
+              if (error.message.includes('not found')) {
+
+                const createReleaseResponse = await github.rest.repos.createRelease({
+                  owner: 'bgambocjaviniar',
+                  repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+                  tag_name: 'anything',
+                  name: 'Spartacus sample data'
+                });
+
+                const { data: { id, upload_url }} = response;
+
+                core.setOutput('id', id);
+                core.setOutput('yes', upload_url);
+
+                console.log(' out response', response);
+              }
+            }
 
 
 
-            const createReleaseResponse = await github.rest.repos.createRelease({
-              owner: 'bgambocjaviniar',
-              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              tag_name: 'anything',
-              name: 'Spartacus sample data'
-            });
 
-            const { data: { id, upload_url }} = response;
-
-            core.setOutput('id', id);
-            core.setOutput('yes', upload_url);
-
-            console.log('response', response);
       - name: cwd
         run: | 
           ls -al
