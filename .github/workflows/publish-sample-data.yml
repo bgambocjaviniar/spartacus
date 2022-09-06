@@ -87,12 +87,14 @@ jobs:
                 name: 'Spartacus sample data'
               });
 
-              const { data: { id, upload_url }} = response;
+              const { data: { id, upload_url }} = createReleaseResponse;
+
+
 
               core.setOutput('id', id);
               core.setOutput('yes', upload_url);
 
-              console.log('in response', response);
+              console.log('in response', createReleaseResponse);
 
             } catch (error) {
               if (error.message.includes('not found')) {
@@ -103,21 +105,13 @@ jobs:
                   name: 'Spartacus sample data'
                 });
 
-                const { data: { id, upload_url }} = response;
+                const { data: { id, upload_url }} = createReleaseResponse;
 
                 core.setOutput('id', id);
                 core.setOutput('yes', upload_url);
 
               }
             }
-
-
-
-
-      - name: cwd
-        run: | 
-          ls -al
-          pwd
       - name: vat test
         uses: actions/github-script@v5
         env:
