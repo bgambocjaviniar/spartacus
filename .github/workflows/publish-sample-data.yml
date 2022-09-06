@@ -31,6 +31,8 @@ jobs:
               ref: 'refs/heads/main'
             })
 
+            console.log('abc', referenceResponse.data.object);
+
             const { data { object: { sha } } } = referenceResponse;
 
             console.log('sha', sha);
