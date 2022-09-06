@@ -64,6 +64,22 @@ jobs:
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
+
+            # const response = await github.rest.repos.getReleaseByTag({
+            #   owner: 'bgambocjaviniar',
+            #   repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+            #   tag: 'anything'
+            # })
+
+
+            # const { data: { id, upload_url }} = response;
+
+            # core.setOutput('id', id);
+            # core.setOutput('yes', upload_url);
+
+
+
+
             const response = await github.rest.repos.createRelease({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
@@ -106,13 +122,15 @@ jobs:
               file: `./spartacussampledata.tar.gz`
             });
 
-            await github.rest.repos.uploadReleaseAsset({
+            const abc = await github.rest.repos.uploadReleaseAsset({
               url: `${{steps.vat.outputs.yes }}`,
               release_id: `${{ steps.vat.outputs.id }}`,
               headers: zipHeaders,
               name: `spartacussampledata.zip`,
               file: fs.readFileSync(`./spartacussampledata.zip`)
             });
+
+            console.log('abc', abc);
 
       # - name: delete release
       #   uses: actions/github-script@v5
