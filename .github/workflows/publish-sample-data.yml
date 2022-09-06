@@ -28,7 +28,7 @@ jobs:
             const referenceResponse = await github.rest.git.getRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'refs/heads/main'
+              ref: 'heads/main'
             })
 
             console.log(referenceResponse);
