@@ -45,8 +45,14 @@ jobs:
               });
 
             } catch (error) {
-              console.log('error', error);
-              console.log(error.message);
+              if (error.message.includes('not exist')) {
+                await github.rest.git.createRef({
+                owner: 'bgambocjaviniar',
+                repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+                ref: 'tags/a',
+                sha
+              });
+              }
             }
 
 
