@@ -57,7 +57,9 @@ jobs:
             const response = await github.rest.repos.createRelease({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              tag_name: 'anything'
+              tag_name: 'anything',
+              draft: true,
+              name: 'Spartacus sample data'
             });
 
             const { data: { id, upload_url }} = response;
