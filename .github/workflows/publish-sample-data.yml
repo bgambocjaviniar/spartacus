@@ -37,11 +37,18 @@ jobs:
 
             console.log('sha', sha);
 
-            github.rest.git.deleteRef({
-              owner: 'bgambocjaviniar',
-              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'tags/a',
-            });
+            try {
+              github.rest.git.deleteRef({
+                owner: 'bgambocjaviniar',
+                repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+                ref: 'tags/a',
+              });
+
+            } catch (error) {
+              console.log('error', error);
+              console.log(error.message);
+            }
+
 
             github.rest.git.createRef({
               owner: 'bgambocjaviniar',
