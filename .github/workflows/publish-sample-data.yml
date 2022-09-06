@@ -98,7 +98,7 @@ jobs:
               console.log('in response', createReleaseResponse);
 
             } catch (error) {
-              if (error.message.includes('not found')) {
+              if (error.message.includes('Not found')) {
                 consoe.log('err in heo ut hre');
 
                 const createReleaseResponse = await github.rest.repos.createRelease({
