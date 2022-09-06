@@ -100,6 +100,7 @@ jobs:
 
             await github.rest.repos.uploadReleaseAsset({
               url: `${{steps.vat.outputs.yes }}`,
+              release_id: `${{ steps.vat.outputs.id }}`
               headers: tarHeaders,
               name: `spartacussampledata.tar.gz`,
               file: `./spartacussampledata.tar.gz`
@@ -107,6 +108,7 @@ jobs:
 
             await github.rest.repos.uploadReleaseAsset({
               url: `${{steps.vat.outputs.yes }}`,
+              release_id: `${{ steps.vat.outputs.id }}`
               headers: zipHeaders,
               name: `spartacussampledata.zip`,
               file: fs.readFileSync(`./spartacussampledata.zip`)
