@@ -53,7 +53,7 @@ jobs:
           script: |
             const fs = require('fs');
 
-            const tarHeaders = { 'content-type': 'application/x-tar', 'content-length': fs.statSync(spartacussampledata.tar.gz).size };
+            const tarHeaders = { 'content-type': 'application/x-tar', 'content-length': fs.statSync(`spartacussampledata.tar.gz`).size };
 
             console.log(fs);
             console.log('aabc', tarHeaders);
