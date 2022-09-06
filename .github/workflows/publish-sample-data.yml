@@ -71,9 +71,9 @@ jobs:
                 tag: 'anything'
               });
 
-              const { data: { id: oldReleaseId } } = createReleaseResponse;
 
               console.log('test', oldReleaseId);
+              console.log('vat', createReleaseResponse.data.id);
             
               const createReleaseResponse = await github.rest.repos.createRelease({
                 owner: 'bgambocjaviniar',
