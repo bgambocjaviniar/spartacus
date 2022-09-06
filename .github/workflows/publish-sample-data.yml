@@ -17,6 +17,25 @@ jobs:
         run: |
           curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.zip --output spartacussampledata.zip
           curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.tar.gz --output spartacussampledata.tar.gz
+      - name: test release by tag
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.BRIAN_PUB_ONE }}
+          script: |
+            const response = await github.rest.repos.getReleaseByTag({
+              owner: 'bgambocjaviniar',
+              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+              tag_name: 'anything'
+            })
+
+            console.log('abc', response);
+
+            const { data: { id, upload_url }} = response;
+
+            core.setOutput('id', id);
+            core.setOutput('yes', upload_url);
+
+            console.log('test test', process.env.yes);
       - name: Create Release / Update Release
         uses: actions/github-script@v5
         with:
