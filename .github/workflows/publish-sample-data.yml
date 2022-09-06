@@ -51,7 +51,8 @@ jobs:
           script: |
             console.log(process.env.sample_branch);            
             console.log('aaaa', process.env.RELEASE_ID);
-            console.log(process.env.UPLAOD_URL);
+            console.log(process.env.UPLOAD_URL);
+            console.log(`${{ github.event.inputs.sample_branch }}`);
        
  
 
