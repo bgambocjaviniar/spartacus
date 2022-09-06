@@ -25,8 +25,10 @@ jobs:
             const testA = github.rest.git.getRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'tags/anythin'
+              ref: 'tags/anything'
             })
+
+            console.log('wow', testA);
       - name: Create Release
         uses: actions/github-script@v5
         with:
