@@ -49,7 +49,23 @@ jobs:
               ref: 'refs/tags/anything',
               sha
             });
+      - name: Create Release / Update Release
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.BRIAN_PUB_ONE }}
+          script: |
+            const response = await github.rest.repos.createRelease({
+              owner: 'bgambocjaviniar',
+              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+              tag_name: 'anything'
+            });
 
+            const { data: { id, upload_url }} = response;
+
+            core.setOutput('id', id);
+            core.setOutput('yes', upload_url);
+
+            console.log('test test', process.env.yes);
       - name: test release by tag
         id: vat
         uses: actions/github-script@v5
@@ -78,23 +94,6 @@ jobs:
         run: | 
           ls -al
           pwd
-      - name: Create Release / Update Release
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.BRIAN_PUB_ONE }}
-          script: |
-            const response = await github.rest.repos.createRelease({
-              owner: 'bgambocjaviniar',
-              repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              tag_name: 'anything'
-            });
-
-            const { data: { id, upload_url }} = response;
-
-            core.setOutput('id', id);
-            core.setOutput('yes', upload_url);
-
-            console.log('test test', process.env.yes);
       - name: vat test
         uses: actions/github-script@v5
         env:
