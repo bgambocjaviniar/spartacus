@@ -49,7 +49,7 @@ jobs:
                 await github.rest.git.createRef({
                 owner: 'bgambocjaviniar',
                 repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-                ref: 'tags/a',
+                ref: 'refs/tags/a',
                 sha
               });
               }
