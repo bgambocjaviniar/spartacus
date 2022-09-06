@@ -49,8 +49,10 @@ jobs:
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
-              console.log(${{ github.event.inputs.sample_branch }});
-        
+            console.log(process.env.sample_branch);            
+            console.log('aaaa', process.env.RELEASE_ID);
+            console.log(process.env.UPLAOD_URL);
+       
  
 
       - name: Create Release / Update Release
