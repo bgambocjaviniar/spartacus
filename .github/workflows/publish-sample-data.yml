@@ -25,7 +25,7 @@ jobs:
             github.rest.git.getRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'refs/tags/anything'
+              ref: 'tags/anything'
             })
       - name: Create Release
         uses: actions/github-script@v5
