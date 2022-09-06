@@ -22,11 +22,13 @@ jobs:
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
-            github.rest.git.getRef({
+            const testA = github.rest.git.getRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
               ref: 'tags/anythin'
             })
+
+            console.log('a', testA);
       - name: Create Release
         uses: actions/github-script@v5
         with:
@@ -35,7 +37,7 @@ jobs:
             github.rest.repos.createRelease({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'anything'
+              tag_name: 'anything'
             })
       - name: Create tag
         uses: actions/github-script@v5
