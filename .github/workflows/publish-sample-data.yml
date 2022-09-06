@@ -18,6 +18,7 @@ jobs:
           curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.zip --output spartacussampledata.zip
           curl -H "Authorization: token ${{ secrets.BRIAN_PAT }}" -L https://github.tools.sap/cx-commerce/spartacussampledata/archive/${{ github.event.inputs.sample_branch }}.tar.gz --output spartacussampledata.tar.gz
       - name: test release by tag
+        id: vat
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
@@ -40,6 +41,10 @@ jobs:
             console.log('test test', process.env.yes);
             console.log(id);
             console.log('ok', upload_url);
+      - name: vat test
+        run: |
+          echo ${{ steps.vat.outputs.yes}}
+          echo abc ${{ steps.vat.outputs.id}}
       - name: Create Release / Update Release
         uses: actions/github-script@v5
         with:
