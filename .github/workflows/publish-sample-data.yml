@@ -38,12 +38,14 @@ jobs:
             console.log('sha', sha);
 
             try {
-              await github.rest.git.deleteRef({
+             const why = await github.rest.git.deleteRef({
                 owner: 'bgambocjaviniar',
                 repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
                 ref: 'tags/a',
               });
 
+
+              console.log('aaaa', why);
             } catch (error) {
               console.log('error', error);
               console.log(error.message);
