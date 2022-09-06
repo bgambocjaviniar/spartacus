@@ -40,7 +40,7 @@ jobs:
             github.rest.git.deleteRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'refs/tags/anything',
+              ref: 'tags/anything',
             });
 
             github.rest.git.createRef({
