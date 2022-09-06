@@ -59,6 +59,7 @@ jobs:
 
     
       - name: Create Release / Update Release
+        id: vats
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
