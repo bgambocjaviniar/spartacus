@@ -46,7 +46,8 @@ jobs:
             console.log('ok', upload_url);
       - name: cwd
         run: | 
-          ls -al 
+          ls -al
+          pwd
       - name: vat test
         uses: actions/github-script@v5
         env:
