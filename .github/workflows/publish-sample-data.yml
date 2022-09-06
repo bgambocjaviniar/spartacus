@@ -22,7 +22,7 @@ jobs:
         with:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
-            const testA = github.rest.git.getRef({
+            const testA = await github.rest.git.getRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
               ref: 'tags/anything'
