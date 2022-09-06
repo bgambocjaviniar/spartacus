@@ -28,7 +28,7 @@ jobs:
             const referenceResponse = await github.rest.git.getRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
-              ref: 'refs/heads/main'
+              ref: 'heads/main'
             });
 
             console.log('abc', referenceResponse.data.object);
@@ -37,7 +37,7 @@ jobs:
 
             console.log('sha', sha);
 
-            github.rest.git.getRef({
+            github.rest.git.createRef({
               owner: 'bgambocjaviniar',
               repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
               ref: 'refs/tags/okay',
