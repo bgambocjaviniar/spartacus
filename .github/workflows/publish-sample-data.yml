@@ -38,7 +38,7 @@ jobs:
             console.log('sha', sha);
 
             try {
-              github.rest.git.deleteRef({
+              await github.rest.git.deleteRef({
                 owner: 'bgambocjaviniar',
                 repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
                 ref: 'tags/a',
