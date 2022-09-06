@@ -76,7 +76,7 @@ jobs:
             core.setOutput('id', id);
             core.setOutput('yes', upload_url);
 
-            console.log('test test', process.env.yes);
+            console.log('response', response);
       - name: cwd
         run: | 
           ls -al
