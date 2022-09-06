@@ -69,6 +69,7 @@ jobs:
               const getReleaseResponse = await github.rest.repos.getReleaseByTag({
                 owner: 'bgambocjaviniar',
                 repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
+                tag: 'a'
               })
               const { data: { id: currentReleaseId }} = getReleaseResponse;
 
@@ -95,8 +96,6 @@ jobs:
 
             } catch (error) {
               if (error.message.includes('not found')) {
-
-                console.log(' out response', response);
                 const createReleaseResponse = await github.rest.repos.createRelease({
                   owner: 'bgambocjaviniar',
                   repo: 'npmrc-not-pickedup-with-yarn-for-private-repo-test',
