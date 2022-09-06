@@ -52,11 +52,14 @@ jobs:
           github-token: ${{ secrets.BRIAN_PUB_ONE }}
           script: |
             const fs = require('fs');
-
             const tarHeaders = { 'content-type': 'application/x-tar', 'content-length': fs.statSync(`spartacussampledata.tar.gz`).size };
 
-            console.log(fs);
-            console.log('aabc', tarHeaders);
+            github.rest.repos.uploadReleaseAsset({
+              url: `${{steps.vat.outputs.yes }}`,
+              headers: tarHeaders,
+              name: `spartacussampledata.tar.gz`,
+              file: fs.readFileSync(`spartacussampledata.tar.gz`)
+            });
 
       - name: Create Release / Update Release
         uses: actions/github-script@v5
