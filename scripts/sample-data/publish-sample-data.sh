@@ -22,8 +22,7 @@ mkdir $SAMPLE_DATA_ASSETS_FOLDER && mv spartacussampledata-* $SAMPLE_DATA_ASSETS
 echo "-----"
 echo "Deleting tag on the remote repository to remove any tied releases"
 
-git push "https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git" :refs/tags/$TAG_NAME
-sleep 5
+# git push "https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git" :refs/tags/$TAG_NAME
 
 # echo "-----"
 # echo "Pushing tag to the remote repository"
