@@ -22,16 +22,16 @@ mkdir $SAMPLE_DATA_ASSETS_FOLDER && mv spartacussampledata-* $SAMPLE_DATA_ASSETS
 echo "-----"
 echo "Deleting tag on the remote repository to remove any tied releases"
 
-git push https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git :refs/tags/$TAG_NAME
+git push "https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git" :refs/tags/$TAG_NAME
 sleep 5
 
 echo "-----"
 echo "Pushing tag to the remote repository"
 
 git tag -a $TAG_NAME -m "Spartacus sample data(s)"
-git push https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git $TAG_NAME
+git push "https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git" $TAG_NAME
 
 echo "-----"
 echo "Create a release with created tag"
 
-gh release create $TAG_NAME ./$SAMPLE_DATA_ASSETS_FOLDER/**  --notes "Spartacus sample data releases" --repo https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git
+gh release create $TAG_NAME ./$SAMPLE_DATA_ASSETS_FOLDER/**  --notes "Spartacus sample data releases" --repo "https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git"
