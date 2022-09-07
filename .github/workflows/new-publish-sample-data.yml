@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
       - name: create release with sample data assets
         env: 
           SAMPLE_DATA_NEW: ${{ github.event.inputs.current_sample_branch }}
