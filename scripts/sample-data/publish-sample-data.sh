@@ -25,11 +25,11 @@ echo "Deleting tag on the remote repository to remove any tied releases"
 git push "https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git" :refs/tags/$TAG_NAME
 sleep 5
 
-echo "-----"
-echo "Pushing tag to the remote repository"
+# echo "-----"
+# echo "Pushing tag to the remote repository"
 
-git tag -a $TAG_NAME -m "Spartacus sample data(s)"
-git push "https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git" $TAG_NAME
+# git tag -a $TAG_NAME -m "Spartacus sample data(s)"
+# git push "https://${GHT_USER}:$GHT_TOKEN@github.com/${GHT_USER}/npmrc-not-pickedup-with-yarn-for-private-repo-test.git" $TAG_NAME
 
 echo "-----"
 echo "Create a release with created tag"
