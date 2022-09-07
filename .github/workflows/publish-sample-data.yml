@@ -109,7 +109,7 @@ jobs:
               release_id: `${{steps.vat.outputs.id }}`,
               headers: currTarHeaders,
               name: `spartacussampledata-current.tar.gz`,
-              file: `fs.readFileSync(./spartacussampledata-current.tar.gz)`
+              file: fs.readFileSync(`./spartacussampledata-current.tar.gz`)
             });
             await github.rest.repos.uploadReleaseAsset({
               url: `${{steps.vat.outputs.yes }}`,
@@ -124,7 +124,7 @@ jobs:
               release_id: `${{steps.vat.outputs.id }}`,
               headers: prevTarHeaders,
               name: `spartacussampledata-previous.tar.gz`,
-              file: `fs.readFileSync(./spartacussampledata-previous.tar.gz)`
+              file: fs.readFileSync(`./spartacussampledata-previous.tar.gz`)
             });
             await github.rest.repos.uploadReleaseAsset({
               url: `${{steps.vat.outputs.yes }}`,
