@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
     inputs:
-      sample_branch:
+      current_sample_branch:
         description: Publish new spartacus sample data to standard Spartacus ccv2 repository
         default: release/2105/next
         required: true
