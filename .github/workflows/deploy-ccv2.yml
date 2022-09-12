@@ -18,7 +18,7 @@ jobs:
       - name: Comment out baseUrl in order to allow set url through index.html
         run: |
           ls -al
-          sed -i '' 's/baseUrl: environment.occBaseUrl/\/\/ baseUrl: environment.occBaseUrl/gi' projects/storefrontapp/src/app/app.module.ts
+          sed -i 's/baseUrl: environment.occBaseUrl/\/\/ baseUrl: environment.occBaseUrl/gi' projects/storefrontapp/src/app/app.module.ts
       - name: okay
         run: |
           cat projects/storefrontapp/src/app/app.module.ts
