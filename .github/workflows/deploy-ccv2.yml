@@ -32,9 +32,8 @@ jobs:
       - name: Package installation
         run: yarn --frozen-lockfile
       - name: Deploy to ccv2 environment
-        with:
-          env: 
-            CCV2_BRANCH: ${{ github.event.inputs.ccv2_branch }}
-            SOURCE_BRANCH_TO_DEPLOY: ${{ github.event.inputs.source_branch_to_deploy }}
+        env: 
+          CCV2_BRANCH: ${{ github.event.inputs.ccv2_branch }}
+          SOURCE_BRANCH_TO_DEPLOY: ${{ github.event.inputs.source_branch_to_deploy }}
         run: |
           ci-scripts/deploy-ccv2.yml
