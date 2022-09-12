@@ -4,7 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       ccv2_branch:
-        description: Updating ccv2 branch that will be used for deployment
+        description: Branch on ccv2 to update
+        default: test_dist_from_public_build
+        required: true
+      source_branch_to_deploy:
+        description: source branch to deploy on ccv2
         default: develop
         required: true
 
@@ -15,10 +19,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Comment out baseUrl in order to allow set url through index.html
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: | 
+            node_modules
+          key: nodemodules-${{ github.event.pull_request.base.sha }}
+          restore-keys: nodemodules-${{ github.event.pull_request.base.sha }}
+      - name: Install angular CLI
+        run: npm install -g @angular/cli@v13-lts
+      - name: Package installation
+        run: yarn --frozen-lockfile
+      - name: Deploy to ccv2 environment
+        with:
+          env: 
+            CCV2_BRANCH: ${{ github.event.inputs.ccv2_branch }}
+            SOURCE_BRANCH_TO_DEPLOY: ${{ github.event.inputs.source_branch_to_deploy }}
         run: |
-          ls -al
-          sed -i 's/baseUrl: environment.occBaseUrl/\/\/ baseUrl: environment.occBaseUrl/gi' projects/storefrontapp/src/app/app.module.ts
-      - name: okay
-        run: |
-          cat projects/storefrontapp/src/app/app.module.ts
+          ci-scripts/deploy-ccv2.yml
