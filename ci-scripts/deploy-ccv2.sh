@@ -30,6 +30,15 @@ echo "Verify app.module.ts has occBaseUrl commented"
 
 cat projects/storefrontapp/src/app/app.module.ts
 
+if grep -Fq "// baseUrl: environment.occBaseUrl" projects/storefrontapp/src/app/app.module.ts
+then
+    echo "app.module.ts has successfully commented out baseUrl"
+else
+    echo "Base url is not commented out from app.module.ts"
+    exit 1
+fi
+
+
 echo "-----"
 echo "Build Spartacus libraries"
 yarn build:libs
@@ -37,7 +46,7 @@ yarn build:libs
 echo "-----"
 echo "Build SSR"
 
-# tO change
+# to change
 yarn build:ssr:ci
 
 echo "-----"
