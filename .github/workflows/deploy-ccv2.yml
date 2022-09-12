@@ -35,5 +35,7 @@ jobs:
         env: 
           CCV2_BRANCH: ${{ github.event.inputs.ccv2_branch }}
           SOURCE_BRANCH_TO_DEPLOY: ${{ github.event.inputs.source_branch_to_deploy }}
+          GHT_USER: ${{ secrets.GHT_USER }}
+          GHT_PRIVATE_REPO_TOKEN: ${{ secrets.GHT_PRIVATE_REPO_TOKEN }}
         run: |
           ci-scripts/deploy-ccv2.sh
