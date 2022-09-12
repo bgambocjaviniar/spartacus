@@ -6,7 +6,7 @@ echo "Verify source branch exist"
 IS_BRANCH=`git ls-remote --heads origin $SOURCE_BRANCH_TO_DEPLOY`
 
 if [ -z "$IS_BRANCH" ]; then
-    echo "Error downloading $SOURCE_BRANCH_TO_DEPLOY zip/tar. Verify branch name exist on the sample data repository"
+    echo "Error downloading $SOURCE_BRANCH_TO_DEPLOY zip/tar. Verify branch name exist on the public Spartacus repository"
     exit 1
 fi
 
@@ -16,7 +16,7 @@ echo "Verify CCv2 branch exist"
 IS_BRANCH=`git ls-remote --heads https://${GHT_USER}:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/ccv2-ec-dev-project-for-tests.git $CCV2_BRANCH`
 
 if [ -z "$IS_BRANCH" ]; then
-    echo "Error downloading $CCV2_BRANCH zip/tar. Verify branch name exist on the sample data repository"
+    echo "Error downloading $CCV2_BRANCH zip/tar. Verify branch name exist on the ccv2 repository"
     exit 1
 fi
 
