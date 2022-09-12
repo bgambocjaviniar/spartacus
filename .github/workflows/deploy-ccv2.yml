@@ -36,4 +36,4 @@ jobs:
           CCV2_BRANCH: ${{ github.event.inputs.ccv2_branch }}
           SOURCE_BRANCH_TO_DEPLOY: ${{ github.event.inputs.source_branch_to_deploy }}
         run: |
-          ci-scripts/deploy-ccv2.yml
+          ci-scripts/deploy-ccv2.sh
