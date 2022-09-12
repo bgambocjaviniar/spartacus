@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -xe
+
 TAG_NAME=sampledata
 SAMPLE_DATA_ASSETS_FOLDER=sample-data-assets
 
