@@ -30,7 +30,7 @@ echo "Verify app.module.ts has occBaseUrl commented"
 
 cat projects/storefrontapp/src/app/app.module.ts
 
-if grep -Fq "// baseUrl: environment.occBaseUrl" projects/storefrontapp/src/app/app.module.ts
+if grep -Fq "// baseUrl: environment.occBaseUrla" projects/storefrontapp/src/app/app.module.ts
 then
     echo "app.module.ts has successfully commented out baseUrl"
 else
