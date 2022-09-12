@@ -5,7 +5,7 @@ on:
     inputs:
       ccv2_branch:
         description: Updating ccv2 branch that will be used for deployment
-        default: release/2105/next
+        default: develop
         required: true
 
 name: Update ccv2 environment from source
@@ -17,6 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Comment out baseUrl in order to allow set url through index.html
         run: |
+          ls -al
           sed -i '' 's/baseUrl: environment.occBaseUrl/\/\/ baseUrl: environment.occBaseUrl/gi' projects/storefrontapp/src/app/app.module.ts
       - name: okay
         run: |
