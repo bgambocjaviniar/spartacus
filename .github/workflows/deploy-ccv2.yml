@@ -39,3 +39,7 @@ jobs:
           GHT_PRIVATE_REPO_TOKEN: ${{ secrets.GHT_PRIVATE_REPO_TOKEN }}
         run: |
           ci-scripts/deploy-ccv2.sh
+      - name: double check again for the file and dist folder
+        run: |
+          cat projects/storefrontapp/src/app/app.module.ts
+          cd dist && ls -al
