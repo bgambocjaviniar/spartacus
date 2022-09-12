@@ -1,0 +1,23 @@
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      ccv2_branch:
+        description: Updating ccv2 branch that will be used for deployment
+        default: release/2105/next
+        required: true
+
+name: Update ccv2 environment from source
+jobs:
+  deploy_to_ccv2: 
+    name: Deploying to a ccv2 environment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Comment out baseUrl in order to allow set url through index.html
+        run: |
+          sed -i '' 's/baseUrl: environment.occBaseUrl/\/\/ baseUrl: environment.occBaseUrl/gi' projects/storefrontapp/src/app/app.module.ts
+      - name: okay
+        run: |
+          cat projects/storefrontapp/src/app/app.module.ts
