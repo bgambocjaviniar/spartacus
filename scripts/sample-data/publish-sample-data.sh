@@ -6,13 +6,13 @@ SAMPLE_DATA_ASSETS_FOLDER=sample-data-assets
 echo "-----"
 echo "Downloading LATEST sample data for 5.0"
 
-curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_NEW.zip" -o "spartacussampledata-current.zip"
-curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_NEW.tar.gz" -o "spartacussampledata-current.tar.gz"
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/abc.zip" -o "spartacussampledata-current.zip"
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/abc.tar.gz" -o "spartacussampledata-current.tar.gz"
 
 echo "Downloading PREVIOUS supported sample data for <= 4.3.x"
 
-curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_OLD.zip" -o "spartacussampledata-previous.zip"
-curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_OLD.tar.gz" -o "spartacussampledata-previous.tar.gz"
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/a.zip" -o "spartacussampledata-previous.zip"
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/a.tar.gz" -o "spartacussampledata-previous.tar.gz"
 
 echo "-----"
 echo "Move assets to single folder"
