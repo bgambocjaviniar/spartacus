@@ -26,5 +26,6 @@ jobs:
           GHT_USER: ${{ secrets.GHT_USER }}
           GHT_PRIVATE_REPO_TOKEN: ${{ secrets.GHT_PRIVATE_REPO_TOKEN }}
           GHT_TOKEN: ${{ secrets.GHT_TOKEN }}
+          GH_TOKEN: ${{ secrets.GHT_TOKEN }}
         run: |
           scripts/sample-data/publish-sample-data.sh
