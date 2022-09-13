@@ -69,8 +69,8 @@ cd "$GHT_REPO/js-storefront"
 rm -rf $B2C_STORE
 rm -rf $B2B_STORE
 
-mkdir -p $B2C_STORE/dist/$B2C_STORE/browser
-mkdir -p $B2C_STORE/dist/$B2C_STORE/server
+mkdir -p $B2C_STORE/dist/storefrontapp/browser
+mkdir -p $B2C_STORE/dist/storefrontapp-server/server
 
 # only b2c for now test
 # mkdir -p $B2B_STORE/dist/$B2B_STORE/browser
