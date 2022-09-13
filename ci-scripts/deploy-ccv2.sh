@@ -16,7 +16,7 @@ B2B_STORE="b2bspastore"
 # echo "-----"
 # echo "Verify CCv2 branch exist"
 
-# IS_BRANCH=`git ls-remote --heads https://${GHT_USER}:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/ccv2-ec-dev-project-for-tests.git $CCV2_BRANCH`
+# IS_BRANCH=`git ls-remote --heads https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/ccv2-ec-dev-project-for-tests.git $CCV2_BRANCH`
 
 # if [ -z "$IS_BRANCH" ]; then
 #     echo "Error downloading $CCV2_BRANCH zip/tar. Verify branch name exist on the ccv2 repository"
@@ -59,8 +59,7 @@ B2B_STORE="b2bspastore"
 
 echo "-----"
 echo "Clone ccv2 repository"
-
-git clone -b spa_p4_dist_test "https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git"
+git clone -b spa_p4_dist_test https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
 
 echo "-----"
 echo "Deleting  ccv2 repository"
