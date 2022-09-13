@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -xe
 
 B2C_STORE="spartacusstore"
 B2B_STORE="b2bspastore"
