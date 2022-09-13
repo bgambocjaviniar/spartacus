@@ -5,7 +5,7 @@ on:
     inputs:
       ccv2_branch:
         description: Branch on ccv2 to update
-        default: test_dist_from_public_build
+        default: spa_p4_dist_test
         required: true
       source_branch_to_deploy:
         description: source branch to deploy on ccv2
@@ -40,7 +40,3 @@ jobs:
           GHT_REPO: ${{ secrets.GHT_REPO }}
         run: |
           ci-scripts/deploy-ccv2.sh
-      - name: double check again for the file and dist folder
-        run: |
-          cat projects/storefrontapp/src/app/app.module.ts
-          cd dist && ls -al

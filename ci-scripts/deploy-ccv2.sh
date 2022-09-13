@@ -43,20 +43,20 @@ else
 fi
 
 
-# echo "-----"
-# echo "Build Spartacus libraries"
-# yarn build:libs
+echo "-----"
+echo "Build Spartacus libraries"
+yarn build:libs
 
-# echo "-----"
-# echo "Build SSR"
+echo "-----"
+echo "Build SSR"
 
-# # to change
-# yarn build:ssr:ci
+# to change
+yarn build:ssr:ci
 
-# echo "-----"
-# echo "Build CSR"
+echo "-----"
+echo "Build CSR"
 
-# yarn build
+yarn build
 
 echo "-----"
 echo "Clone ccv2 repository"
@@ -71,11 +71,23 @@ cd "$GHT_REPO/js-storefront"
 rm -rf $B2C_STORE
 rm -rf $B2B_STORE
 
-mkdir -p $B2C_STORE/dist/$B2C_STORE
-mkdir -p $B2B_STORE/dist/$B2B_STORE
-
-ls -al
+mkdir -p $B2C_STORE/dist/$B2C_STORE/browser
+mkdir -p $B2C_STORE/dist/$B2C_STORE/server
+# only b2c for now test
+# mkdir -p $B2B_STORE/dist/$B2B_STORE
 
 cd -
 
-ls -al
+echo "-----"
+echo "Copy server and browser files to js-storefront to adhere to the ccv2 dist strucutre"
+
+cp -R dist/storefrontapp/ $B2C_STORE/dist/$B2C_STORE/browser/
+cp -R dist/storefrontapp-server/ $B2C_STORE/dist/$B2C_STORE/server/
+
+echo "-----"
+echo "Push to remote repository"
+
+cd $GHT_REPO
+git add .
+git commit -m "update from source"
+git push
