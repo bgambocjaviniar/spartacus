@@ -62,10 +62,12 @@ echo "-----"
 echo "Clone ccv2 repository"
 git clone -b spa_p4_dist_test https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
 
+ls -ls
+
 echo "-----"
 echo "Deleting  ccv2 repository"
 
-cd "$GH_REPO/js-storefront"
+cd "$GHT_REPO/js-storefront"
 rm -rf $B2C_STORE
 rm -rf $B2B_STORE
 
