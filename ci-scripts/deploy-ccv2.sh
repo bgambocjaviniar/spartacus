@@ -79,6 +79,8 @@ ls -al
 # mkdir -p $B2B_STORE/dist/$B2B_STORE/browser
 # mkdir -p $B2B_STORE/dist/$B2B_STORE/server
 
+sleep 5
+
 cd -
 
 echo "-----"
