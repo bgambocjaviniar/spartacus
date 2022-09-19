@@ -28,11 +28,16 @@ echo "-----"
 echo "Comment out occBaseUrl from configration to allow index.html meta tag to set the occBaseUrl"
 
 sed -i 's/baseUrl: environment.occBaseUrl/\/\/ baseUrl: environment.occBaseUrl/gi' projects/storefrontapp/src/app/app.module.ts
+sed -i 's%<meta name="occ-backend-base-url" content="OCC_BACKEND_BASE_URL_VALUE" />%<meta name="occ-backend-base-url" content="https://api.cg79x9wuu9-eccommerc1-p4-public.model-t.myhybris.cloud" />%gi' projects/storefrontapp/src/index.html
 
 echo "-----"
 echo "Verify app.module.ts has occBaseUrl commented"
 
 cat projects/storefrontapp/src/app/app.module.ts
+
+echo "1010100101010101010100101010"
+
+cat projects/storefrontapp/src/index.html
 
 if grep -Fq "// baseUrl: environment.occBaseUrl" projects/storefrontapp/src/app/app.module.ts
 then
