@@ -74,8 +74,8 @@ cd "$GHT_REPO/js-storefront"
 rm -rf $B2C_STORE
 rm -rf $B2B_STORE
 
-mkdir -p $B2C_STORE/dist/storefrontapp/browser
-mkdir -p $B2C_STORE/dist/storefrontapp-server/server
+mkdir -p $B2C_STORE/dist/$B2C_STORE/browser
+mkdir -p $B2C_STORE/dist/$B2C_STORE/server
 
 # only b2c for now test
 # mkdir -p $B2B_STORE/dist/$B2B_STORE/browser
@@ -86,8 +86,8 @@ cd -
 echo "-----"
 echo "Copy server and browser files to js-storefront to adhere to the ccv2 dist structure"
 
-cp -a dist/storefrontapp/. $GHT_REPO/js-storefront/$B2C_STORE/dist/storefrontapp/browser/
-cp -a dist/storefrontapp-server/. $GHT_REPO/js-storefront/$B2C_STORE/dist/storefrontapp-server/server/
+cp -a dist/storefrontapp/. $GHT_REPO/js-storefront/$B2C_STORE/dist/$B2C_STORE/browser/
+cp -a dist/storefrontapp-server/. $GHT_REPO/js-storefront/$B2C_STORE/dist/$B2C_STORE/server/
 
 echo "-----"
 echo "Push to remote repository"
