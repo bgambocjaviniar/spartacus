@@ -65,7 +65,7 @@ yarn build
 echo "-----"
 echo "Clone ccv2 repository"
 
-git clone -b spa_p4_dist_test https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
+git clone -b spa_p4_it_works https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
 
 echo "-----"
 echo "Updating js-storefront to adhere to the ccv2 dist strucutre"
