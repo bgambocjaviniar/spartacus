@@ -47,10 +47,10 @@ fi
 echo "-----"
 echo "Clone ccv2 repository"
 
-git clone -b spa_p4_it_works https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
+git clone -b $CCV2_BRANCH https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
 
 echo "-----"
-echo "Updating ccv2 repo's js-storefront to adhere to the ccv2 dist strucutre"
+echo "Updating ccv2 repo's js-storefront folder to adhere to the ccv2 dist strucutre"
 
 rm -rf $CCV2_B2C_STOREFRONT_PATH
 rm -rf $CCV2_B2B_STOREFRONT_PATH
@@ -63,20 +63,27 @@ mkdir -p $CCV2_B2C_STOREFRONT_PATH/dist/$B2C_STORE/server
 mkdir -p $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/browser
 mkdir -p $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/server
 
-ls -al $CCV2_B2C_STOREFRONT_PATH/dist/
-
 echo "-----"
 echo "Build Spartacus libraries"
 yarn build:libs
 
 echo "-----"
-echo "update server.ts for B2C"
+echo "update server.ts for b2c storefront"
 
 sed -i "s%dist/storefrontapp%dist/$B2C_STORE/browser%gi" projects/storefrontapp/server.ts
 
-echo "1010100101010101010100101010"
+echo "-----"
+echo "Verify server.ts has been updated for b2c dist"
 
 cat projects/storefrontapp/server.ts
+
+if grep -Fq "const distFolder = join(process.cwd(), 'dist/$B2C_STORE/browser');" projects/storefrontapp/server.ts
+then
+    echo "Dist folder has been updated"
+else
+    echo "Dist folder has NOT been updated"
+    exit 1
+fi
 
 echo "-----"
 echo "Build SSR for b2c storefront"
@@ -99,9 +106,18 @@ echo "update server.ts for b2b storefront"
 
 sed -i "s%dist/$B2C_STORE/browser%dist/$B2B_STORE/browser%gi" projects/storefrontapp/server.ts
 
-echo "1010100101010101010100101010"
+echo "-----"
+echo "Verify server.ts has been updated for b2b dist"
 
 cat projects/storefrontapp/server.ts
+
+if grep -Fq "const distFolder = join(process.cwd(), 'dist/$B2B_STORE/browser');" projects/storefrontapp/server.ts
+then
+    echo "Dist folder has been updated"
+else
+    echo "Dist folder has NOT been updated"
+    exit 1
+fi
 
 echo "-----"
 echo "Build SSR for b2b storefront"
@@ -119,7 +135,6 @@ echo "Copy server and browser files to js-storefront to adhere to the ccv2 dist 
 
 cp -a dist/storefrontapp/. $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/browser/
 cp -a dist/storefrontapp-server/. $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/server/
-
 
 echo "-----"
 echo "Push to remote repository"
