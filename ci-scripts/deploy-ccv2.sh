@@ -29,7 +29,7 @@ echo "Comment out occBaseUrl from configration to allow index.html meta tag to s
 
 sed -i 's/baseUrl: environment.occBaseUrl/\/\/ baseUrl: environment.occBaseUrl/gi' projects/storefrontapp/src/app/app.module.ts
 
-sed -i 's%dist/storefrontapp%dist/${IS_BRANCH}/browser%gi' projects/storefrontapp/server.ts
+sed -i 's%dist/storefrontapp%dist/"$IS_BRANCH"/browser%gi' projects/storefrontapp/server.ts
 
 
 echo "-----"
