@@ -28,9 +28,8 @@ echo "-----"
 echo "Comment out occBaseUrl from configration to allow index.html meta tag to set the occBaseUrl"
 
 sed -i 's/baseUrl: environment.occBaseUrl/\/\/ baseUrl: environment.occBaseUrl/gi' projects/storefrontapp/src/app/app.module.ts
-# sed -i 's%<meta name="occ-backend-base-url" content="OCC_BACKEND_BASE_URL_VALUE" />%<meta name="occ-backend-base-url" content="https://api.cg79x9wuu9-eccommerc1-p4-public.model-t.myhybris.cloud" />%gi' projects/storefrontapp/src/index.html
 
-sed -i 's%dist/storefrontapp%dist/spartacusstore/browser%gi' projects/storefrontapp/server.ts
+sed -i 's%dist/storefrontapp%dist/$IS_BRANCH/browser%gi' projects/storefrontapp/server.ts
 
 
 echo "-----"
@@ -40,67 +39,66 @@ cat projects/storefrontapp/src/app/app.module.ts
 
 echo "1010100101010101010100101010"
 
-# cat projects/storefrontapp/src/index.html
 cat projects/storefrontapp/server.ts
 
-if grep -Fq "// baseUrl: environment.occBaseUrl" projects/storefrontapp/src/app/app.module.ts
-then
-    echo "Base url has been successfully commented out from app.module.ts"
-else
-    echo "Base url is not commented out from app.module.ts"
-    exit 1
-fi
+# if grep -Fq "// baseUrl: environment.occBaseUrl" projects/storefrontapp/src/app/app.module.ts
+# then
+#     echo "Base url has been successfully commented out from app.module.ts"
+# else
+#     echo "Base url is not commented out from app.module.ts"
+#     exit 1
+# fi
 
-echo "-----"
-echo "Build Spartacus libraries"
-yarn build:libs
+# echo "-----"
+# echo "Build Spartacus libraries"
+# yarn build:libs
 
-echo "-----"
-echo "Build SSR"
+# echo "-----"
+# echo "Build SSR"
 
-# to change
-yarn build:ssr:ci
+# # to change
+# yarn build:ssr:ci
 
-echo "-----"
-echo "Build CSR"
+# echo "-----"
+# echo "Build CSR"
 
-yarn build
+# yarn build
 
-echo "-----"
-echo "Clone ccv2 repository"
+# echo "-----"
+# echo "Clone ccv2 repository"
 
-git clone -b spa_p4_dist_test https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
+# git clone -b $IS_BRANCH https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
 
-echo "-----"
-echo "Updating js-storefront to adhere to the ccv2 dist strucutre"
+# echo "-----"
+# echo "Updating js-storefront to adhere to the ccv2 dist strucutre"
 
-cd "$GHT_REPO/js-storefront"
-rm -rf $B2C_STORE
-rm -rf $B2B_STORE
+# cd "$GHT_REPO/js-storefront"
+# rm -rf $B2C_STORE
+# rm -rf $B2B_STORE
 
-mkdir -p $B2C_STORE/dist/$B2C_STORE/browser
-mkdir -p $B2C_STORE/dist/$B2C_STORE/server
+# mkdir -p $B2C_STORE/dist/$B2C_STORE/browser
+# mkdir -p $B2C_STORE/dist/$B2C_STORE/server
 
-# only b2c for now test
-# mkdir -p $B2B_STORE/dist/$B2B_STORE/browser
-# mkdir -p $B2B_STORE/dist/$B2B_STORE/server
+# # only b2c for now test
+# # mkdir -p $B2B_STORE/dist/$B2B_STORE/browser
+# # mkdir -p $B2B_STORE/dist/$B2B_STORE/server
 
-cd -
+# cd -
 
-echo "-----"
-echo "Copy server and browser files to js-storefront to adhere to the ccv2 dist structure"
+# echo "-----"
+# echo "Copy server and browser files to js-storefront to adhere to the ccv2 dist structure"
 
-cp -a dist/storefrontapp/. $GHT_REPO/js-storefront/$B2C_STORE/dist/$B2C_STORE/browser/
-cp -a dist/storefrontapp-server/. $GHT_REPO/js-storefront/$B2C_STORE/dist/$B2C_STORE/server/
+# cp -a dist/storefrontapp/. $GHT_REPO/js-storefront/$B2C_STORE/dist/$B2C_STORE/browser/
+# cp -a dist/storefrontapp-server/. $GHT_REPO/js-storefront/$B2C_STORE/dist/$B2C_STORE/server/
 
-echo "-----"
-echo "Push to remote repository"
+# echo "-----"
+# echo "Push to remote repository"
 
-cd $GHT_REPO
+# cd $GHT_REPO
 
-git config --global user.email louis.pierrestiger@sap.com
-git config --global user.name team-griffin-serviceuser
+# git config --global user.email louis.pierrestiger@sap.com
+# git config --global user.name team-griffin-serviceuser
 
-git add .
-git commit -m "update from source"
-git push
+# git add .
+# git commit -m "update from source"
+# git push
