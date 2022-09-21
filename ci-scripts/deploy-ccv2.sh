@@ -77,7 +77,7 @@ echo "Verify server.ts has been updated for b2c dist"
 
 cat projects/storefrontapp/server.ts
 
-if grep -Fq "const distFolder = join(process.cwd(), 'dist/$B2C_STORE/browsera');" projects/storefrontapp/server.ts
+if grep -Fq "const distFolder = join(process.cwd(), 'dist/$B2C_STORE/browser');" projects/storefrontapp/server.ts
 then
     echo "Dist folder has been updated"
 else
