@@ -47,7 +47,7 @@ fi
 echo "-----"
 echo "Clone ccv2 repository"
 
-git clone -b $IS_BRANCH https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
+git clone -b spa_p4_it_works https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
 
 echo "-----"
 echo "Updating ccv2 repo's js-storefront to adhere to the ccv2 dist strucutre"
@@ -115,47 +115,20 @@ echo "Build CSR for b2b storefront"
 yarn build
 
 echo "-----"
-echo "Copy server and browser files to js-storefront to adhere to the ccv2 dist structure for b2c storefront"
+echo "Copy server and browser files to js-storefront to adhere to the ccv2 dist structure for b2b storefront"
 
 cp -a dist/storefrontapp/. $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/browser/
 cp -a dist/storefrontapp-server/. $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/server/
 
 
-# echo "-----"
-# echo "Clone ccv2 repository"
+echo "-----"
+echo "Push to remote repository"
 
-# git clone -b $IS_BRANCH https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/$GHT_REPO.git
+cd $GHT_REPO
 
-# echo "-----"
-# echo "Updating js-storefront to adhere to the ccv2 dist strucutre"
+git config --global user.email louis.pierrestiger@sap.com
+git config --global user.name team-griffin-serviceuser
 
-# cd "$GHT_REPO/js-storefront"
-# rm -rf $B2C_STORE
-# rm -rf $B2B_STORE
-
-# mkdir -p $B2C_STORE/dist/$B2C_STORE/browser
-# mkdir -p $B2C_STORE/dist/$B2C_STORE/server
-
-# # only b2c for now test
-# # mkdir -p $B2B_STORE/dist/$B2B_STORE/browser
-# # mkdir -p $B2B_STORE/dist/$B2B_STORE/server
-
-# cd -
-
-# echo "-----"
-# echo "Copy server and browser files to js-storefront to adhere to the ccv2 dist structure"
-
-# cp -a dist/storefrontapp/. $GHT_REPO/js-storefront/$B2C_STORE/dist/$B2C_STORE/browser/
-# cp -a dist/storefrontapp-server/. $GHT_REPO/js-storefront/$B2C_STORE/dist/$B2C_STORE/server/
-
-# echo "-----"
-# echo "Push to remote repository"
-
-# cd $GHT_REPO
-
-# git config --global user.email louis.pierrestiger@sap.com
-# git config --global user.name team-griffin-serviceuser
-
-# git add .
-# git commit -m "update from source"
-# git push
+git add .
+git commit -m "update from source"
+git push
