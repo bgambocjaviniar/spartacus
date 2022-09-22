@@ -18,14 +18,11 @@ jobs:
           fetch-depth: 0
       - name: push develop branch to the private repository
         run: | 
-          git push -u ${{secrets.PWA_CX_COMMERCE}} develop -f
+          git push -u https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git develop -f
       - name: include remaining pipeline files to the private remote's branch
         run: |
-          ls -al
-
-          git clone ${{secrets.PWA_CX_COMMERCE}}
-
-           ls -al
-
-
+          git clone https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git
+          cd ${{ secrets.GHT_SPARTACUS_REPO }}
+          git checkout sap-pipeline-files -- .
+          git push
             
