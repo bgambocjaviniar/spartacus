@@ -1,7 +1,6 @@
 on:
-  push:
-    branches:
-      - develop-fake-test-sample
+  schedule:
+    - cron:  '0 0 * * 1,4'
   workflow_dispatch:
     inputs:
       branch_to_sync:
@@ -13,15 +12,15 @@ name: Sync develop branch to private PWA repo
 
 jobs:
   sync_public_repo_to_private:
-    name: Force sync the develop branch to the private repository with current git history
+    name: Force sync a branch to the private repository with current git history
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Push develop branch to the private repository
+      - name: Push a branch to the private repository
         run: | 
-          git push -u https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git ${{ github.event.inputs.branch_to_sync }} -f
+          git push -u https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git origin/${{ github.event.inputs.branch_to_sync }} -f
       - name: Include remaining pipeline files to the private remote's branch
         run: |
           git clone -b ${{ github.event.inputs.branch_to_sync }} https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git
