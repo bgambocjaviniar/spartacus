@@ -25,8 +25,4 @@ jobs:
           git status
           git branch
           git log
-          git clone ${{secrets.PWA_CX_COMMERCE}}
-          cd $GHT_SPARTACUS_REPO 
-          git checkout sap-pipeline-files -- .
-          git push
             
