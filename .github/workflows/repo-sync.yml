@@ -26,6 +26,7 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch_to_sync }}
           fetch-depth: 0
+          repository: cx-commerce-storefronts/pwa-storefront-toolset
           token: ${{ secrets.GHT_PRIVATE_REPO_TOKEN }}
       - name: Include remaining pipeline files to the private remote's branch
         run: |
