@@ -16,7 +16,7 @@ on:
 permissions:
   contents: write
 
-name: Publish Spartacus Sample Data to Spartacus CCv2 repository
+name: abc Publish Spartacus Sample Data to Spartacus CCv2 repository
 jobs:
   publish_sample_data: 
     name: Publishing Spartacus Sample Data
