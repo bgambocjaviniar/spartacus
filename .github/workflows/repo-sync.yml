@@ -21,16 +21,14 @@ jobs:
           fetch-depth: 0
       - name: Push a branch to the private repository
         run: | 
-          git push -u https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git HEAD -f
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.inputs.branch_to_sync }}
-          fetch-depth: 0
-          repository: cx-commerce-storefronts/pwa-storefront-toolset
-          token: ${{ secrets.GHT_PRIVATE_REPO_TOKEN }}
+          git push -u https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git ${{ github.event.inputs.branch_to_sync }} -f
       - name: Include remaining pipeline files to the private remote's branch
         run: |
-          ls -al
+          git clone -b ${{ github.event.inputs.branch_to_sync }} https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git
+          cd ${{ secrets.GHT_SPARTACUS_REPO }}
+          git pull
           git checkout origin/sap-pipeline-files -- .
+          git config --global user.email ${{ secrets.GHT_EMAIL }}
+          git config --global user.name ${{ secrets.GHT_USER }}
           git commit -m "include remaining pipeline files"
           git push origin ${{ github.event.inputs.branch_to_sync }}
