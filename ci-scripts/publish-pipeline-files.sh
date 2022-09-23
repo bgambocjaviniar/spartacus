@@ -25,7 +25,7 @@ echo "Configure sonar"
 sed -i "s%sonar.branch.name=%sonar.branch.name=$BRANCH_TO_SYNC%gi" $SONAR_PATH
 
 echo "---------------------------------------------------------------------------------------------------------------------------"
-echo "Verify app.module.ts has occBaseUrl commented"
+echo "Verify sonar.branch.name has been updated with the synched branch name"
 
 cat $SONAR_PATH
 
