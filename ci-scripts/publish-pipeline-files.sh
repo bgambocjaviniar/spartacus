@@ -40,5 +40,6 @@ fi
 echo "-----"
 echo "Include files to synced branch"
 
+git add .
 git commit -m "include remaining pipeline files"
 git push origin $BRANCH_TO_SYNC
