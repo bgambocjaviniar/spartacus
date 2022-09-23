@@ -31,9 +31,9 @@ cat $SONAR_PATH
 
 if grep -Fq "sonar.branch.name=$BRANCH_TO_SYNC" $SONAR_PATH
 then
-    echo "Branch value has successfully been appended to the sonar.branch.name"
+    echo "Branch name has successfully been added to the sonar.branch.name"
 else
-    echo "Branch value has NOT been appended to the sonar.branch.name"
+    echo "Error. Branch name has NOT been added to the sonar.branch.name"
     exit 1
 fi
 
