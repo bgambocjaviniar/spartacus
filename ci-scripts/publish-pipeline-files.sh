@@ -22,12 +22,12 @@ git checkout origin/sap-pipeline-files -- .
 echo "-----"
 echo "Configure sonar"
 
-sed -i "s%sonar.branch.name=%sonar.branch.name=$BRANCH_TO_SYNC@gi" $SONAR_PATH
+sed -i "s%sonar.branch.name=%sonar.branch.name=$BRANCH_TO_SYNC%gi" $SONAR_PATH
 
 echo "---------------------------------------------------------------------------------------------------------------------------"
 echo "Verify app.module.ts has occBaseUrl commented"
 
-cat projects/storefrontapp/src/app/app.module.ts
+cat $SONAR_PATH
 
 if grep -Fq "sonar.branch.name=$BRANCH_TO_SYNC" $SONAR_PATH
 then

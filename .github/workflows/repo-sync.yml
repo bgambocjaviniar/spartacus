@@ -8,7 +8,7 @@ on:
         default: develop
         required: true
 
-name: Sync develop branch to private PWA repo
+name: Sync a branch to private PWA repo
 
 jobs:
   sync_public_repo_to_private:
