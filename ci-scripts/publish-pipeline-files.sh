@@ -8,8 +8,7 @@ SONAR_PATH="./sonar-project.properties"
 
 git clone -b $BRANCH_TO_SYNC https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce-storefronts/$GHT_SPARTACUS_REPO.git
 cd $GHT_SPARTACUS_REPO
-
-# git pull
+git pull
 
 git config --global user.email $GHT_EMAIL
 git config --global user.name $GHT_USER
