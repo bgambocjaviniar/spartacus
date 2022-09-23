@@ -23,12 +23,11 @@ jobs:
         run: | 
           git push -u https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git ${{ github.event.inputs.branch_to_sync }} -f
       - name: Include remaining pipeline files to the private remote's branch
+        env: 
+          BRANCH_TO_SYNC: ${{ github.event.inputs.branch_to_sync }}
+          GHT_USER: ${{ secrets.GHT_USER }}
+          GHT_EMAIL: ${{ secrets.GHT_EMAIL }}
+          GHT_PRIVATE_REPO_TOKEN: ${{ secrets.GHT_PRIVATE_REPO_TOKEN }}
+          GHT_SPARTACUS_REPO: ${{ secrets.GHT_SPARTACUS_REPO }}
         run: |
-          git clone -b ${{ github.event.inputs.branch_to_sync }} https://${{ secrets.GHT_USER }}:${{ secrets.GHT_PRIVATE_REPO_TOKEN }}@github.tools.sap/cx-commerce-storefronts/${{ secrets.GHT_SPARTACUS_REPO}}.git
-          cd ${{ secrets.GHT_SPARTACUS_REPO }}
-          git pull
-          git checkout origin/sap-pipeline-files -- .
-          git config --global user.email ${{ secrets.GHT_EMAIL }}
-          git config --global user.name ${{ secrets.GHT_USER }}
-          git commit -m "include remaining pipeline files"
-          git push origin ${{ github.event.inputs.branch_to_sync }}
+          ci-scripts/publish-pipeline-files.sh
