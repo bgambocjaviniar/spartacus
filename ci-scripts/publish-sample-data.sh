@@ -2,38 +2,55 @@
 
 TAG_NAME=sampledata
 SAMPLE_DATA_ASSETS_FOLDER=sample-data-assets
-IS_SAMPLE_DATA_BRANCH=
+IS_SAMPLE_DATA_BRANCH_OR_TAGS=
+
+echo "-----"
+echo "Verify UNRELEASED sample data branch exist"
+
+IS_SAMPLE_DATA_BRANCH_OR_TAGS=`git ls-remote --heads --tags https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/spartacussampledata.git $SAMPLE_DATA_UNRELEASED`
+
+if [ -z "$IS_SAMPLE_DATA_BRANCH_OR_TAGS" ]; then
+    echo "Error downloading $SAMPLE_DATA_UNRELEASED zip/tar. Verify branch/tag name exist on the spartacus sample data repository"
+    exit 1
+fi
 
 echo "-----"
 echo "Verify LATEST sample data branch exist"
 
-IS_SAMPLE_DATA_BRANCH=`git ls-remote --heads https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/spartacussampledata.git $SAMPLE_DATA_NEW`
+IS_SAMPLE_DATA_BRANCH_OR_TAGS=`git ls-remote --heads --tags https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/spartacussampledata.git $SAMPLE_DATA_CURRENT`
 
-if [ -z "$IS_SAMPLE_DATA_BRANCH" ]; then
-    echo "Error downloading $SAMPLE_DATA_NEW zip/tar. Verify branch name exist on the sample data repository"
+if [ -z "$IS_SAMPLE_DATA_BRANCH_OR_TAGS" ]; then
+    echo "Error downloading $SAMPLE_DATA_CURRENT zip/tar. Verify branch/tag name exist on the spartacus sample data repository"
     exit 1
 fi
 
 echo "-----"
 echo "Verify PREVIOUS sample data branch exist"
 
-IS_SAMPLE_DATA_BRANCH=`git ls-remote --heads https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/spartacussampledata.git $SAMPLE_DATA_OLD`
+IS_SAMPLE_DATA_BRANCH_OR_TAGS=`git ls-remote --heads --tags https://$GHT_USER:$GHT_PRIVATE_REPO_TOKEN@github.tools.sap/cx-commerce/spartacussampledata.git $SAMPLE_DATA_PREVIOUS`
 
-if [ -z "$IS_SAMPLE_DATA_BRANCH" ]; then
-    echo "Error downloading $SAMPLE_DATA_OLD zip/tar. Verify branch name exist on the sample data repository"
+if [ -z "$IS_SAMPLE_DATA_BRANCH_OR_TAGS" ]; then
+    echo "Error downloading $SAMPLE_DATA_PREVIOUS zip/tar. Verify branch/tag name exist on the spartacus sample data repository"
     exit 1
 fi
 
 echo "-----"
+echo "Downloading UNRELEASED sample data for 5.0"
+
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_UNRELEASED.zip" -o "spartacussampledata-version-5-x.zip"
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_UNRELEASED.tar.gz" -o "spartacussampledata-version-4-x.tar.gz"
+
+echo "-----"
 echo "Downloading LATEST sample data for 5.0"
 
-curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_NEW.zip" -o "spartacussampledata-current.zip"
-curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_NEW.tar.gz" -o "spartacussampledata-current.tar.gz"
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_CURRENT.zip" -o "spartacussampledata-version-4-x.zip"
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_CURRENT.tar.gz" -o "spartacussampledata-version-4-x.tar.gz"
+
 
 echo "Downloading PREVIOUS supported sample data for <= 4.3.x"
 
-curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_OLD.zip" -o "spartacussampledata-previous.zip"
-curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_OLD.tar.gz" -o "spartacussampledata-previous.tar.gz"
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_PREVIOUS.zip" -o "spartacussampledata-version-3-x.zip"
+curl -H "Authorization: token $GHT_PRIVATE_REPO_TOKEN" -L "https://github.tools.sap/cx-commerce/spartacussampledata/archive/$SAMPLE_DATA_PREVIOUS.tar.gz" -o "spartacussampledata-version-3-x.tar.gz"
 
 echo "-----"
 echo "Move assets to single folder"
@@ -48,4 +65,7 @@ git push "https://$GH_TOKEN@github.com/SAP-samples/cloud-commerce-sample-setup.g
 echo "-----"
 echo "Create a release with created tag"
 
-gh release create $TAG_NAME ./$SAMPLE_DATA_ASSETS_FOLDER/**  --notes "Spartacus sample data releases" --repo "https://$GH_TOKEN@github.com/SAP-samples/cloud-commerce-sample-setup.git"
+gh release create $TAG_NAME ./$SAMPLE_DATA_ASSETS_FOLDER/** --repo "https://$GH_TOKEN@github.com/SAP-samples/cloud-commerce-sample-setup.git" --title "Spartacus Sample Data"  --notes "Spartacus sample data releases
+unreleased 5.x
+current 4.x
+previous 3.x"
