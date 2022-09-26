@@ -33,4 +33,4 @@ jobs:
           GHT_PRIVATE_REPO_TOKEN: ${{ secrets.GHT_PRIVATE_REPO_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TEMPORARY_TOKEN }}
         run: |
-          ci-scripts/publish-sample-data.sh
+          source ci-scripts/publish-sample-data.sh
