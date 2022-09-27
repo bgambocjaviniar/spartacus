@@ -52,11 +52,14 @@ echo "--------------------------------------------------------------------------
 echo "Remove pwa config for b2c storefront"
 
 sed -i '/pwa:[[:blank:]]*{/,/^[[:space:]]*}/d' $B2C_CONFIG_PATH
+
 echo "---------------------------------------------------------------------------------------------------------------------------"
 echo "Verify pwa config has been updated for b2c dist"
 
 cat $B2C_CONFIG_PATH
-if grep -Fq "addToHomeScreen: true" $B2C_CONFIG_PATHthen
+
+if grep -Fq "addToHomeScreen: true" $B2C_CONFIG_PATH
+then
     echo "PWA config has NOT been removed"
 else
     echo "PWA config has SUCCESSFULLY been removed"
