@@ -1,6 +1,4 @@
 on:
-  schedule:
-    - cron:  '0 0 * * *'
   workflow_dispatch:
     inputs:
       ccv2_branch:
@@ -12,7 +10,7 @@ on:
         default: develop
         required: true
 
-name: Update ccv2 environment from source
+name: Deploy unreleased Spartacus to ccv2 environment
 jobs:
   deploy_to_ccv2: 
     name: Deploying to a ccv2 environment
@@ -25,8 +23,8 @@ jobs:
         with:
           path: | 
             node_modules
-          key: nodemodules-${{ github.event.pull_request.base.sha }}
-          restore-keys: nodemodules-${{ github.event.pull_request.base.sha }}
+          key: nodemodules-${{ github.event.pull_request.base.sha || github.sha }}
+          restore-keys: nodemodules-${{ github.event.pull_request.base.sha || github.sha }}
       - name: Install angular CLI
         run: npm install -g @angular/cli@v13-lts
       - name: Package installation

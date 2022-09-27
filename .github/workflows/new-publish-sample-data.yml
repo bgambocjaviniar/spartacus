@@ -14,7 +14,6 @@ on:
         default: 2105-3.4.8
         required: true
 
-
 name: Publish Spartacus Sample Data to Spartacus CCv2 repository
 jobs:
   publish_sample_data: 
