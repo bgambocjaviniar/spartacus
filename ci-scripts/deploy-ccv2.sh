@@ -61,9 +61,9 @@ cat $B2C_CONFIG_PATH
 if grep -Fq "addToHomeScreen: true" $B2C_CONFIG_PATH
 then
     echo "PWA config has NOT been removed"
+    exit 1
 else
     echo "PWA config has SUCCESSFULLY been removed"
-    exit 1
 fi
 
 echo "---------------------------------------------------------------------------------------------------------------------------"
@@ -79,9 +79,9 @@ cat $B2B_CONFIG_PATH
 if grep -Fq "addToHomeScreen: true" $B2B_CONFIG_PATH
 then
     echo "PWA config has NOT been removed"
+    exit 1
 else
     echo "PWA config has SUCCESSFULLY been removed"
-    exit 1
 fi
 
 echo "---------------------------------------------------------------------------------------------------------------------------"
