@@ -37,9 +37,6 @@ function remove_pwa_config {
 function copy_browser_and_server_files {
     cp -a dist/storefrontapp/. $1/dist/$2/browser/
     cp -a dist/storefrontapp-server/. $1/dist/$2/server/
-
-    ls -al $1/dist/$2/browser/
-    ls -al $1/dist/$2/server/
 }
 
 echo "------------------------------------------------------------------"
@@ -95,14 +92,6 @@ mkdir -p $CCV2_B2C_STOREFRONT_PATH/dist/$B2C_STORE/server
 # b2b
 mkdir -p $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/browser
 mkdir -p $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/server
-
-echo "b2c"
-ls -al $CCV2_B2C_STOREFRONT_PATH/dist/$B2C_STORE/browser
-ls -al $CCV2_B2C_STOREFRONT_PATH/dist/$B2C_STORE/server
-
-echo "b2b"
-ls -al $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/browser
-ls -al $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/server
 
 echo "------------------------------------------------------------------"
 echo "Build Spartacus libraries"
@@ -183,12 +172,7 @@ cd $GHT_REPO
 git config --global user.email dl_61c08cf5a3cac30261c7e88c@global.corp.sap
 git config --global user.name cx-cc-automation-serviceuser
 
-if [ -n "$(git status --porcelain)" ]; then
-    git add .
-    git commit -m "Update with $BRANCH_NAME branch from source of Spartacus" 
-else
-    git commit --allow-empty -m "Update with $BRANCH_NAME branch from source of Spartacus" 
-fi
+git commit --allow-empty -m "Update with $BRANCH_NAME branch from source of Spartacus" 
 
 git push
 
