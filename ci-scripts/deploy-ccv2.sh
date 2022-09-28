@@ -37,6 +37,9 @@ function remove_pwa_config {
 function copy_browser_and_server_files {
     cp -a dist/storefrontapp/. $1/dist/$2/browser/
     cp -a dist/storefrontapp-server/. $1/dist/$2/server/
+
+    ls -al $1/dist/$2/browser/
+    ls -al $1/dist/$2/server/
 }
 
 echo "------------------------------------------------------------------"
@@ -168,6 +171,8 @@ echo "------------------------------------------------------------------"
 echo "Push to remote repository"
 
 cd $GHT_REPO
+
+git status
 
 git config --global user.email dl_61c08cf5a3cac30261c7e88c@global.corp.sap
 git config --global user.name cx-cc-automation-serviceuser
