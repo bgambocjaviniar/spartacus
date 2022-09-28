@@ -14,7 +14,7 @@ SERVER_CONFIG_PATH="projects/storefrontapp/server.ts"
 function verify_branch_exist {
     IS_BRANCH=`git ls-remote --heads $1 $2`
 
-    if [ -z "$IS_BRANCH" ]; then
+    if [[ -z "$IS_BRANCH" ]]; then
         echo "Error. Can't finding the branch $2. Verify the branch name exist"
         exit 1
     fi
