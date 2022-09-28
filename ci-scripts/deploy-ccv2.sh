@@ -187,4 +187,4 @@ git config --global user.name cx-cc-automation-serviceuser
 
 git add .
 git commit -m "Update with $BRANCH_NAME branch from source of Spartacus"
-git push
+git push || true
