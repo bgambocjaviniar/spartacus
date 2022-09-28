@@ -96,6 +96,14 @@ mkdir -p $CCV2_B2C_STOREFRONT_PATH/dist/$B2C_STORE/server
 mkdir -p $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/browser
 mkdir -p $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/server
 
+echo "b2c"
+ls-al $CCV2_B2C_STOREFRONT_PATH/dist/$B2C_STORE/browser
+ls-al $CCV2_B2C_STOREFRONT_PATH/dist/$B2C_STORE/server
+
+echo "b2b"
+ls-al $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/browser
+ls-al $CCV2_B2B_STOREFRONT_PATH/dist/$B2B_STORE/server
+
 echo "------------------------------------------------------------------"
 echo "Build Spartacus libraries"
 yarn build:libs
