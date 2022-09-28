@@ -175,4 +175,3 @@ git config --global user.name cx-cc-automation-serviceuser
 git commit --allow-empty -m "Update with $SOURCE_BRANCH_TO_DEPLOY branch from source of Spartacus" 
 
 git push
-
