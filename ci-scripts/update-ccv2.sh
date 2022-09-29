@@ -166,9 +166,11 @@ copy_browser_and_server_files $CCV2_B2B_STOREFRONT_PATH $B2B_STORE
 
 echo "------------------------------------------------------------------"
 echo "Push to remote repository"
-
+ls -al 
+git status
 cd $GHT_REPO
-
+ls -al
+git status
 git config --global user.email dl_61c08cf5a3cac30261c7e88c@global.corp.sap
 git config --global user.name cx-cc-automation-serviceuser
 
