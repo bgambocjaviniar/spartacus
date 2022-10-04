@@ -21,11 +21,11 @@ jobs:
         id: files-to-license
         run: |
           FILES=$(find . -not -path '**/node_modules/**' -not -name '*spec*' -name '*.ts' -print)
-          echo "::set-output name=abc::$(echo $FILES)"
+          echo "::set-output name=files::$(echo $FILES)"
 
           pwd
 
-          echo $FILES
+          echo "vat $FILES"
 
       - name: test
-        run: echo ${{ steps.files-to-license.outputs.abc }}
+        run: echo ${{ steps.files-to-license.outputs.files }}
