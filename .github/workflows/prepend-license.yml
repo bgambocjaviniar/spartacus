@@ -13,10 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-          cache: 'pip'
       - name: Download reuse tool
         run: pip3 install --user reuse
       - name: Setup git config for github bot
