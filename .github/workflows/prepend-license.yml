@@ -22,10 +22,12 @@ jobs:
         run: |
           FILES=$(find . -not -path '**/node_modules/**' -not -name '*spec*' -name '*.ts' -print)
           echo "::set-output name=files::$(echo $FILES)"
-
-          pwd
-
-          echo "vat $FILES"
-
+      - name: Using reuse tool to prepend headers to files
+        uses: fsfe/reuse-action@v1
+        with: 
+          args: addheader --copyright="SAP Spartacus team <spartacus-team@sap.com>" --license="Apache-2.0" --multi-line ${{ steps.files-to-license.outputs.files }}
       - name: test
-        run: echo ${{ steps.files-to-license.outputs.files }}
+        run: |
+          pwd
+          ls -al 
+          git status
