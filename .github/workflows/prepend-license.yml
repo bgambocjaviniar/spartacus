@@ -22,6 +22,8 @@ jobs:
         run: |
           FILES=$(find . -not -path '**/node_modules/**' -not -name '*spec*' -name '*.ts' -print)
           echo "::set-output name=files::$FILES"
-          
+
+          pwd
+
       - name: test
         run: echo ${{ steps.files-to-license.outputs.files }}
