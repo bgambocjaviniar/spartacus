@@ -37,6 +37,6 @@ jobs:
       #     args: addheader --copyright="SAP Spartacus team <spartacus-team@sap.com>" --license="Apache-2.0" --multi-line ${{ steps.files-to-license.outputs.files }}
       - name: test
         run: |
-          pwd
-          ls -al 
-          git status
+          git add .
+          git commit -m "prepend licences"
+          git push
