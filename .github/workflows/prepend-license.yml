@@ -24,5 +24,10 @@ jobs:
           echo "$files"
           echo "1 ${{ steps.files-to-license.outputs.files }}"
           echo ${{ steps.files-to-license.outputs.files }}
+
+          ls -al
+
+          TESTEST=$(find . -not -path '**/node_modules/**' -not -name '*spec*' -name '*.ts' -print)
+          echo $TESTEST
       - name: test
         run: echo ${{ steps.files-to-license.outputs.files }}
