@@ -36,9 +36,9 @@ jobs:
         run: |
           if [ -z $(git status --porcelain) ];
           then
-              echo "No Files to prepend"
+              echo "No files to commit"
           else
               git add .
-              git commit -m "prepend licences"
+              git commit -m "Prepend licence to files"
               git push
           fi
