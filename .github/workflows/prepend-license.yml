@@ -30,8 +30,7 @@ jobs:
           FILES=$(find . -not -path '**/node_modules/**' -not -name '*spec*' -name '*.ts' -print)
           echo "::set-output name=files::$(echo $FILES)"
       - name: Adding headers to files
-        run: | 
-          reuse addheader --copyright="SAP Spartacus team <spartacus-team@sap.com>" --license="Apache-2.0" --multi-line ${{ steps.files-to-license.outputs.files }}
+        run: ci-scripts/prepend-license.sh
       - name: push a commit to current pull request
         run: |
           if [ -z $(git status --porcelain) ];
