@@ -18,7 +18,7 @@ jobs:
       - name: 'abc'
         run: | 
           echo ${{ github.ref }}
-          echo ${{ github.event.pull_request }}
+          echo ${{ github.event.pull_request.head.ref }}
       # - uses: actions/setup-python@v4
       #   with:
       #     python-version: '3.9'
