@@ -32,13 +32,13 @@ jobs:
       - name: Adding headers to files
         run: | 
           reuse addheader --copyright="SAP Spartacus team <spartacus-team@sap.com>" --license="Apache-2.0" --multi-line ${{ steps.files-to-license.outputs.files }}
-
-      # - name: Using reuse tool to prepend headers to files
-      #   uses: fsfe/reuse-action@v1
-      #   with: 
-      #     args: addheader --copyright="SAP Spartacus team <spartacus-team@sap.com>" --license="Apache-2.0" --multi-line ${{ steps.files-to-license.outputs.files }}
-      - name: test
+      - name: push a commit to current pull request
         run: |
-          git add .
-          git commit -m "prepend licences"
-          git push
+          if [ -z $(git status --porcelain) ];
+          then
+              echo "No Files to prepend"
+          else
+              git add .
+              git commit -m "prepend licences"
+              git push
+          fi
