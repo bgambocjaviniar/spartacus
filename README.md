@@ -2,6 +2,7 @@
 
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP/spartacus)](https://api.reuse.software/info/github.com/SAP/spartacus)
 
+test
 
 Spartacus is a lean, Angular-based JavaScript storefront for SAP Commerce Cloud. Spartacus talks to SAP Commerce Cloud exclusively through the Commerce REST API.
 
