@@ -17,7 +17,7 @@ Spartacus is... aaaa asdasd
 - **Upgradable**: Spartacus code is published and used as libraries and follows semantic versioning conventions. By using the libraries, Spartacus is upgradable for minor and patch releases.
 - **Progressive**: Spartacus is on a journey to be fully compliant with the Progressive Web Application (PWA) checklist. We aim to add support for all major features of a PWA-enabled storefront, to offer the best possible customer experience regardless of device or location.
 - **Open Source**: Spartacus is open source. It will be continually developed by the SAP Commerce Cloud team, but we are very keen to welcome contributors and to foster an inclusive, active development community for Spartacus. See our [contributing documentation](CONTRIBUTING.md) for more information.
-- **Modern**: The Spartacus storefront is part of our exciting new journey towards a customizable-yet-upgradable technology for SAP Commerce Cloud installations. See [SAP Customer Experience](https://cx.sap.com/en/products/commerce) for more information about SAP Commerce Cloud.
+- **Modern**: The Spartacus storefront is part of our exciting new journey towards a customizable-yet-upgradable technology for SAP Commerce Cloud installations. See [\](https://cx.sap.com/en/products/commerce) for more information about SAP Commerce Cloud.
 
 ## Storefront Features
 
@@ -34,7 +34,7 @@ Spartacus provides core storefront features such as:
 
 See the [Release documentation](https://sap.github.io/spartacus-docs/release-information/) for more information.
 
-## Requirements
+## Requirements a
 
 If you are working with Spartacus 4.x, your Angular development environment should include the following:
 
