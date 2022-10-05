@@ -12,13 +12,33 @@ jobs:
     name: Commit prepended licences to files 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Download reuse tool
+        run: pip3 install --user reuse
       - name: Setup git config for github bot
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
       - name: Get all files to license
         id: files-to-license
-        run: echo "::set-output name=files::$(find . -not -path '**/node_modules/**' -not -name '*spec*' -name '*.ts' -print)
+        run: |
+          FILES=$(find . -not -path '**/node_modules/**' -not -name '*spec*' -name '*.ts' -print)
+          echo "::set-output name=files::$(echo $FILES)"
+      - name: Adding headers to files
+        run: | 
+          reuse addheader --copyright="SAP Spartacus team <spartacus-team@sap.com>" --license="Apache-2.0" --multi-line ${{ steps.files-to-license.outputs.files }}
+
+      # - name: Using reuse tool to prepend headers to files
+      #   uses: fsfe/reuse-action@v1
+      #   with: 
+      #     args: addheader --copyright="SAP Spartacus team <spartacus-team@sap.com>" --license="Apache-2.0" --multi-line ${{ steps.files-to-license.outputs.files }}
       - name: test
-        run: echo ${{ steps.files-to-license.outputs.files }}
+        run: |
+          git add .
+          git commit -m "prepend licences"
+          git push
