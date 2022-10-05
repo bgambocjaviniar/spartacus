@@ -24,11 +24,6 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-      - name: Get all files to license
-        id: files-to-license
-        run: |
-          FILES=$(find . -not -path '**/node_modules/**' -not -name '*spec*' -name '*.ts' -print)
-          echo "::set-output name=files::$(echo $FILES)"
       - name: Adding headers to files
         run: ci-scripts/prepend-license.sh
       - name: push a commit to current pull request
