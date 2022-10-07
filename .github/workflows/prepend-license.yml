@@ -26,7 +26,7 @@ jobs:
         run: ci-scripts/prepend-license.sh
       - name: push a commit to current pull request
         run: |
-          git pull
+          git pull origin ${{ github.event.pull_request.head.ref }} 
 
           if [ -z $(git status --porcelain) ];
           then
