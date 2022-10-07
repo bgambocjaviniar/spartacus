@@ -56,7 +56,7 @@ jobs:
 
           echo "::set-output name=SHOULD_SKIP_CURRENT_WORKFLOW::$(echo $SKIP_CURRENT_WORKFLOW)"
   no_retries:
-    needs: prepend-license
+    needs: prepend_license
     name: Verify re-run of all jobs
     runs-on: ubuntu-latest
     if: ${{ needs.validate_e2e_execution.outputs.SHOULD_SKIP_CURRENT_WORKFLOW == 'true' }}
