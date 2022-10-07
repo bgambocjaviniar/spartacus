@@ -4,17 +4,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// This file is required by karma.conf.js and loads recursively all the .spec and framework files
-
 // Zone.js and zone.js/testing should be imported as FIRST and in this ORDER:
-import 'zone.js';
-import 'zone.js/testing';
-
 import { getTestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting,
+  platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import 'zone.js';
+import 'zone.js/testing';
+
 
 declare const require: {
   context(
