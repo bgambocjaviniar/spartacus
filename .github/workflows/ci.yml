@@ -21,7 +21,7 @@ jobs:
     name: Commit prepended licences to files 
     runs-on: ubuntu-latest
     outputs: 
-      SHOULD_SKIP_CURRENT_WORKFLOW: ${{ steps.save-e2e-output-result.outputs.SHOULD_SKIP_CURRENT_WORKFLOW }}
+      SHOULD_SKIP_CURRENT_WORKFLOW: ${{ steps.commit-to-pr.outputs.SHOULD_SKIP_CURRENT_WORKFLOW }}
     if: ${{ github.event_name == 'pull_request' }}
     steps:
       - uses: actions/checkout@v3
@@ -40,6 +40,7 @@ jobs:
       - name: Adding headers to files
         run: ci-scripts/prepend-license.sh
       - name: push a commit to current pull request
+        id: commit-to-pr
         run: |
           git pull origin ${{ github.event.pull_request.head.ref }} 
           SKIP_CURRENT_WORKFLOW=false
