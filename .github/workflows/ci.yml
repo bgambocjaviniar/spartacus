@@ -20,6 +20,9 @@ jobs:
   prepend_license: 
     name: Commit prepended licences to files 
     runs-on: ubuntu-latest
+    outputs: 
+      SHOULD_SKIP_CURRENT_WORKFLOW: ${{ steps.save-e2e-output-result.outputs.SHOULD_SKIP_CURRENT_WORKFLOW }}
+    if: ${{ github.event_name == 'pull_request' }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -39,17 +42,24 @@ jobs:
       - name: push a commit to current pull request
         run: |
           git pull origin ${{ github.event.pull_request.head.ref }} 
+          SKIP_CURRENT_WORKFLOW=false
+
 
           if [ -z $(git status --porcelain) ];
           then
               echo "No files to commit"
           else
+              SKIP_CURRENT_WORKFLOW=true
               git commit -am "Prepend licence to files"
               git push
           fi
-  no_retries: 
+
+          echo "::set-output name=SHOULD_SKIP_CURRENT_WORKFLOW::$(echo $SKIP_CURRENT_WORKFLOW)"
+  no_retries:
+    needs: prepend-license
     name: Verify re-run of all jobs
     runs-on: ubuntu-latest
+    if: ${{ needs.validate_e2e_execution.outputs.SHOULD_SKIP_CURRENT_WORKFLOW == 'true' }}
     steps:
       - name: Forcefully fail build if jobs are all retried
         uses: actions/github-script@v5
