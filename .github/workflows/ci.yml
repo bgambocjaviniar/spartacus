@@ -182,7 +182,7 @@ jobs:
       - name: Run e2es
         env: 
           SPA_ENV: ci,b2c
-          BUILD_NUMBER: ci-build-number-${{ github.event.pull_request.head.sha || github.sha }}
+          BUILD_NUMBER: ci-build-number-${{ github.event.pull_request.head.sha || github.run_id }}
         run: |
           echo "run attempt ${{ github.run_attempt }}"
           echo "sha ${{ github.sha }}"
@@ -218,7 +218,7 @@ jobs:
       - name: Run e2es
         env: 
           SPA_ENV: ci,b2c
-          BUILD_NUMBER: ci-build-number-${{ github.event.pull_request.head.sha || github.sha }}
+          BUILD_NUMBER: ci-build-number-${{ github.event.pull_request.head.sha || github.run_id }}
         run: |
           echo "run attempt ${{ github.run_attempt }}"
           echo "sha ${{ github.sha }}"
@@ -257,7 +257,7 @@ jobs:
       - name: Run e2es
         env:
           SPA_ENV: ci,b2b
-          BUILD_NUMBER: ci-build-number-${{ github.event.pull_request.head.sha || github.sha }}
+          BUILD_NUMBER: ci-build-number-${{ github.event.pull_request.head.sha || github.run_id }}
         run: |     
           echo "run attempt ${{ github.run_attempt }}"
           echo "sha ${{ github.sha }}"
