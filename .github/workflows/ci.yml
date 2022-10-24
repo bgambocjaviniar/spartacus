@@ -84,7 +84,14 @@ jobs:
         run: yarn --frozen-lockfile
       - name: Run unit tests for Spartacus libs
         run: |
-          ci-scripts/unit-tests-core-lib.sh
+          echo "run attempt ${{ github.run_attempt }}"
+          echo "sha ${{ github.sha }}"
+          echo "head_ref ${{ github.head_ref }}"
+          echo "run_id ${{ github.run_id }}"
+          echo "event.pull_request.base.sha ${{ github.event.pull_request.base.sha }}"
+          echo "event.pull_request.head.sha ${{ github.event.pull_request.head.sha }}"
+          echo "event_name ${{ github.event_name }}"
+          echo "ref_name ${{ github.ref_name }}"
   unit_tests_libs:
     needs: no_retries
     name: Unit tests for integration libs
@@ -111,7 +118,14 @@ jobs:
         run: yarn --frozen-lockfile
       - name: Run unit tests for integration libs
         run: |
-          ci-scripts/unit-tests.sh
+          echo "run attempt ${{ github.run_attempt }}"
+          echo "sha ${{ github.sha }}"
+          echo "head_ref ${{ github.head_ref }}"
+          echo "run_id ${{ github.run_id }}"
+          echo "event.pull_request.base.sha ${{ github.event.pull_request.base.sha }}"
+          echo "event.pull_request.head.sha ${{ github.event.pull_request.head.sha }}"
+          echo "event_name ${{ github.event_name }}"
+          echo "ref_name ${{ github.ref_name }}"
   linting:
     needs: no_retries
     name: Validations and static code checks
@@ -170,7 +184,14 @@ jobs:
           SPA_ENV: ci,b2c
           BUILD_NUMBER: ci-build-number-${{ github.event.pull_request.head.sha || github.run_id }}
         run: |
-          ci-scripts/e2e-cypress.sh
+          echo "run attempt ${{ github.run_attempt }}"
+          echo "sha ${{ github.sha }}"
+          echo "head_ref ${{ github.head_ref }}"
+          echo "run_id ${{ github.run_id }}"
+          echo "event.pull_request.base.sha ${{ github.event.pull_request.base.sha }}"
+          echo "event.pull_request.head.sha ${{ github.event.pull_request.head.sha }}"
+          echo "event_name ${{ github.event_name }}"
+          echo "ref_name ${{ github.ref_name }}"
   b2c_ssr_e2e_tests:
     needs: [no_retries, validate_e2e_execution]
     name: E2E tests for SSR B2C
@@ -199,7 +220,14 @@ jobs:
           SPA_ENV: ci,b2c
           BUILD_NUMBER: ci-build-number-${{ github.event.pull_request.head.sha || github.run_id }}
         run: |
-          ci-scripts/e2e-cypress.sh --ssr
+          echo "run attempt ${{ github.run_attempt }}"
+          echo "sha ${{ github.sha }}"
+          echo "head_ref ${{ github.head_ref }}"
+          echo "run_id ${{ github.run_id }}"
+          echo "event.pull_request.base.sha ${{ github.event.pull_request.base.sha }}"
+          echo "event.pull_request.head.sha ${{ github.event.pull_request.head.sha }}"
+          echo "event_name ${{ github.event_name }}"
+          echo "ref_name ${{ github.ref_name }}"
   b2b_e2e_tests:
     needs: [no_retries, validate_e2e_execution]
     name: E2E tests for B2B
@@ -231,7 +259,14 @@ jobs:
           SPA_ENV: ci,b2b
           BUILD_NUMBER: ci-build-number-${{ github.event.pull_request.head.sha || github.run_id }}
         run: |     
-          ci-scripts/e2e-cypress.sh -s b2b
+          echo "run attempt ${{ github.run_attempt }}"
+          echo "sha ${{ github.sha }}"
+          echo "head_ref ${{ github.head_ref }}"
+          echo "run_id ${{ github.run_id }}"
+          echo "event.pull_request.base.sha ${{ github.event.pull_request.base.sha }}"
+          echo "event.pull_request.head.sha ${{ github.event.pull_request.head.sha }}"
+          echo "event_name ${{ github.event_name }}"
+          echo "ref_name ${{ github.ref_name }}"
   build_conclusion:
     needs: [no_retries, unit_tests_core, unit_tests_libs, linting, b2c_e2e_tests, b2c_ssr_e2e_tests, b2b_e2e_tests]
     name: Build Conclusion
