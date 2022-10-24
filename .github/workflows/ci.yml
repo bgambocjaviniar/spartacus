@@ -7,6 +7,8 @@ on:
       - integration-libs/**
   pull_request:
     types: [opened, synchronize]
+  workflow_dispatch:
+  
 env:
   CYPRESS_KEY: ${{ secrets.CYPRESS_KEY }}
   NODE_VERSION: '16'
@@ -17,6 +19,21 @@ concurrency:
 
 name: Spartacus build pipeline
 jobs:
+  random_test: 
+    name: test the values
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test values
+        run: |
+          echo "run attempt ${{ github.run_attempt }}"
+          echo "sha ${{ github.sha }}"
+          echo "head_ref ${{ github.head_ref }}"
+          echo "run_id ${{ github.run_id }}"
+          echo "event.pull_request.base.sha ${{ github.event.pull_request.base.sha }}"
+          echo "event.pull_request.head.sha ${{ github.event.pull_request.head.sha }}"
+          echo "event_name ${{ github.event_name }}"
+          echo "ref_name ${{ github.ref_name }}"
   no_retries: 
     name: Verify re-run of all jobs
     runs-on: ubuntu-latest
