@@ -14,22 +14,28 @@ on:
         default: 2105-3.4.8
         required: true
 
-name: Publish Spartacus Sample Data to Spartacus CCv2 repository
+name: Pre-release for Spartacus
 jobs:
-  publish_sample_data: 
-    name: Publishing Spartacus Sample Data
+  publish_compodoc:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-      - name: create release with sample data assets
-        env:
-          SAMPLE_DATA_UNRELEASED: ${{ github.event.inputs.unreleased_sample_branch }}
-          SAMPLE_DATA_CURRENT: ${{ github.event.inputs.current_sample_branch }}
-          SAMPLE_DATA_PREVIOUS: ${{ github.event.inputs.previous_sample_branch }}
-          GHT_USER: ${{ secrets.GHT_USER }}
-          GHT_PRIVATE_REPO_TOKEN: ${{ secrets.GHT_PRIVATE_REPO_TOKEN }}
-          GH_TOKEN: ${{ secrets.GH_TEMPORARY_TOKEN }}
-        run: |
-          ci-scripts/publish-sample-data.sh
+      - name: Generate and publish compodocs
+        run: yarn generate:publish:docs
+  # publish_sample_data: 
+  #   name: Publishing Spartacus Sample Data
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         persist-credentials: false
+  #     - name: create release with sample data assets
+  #       env:
+  #         SAMPLE_DATA_UNRELEASED: ${{ github.event.inputs.unreleased_sample_branch }}
+  #         SAMPLE_DATA_CURRENT: ${{ github.event.inputs.current_sample_branch }}
+  #         SAMPLE_DATA_PREVIOUS: ${{ github.event.inputs.previous_sample_branch }}
+  #         GHT_USER: ${{ secrets.GHT_USER }}
+  #         GHT_PRIVATE_REPO_TOKEN: ${{ secrets.GHT_PRIVATE_REPO_TOKEN }}
+  #         GH_TOKEN: ${{ secrets.GH_TEMPORARY_TOKEN }}
+  #       run: |
+  #         ci-scripts/publish-sample-data.sh
