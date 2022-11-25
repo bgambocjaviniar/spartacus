@@ -14,13 +14,13 @@
 <title>cluster_VisualPickingProductFilterModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 898,-230.8 898,-32.8 8,-32.8"/>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_VisualPickingProductFilterModule_exports</title>
-<polygon fill="none" stroke="black" points="510,-170.8 510,-222.8 764,-222.8 764,-170.8 510,-170.8"/>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_VisualPickingProductFilterModule_imports</title>
 <polygon fill="none" stroke="black" points="590,-40.8 590,-92.8 890,-92.8 890,-40.8 590,-40.8"/>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_VisualPickingProductFilterModule_exports</title>
+<polygon fill="none" stroke="black" points="510,-170.8 510,-222.8 764,-222.8 764,-170.8 510,-170.8"/>
 </g>
 <g id="clust7" class="cluster">
 <title>cluster_VisualPickingProductFilterModule_providers</title>

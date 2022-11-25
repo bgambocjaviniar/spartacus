@@ -18,13 +18,13 @@
 <title>cluster_OrderApprovalDetailsModule_declarations</title>
 <polygon fill="none" stroke="black" points="602,-40.8 602,-92.8 1120,-92.8 1120,-40.8 602,-40.8"/>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_OrderApprovalDetailsModule_imports</title>
-<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 594,-92.8 594,-40.8 16,-40.8"/>
-</g>
 <g id="clust6" class="cluster">
 <title>cluster_OrderApprovalDetailsModule_exports</title>
 <polygon fill="none" stroke="black" points="144,-170.8 144,-222.8 668,-222.8 668,-170.8 144,-170.8"/>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_OrderApprovalDetailsModule_imports</title>
+<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 594,-92.8 594,-40.8 16,-40.8"/>
 </g>
 <!-- OrderApprovalDetailFormComponent -->
 <g id="node1" class="node">

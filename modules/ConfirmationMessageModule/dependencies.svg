@@ -14,79 +14,79 @@
 <title>cluster_ConfirmationMessageModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-157.8 788,-157.8 788,-32.8 8,-32.8"/>
 </g>
-<g id="clust2" class="cluster">
-<title>cluster_ConfirmationMessageModule_declarations</title>
-<polygon fill="none" stroke="black" points="558,-40.8 558,-92.8 780,-92.8 780,-40.8 558,-40.8"/>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_ConfirmationMessageModule_imports</title>
-<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 550,-92.8 550,-40.8 16,-40.8"/>
+<polygon fill="none" stroke="black" points="246,-40.8 246,-92.8 780,-92.8 780,-40.8 246,-40.8"/>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_ConfirmationMessageModule_declarations</title>
+<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 238,-92.8 238,-40.8 16,-40.8"/>
 </g>
 <!-- ConfirmationMessageComponent -->
 <g id="node1" class="node">
 <title>ConfirmationMessageComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="771.75,-84.8 566.25,-84.8 566.25,-48.8 771.75,-48.8 771.75,-84.8"/>
-<text text-anchor="middle" x="669" y="-62.6" font-family="Times,serif" font-size="14.00">ConfirmationMessageComponent</text>
+<polygon fill="#ffffb3" stroke="black" points="229.75,-84.8 24.25,-84.8 24.25,-48.8 229.75,-48.8 229.75,-84.8"/>
+<text text-anchor="middle" x="127" y="-62.6" font-family="Times,serif" font-size="14.00">ConfirmationMessageComponent</text>
 </g>
 <!-- ConfirmationMessageModule -->
 <g id="node2" class="node">
 <title>ConfirmationMessageModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="426.97,-149.8 423.97,-153.8 402.97,-153.8 399.97,-149.8 243.03,-149.8 243.03,-113.8 426.97,-113.8 426.97,-149.8"/>
-<text text-anchor="middle" x="335" y="-127.6" font-family="Times,serif" font-size="14.00">ConfirmationMessageModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="553.97,-149.8 550.97,-153.8 529.97,-153.8 526.97,-149.8 370.03,-149.8 370.03,-113.8 553.97,-113.8 553.97,-149.8"/>
+<text text-anchor="middle" x="462" y="-127.6" font-family="Times,serif" font-size="14.00">ConfirmationMessageModule</text>
 </g>
 <!-- ConfirmationMessageComponent&#45;&gt;ConfirmationMessageModule -->
 <g id="edge1" class="edge">
 <title>ConfirmationMessageComponent&#45;&gt;ConfirmationMessageModule</title>
-<path fill="none" stroke="black" d="M669,-84.91C669,-104.14 669,-131.8 669,-131.8 669,-131.8 437.15,-131.8 437.15,-131.8"/>
-<polygon fill="black" stroke="black" points="437.15,-128.3 427.15,-131.8 437.15,-135.3 437.15,-128.3"/>
+<path fill="none" stroke="black" d="M127,-84.91C127,-104.14 127,-131.8 127,-131.8 127,-131.8 360.02,-131.8 360.02,-131.8"/>
+<polygon fill="black" stroke="black" points="360.02,-135.3 370.02,-131.8 360.02,-128.3 360.02,-135.3"/>
 </g>
 <!-- FeaturesConfigModule -->
 <g id="node3" class="node">
 <title>FeaturesConfigModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="541.87,-84.8 538.87,-88.8 517.87,-88.8 514.87,-84.8 396.13,-84.8 396.13,-48.8 541.87,-48.8 541.87,-84.8"/>
-<text text-anchor="middle" x="469" y="-62.6" font-family="Times,serif" font-size="14.00">FeaturesConfigModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="771.87,-84.8 768.87,-88.8 747.87,-88.8 744.87,-84.8 626.13,-84.8 626.13,-48.8 771.87,-48.8 771.87,-84.8"/>
+<text text-anchor="middle" x="699" y="-62.6" font-family="Times,serif" font-size="14.00">FeaturesConfigModule</text>
 </g>
 <!-- FeaturesConfigModule&#45;&gt;ConfirmationMessageModule -->
 <g id="edge2" class="edge">
 <title>FeaturesConfigModule&#45;&gt;ConfirmationMessageModule</title>
-<path fill="none" stroke="black" d="M411.53,-84.91C411.53,-84.91 411.53,-103.79 411.53,-103.79"/>
-<polygon fill="black" stroke="black" points="408.03,-103.79 411.53,-113.79 415.03,-103.79 408.03,-103.79"/>
+<path fill="none" stroke="black" d="M699,-84.91C699,-104.14 699,-131.8 699,-131.8 699,-131.8 564.31,-131.8 564.31,-131.8"/>
+<polygon fill="black" stroke="black" points="564.31,-128.3 554.31,-131.8 564.31,-135.3 564.31,-128.3"/>
 </g>
 <!-- I18nModule -->
 <g id="node4" class="node">
 <title>I18nModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="377.71,-84.8 374.71,-88.8 353.71,-88.8 350.71,-84.8 292.29,-84.8 292.29,-48.8 377.71,-48.8 377.71,-84.8"/>
-<text text-anchor="middle" x="335" y="-62.6" font-family="Times,serif" font-size="14.00">I18nModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="607.71,-84.8 604.71,-88.8 583.71,-88.8 580.71,-84.8 522.29,-84.8 522.29,-48.8 607.71,-48.8 607.71,-84.8"/>
+<text text-anchor="middle" x="565" y="-62.6" font-family="Times,serif" font-size="14.00">I18nModule</text>
 </g>
 <!-- I18nModule&#45;&gt;ConfirmationMessageModule -->
 <g id="edge3" class="edge">
 <title>I18nModule&#45;&gt;ConfirmationMessageModule</title>
-<path fill="none" stroke="black" d="M335,-84.91C335,-84.91 335,-103.79 335,-103.79"/>
-<polygon fill="black" stroke="black" points="331.5,-103.79 335,-113.79 338.5,-103.79 331.5,-103.79"/>
+<path fill="none" stroke="black" d="M538.19,-84.91C538.19,-84.91 538.19,-103.79 538.19,-103.79"/>
+<polygon fill="black" stroke="black" points="534.69,-103.79 538.19,-113.79 541.69,-103.79 534.69,-103.79"/>
 </g>
 <!-- IconModule -->
 <g id="node5" class="node">
 <title>IconModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="274.43,-84.8 271.43,-88.8 250.43,-88.8 247.43,-84.8 189.57,-84.8 189.57,-48.8 274.43,-48.8 274.43,-84.8"/>
-<text text-anchor="middle" x="232" y="-62.6" font-family="Times,serif" font-size="14.00">IconModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="504.43,-84.8 501.43,-88.8 480.43,-88.8 477.43,-84.8 419.57,-84.8 419.57,-48.8 504.43,-48.8 504.43,-84.8"/>
+<text text-anchor="middle" x="462" y="-62.6" font-family="Times,serif" font-size="14.00">IconModule</text>
 </g>
 <!-- IconModule&#45;&gt;ConfirmationMessageModule -->
 <g id="edge4" class="edge">
 <title>IconModule&#45;&gt;ConfirmationMessageModule</title>
-<path fill="none" stroke="black" d="M258.61,-84.91C258.61,-84.91 258.61,-103.79 258.61,-103.79"/>
-<polygon fill="black" stroke="black" points="255.11,-103.79 258.61,-113.79 262.11,-103.79 255.11,-103.79"/>
+<path fill="none" stroke="black" d="M462,-84.91C462,-84.91 462,-103.79 462,-103.79"/>
+<polygon fill="black" stroke="black" points="458.5,-103.79 462,-113.79 465.5,-103.79 458.5,-103.79"/>
 </g>
 <!-- KeyboardFocusModule -->
 <g id="node6" class="node">
 <title>KeyboardFocusModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="172.2,-84.8 169.2,-88.8 148.2,-88.8 145.2,-84.8 23.8,-84.8 23.8,-48.8 172.2,-48.8 172.2,-84.8"/>
-<text text-anchor="middle" x="98" y="-62.6" font-family="Times,serif" font-size="14.00">KeyboardFocusModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="402.2,-84.8 399.2,-88.8 378.2,-88.8 375.2,-84.8 253.8,-84.8 253.8,-48.8 402.2,-48.8 402.2,-84.8"/>
+<text text-anchor="middle" x="328" y="-62.6" font-family="Times,serif" font-size="14.00">KeyboardFocusModule</text>
 </g>
 <!-- KeyboardFocusModule&#45;&gt;ConfirmationMessageModule -->
 <g id="edge5" class="edge">
 <title>KeyboardFocusModule&#45;&gt;ConfirmationMessageModule</title>
-<path fill="none" stroke="black" d="M98,-84.91C98,-104.14 98,-131.8 98,-131.8 98,-131.8 232.69,-131.8 232.69,-131.8"/>
-<polygon fill="black" stroke="black" points="232.69,-135.3 242.69,-131.8 232.69,-128.3 232.69,-135.3"/>
+<path fill="none" stroke="black" d="M386.06,-84.91C386.06,-84.91 386.06,-103.79 386.06,-103.79"/>
+<polygon fill="black" stroke="black" points="382.56,-103.79 386.06,-113.79 389.56,-103.79 382.56,-103.79"/>
 </g>
 </g>
 </svg>

@@ -14,13 +14,13 @@
 <title>cluster_CheckoutPaymentTypeModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 599,-230.8 599,-32.8 8,-32.8"/>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_CheckoutPaymentTypeModule_exports</title>
-<polygon fill="none" stroke="black" points="127,-170.8 127,-222.8 359,-222.8 359,-170.8 127,-170.8"/>
-</g>
 <g id="clust2" class="cluster">
 <title>cluster_CheckoutPaymentTypeModule_declarations</title>
 <polygon fill="none" stroke="black" points="363,-40.8 363,-92.8 591,-92.8 591,-40.8 363,-40.8"/>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_CheckoutPaymentTypeModule_exports</title>
+<polygon fill="none" stroke="black" points="127,-170.8 127,-222.8 359,-222.8 359,-170.8 127,-170.8"/>
 </g>
 <g id="clust4" class="cluster">
 <title>cluster_CheckoutPaymentTypeModule_imports</title>

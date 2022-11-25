@@ -14,13 +14,13 @@
 <title>cluster_ListNavigationModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 380,-230.8 380,-32.8 8,-32.8"/>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_ListNavigationModule_exports</title>
-<polygon fill="none" stroke="black" points="42,-170.8 42,-222.8 346,-222.8 346,-170.8 42,-170.8"/>
-</g>
 <g id="clust3" class="cluster">
 <title>cluster_ListNavigationModule_imports</title>
 <polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 372,-92.8 372,-40.8 16,-40.8"/>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_ListNavigationModule_exports</title>
+<polygon fill="none" stroke="black" points="42,-170.8 42,-222.8 346,-222.8 346,-170.8 42,-170.8"/>
 </g>
 <!-- IconModule -->
 <g id="node1" class="node">

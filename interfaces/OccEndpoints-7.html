@@ -64,7 +64,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>feature-libs/organization/account-summary/occ/model/occ-account-summary-endpoints.model.ts</code>
+            <code>feature-libs/checkout/base/occ/model/occ-checkout-endpoints.model.ts</code>
         </p>
 
 
@@ -73,7 +73,7 @@
                 <h3>Extends</h3>
             </p>
             <p class="comment">
-                        <code><a href="../interfaces/AccountSummaryOccEndpoints.html" target="_self" >AccountSummaryOccEndpoints</a></code>
+                        <code><a href="../interfaces/CheckoutOccEndpoints.html" target="_self" >CheckoutOccEndpoints</a></code>
             </p>
 
 
@@ -85,34 +85,59 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { OccEndpoint } from &#x27;@spartacus/core&#x27;;
 
-export interface AccountSummaryOccEndpoints {
+export interface CheckoutOccEndpoints {
   /**
-   * Get Account summary header details
-   *
-   * @member {string} [accountSummary]
+   * Endpoint for set delivery address to cart
    */
-
-  accountSummary?: string | OccEndpoint;
-
+  setDeliveryAddress?: string | OccEndpoint;
   /**
-   * Get Account summary documents
-   *
-   * @member {string} [accountSummaryDocument]
+   * Get a list of supported payment card types.
    */
-
-  accountSummaryDocument?: string | OccEndpoint;
-
+  cardTypes?: string | OccEndpoint;
   /**
-   * Get Account summary document attachment
-   *
-   * @member {string} [accountSummaryDocumentAttachment]
+   * Sets credit card payment details for the cart.
    */
-
-  accountSummaryDocumentAttachment?: string | OccEndpoint;
+  setCartPaymentDetails?: string | OccEndpoint;
+  /**
+   *  Get information needed for create subscription
+   */
+  paymentProviderSubInfo?: string | OccEndpoint;
+  /**
+   * Handles response from payment provider and create payment details
+   */
+  createPaymentDetails?: string | OccEndpoint;
+  /**
+   * Get checkout details
+   */
+  getCheckoutDetails?: string | OccEndpoint;
+  /**
+   * Endpoint for create delivery address
+   */
+  createDeliveryAddress?: string | OccEndpoint;
+  /**
+   * Endpoint for delete deliver address
+   */
+  removeDeliveryAddress?: string | OccEndpoint;
+  /**
+   * Endpoint for get the delivery mode selected for the cart.
+   */
+  deliveryMode?: string | OccEndpoint;
+  /**
+   * Endpoint for sets the delivery mode for a cart.
+   */
+  setDeliveryMode?: string | OccEndpoint;
+  /**
+   * Endpoint for deletes the delivery mode from the cart.
+   */
+  clearDeliveryMode?: string | OccEndpoint;
+  /**
+   *Endpoint for get all delivery modes for the current store and delivery address.
+   */
+  deliveryModes?: string | OccEndpoint;
 }
 
 declare module &#x27;@spartacus/core&#x27; {
-  interface OccEndpoints extends AccountSummaryOccEndpoints {}
+  interface OccEndpoints extends CheckoutOccEndpoints {}
 }
 </code></pre>
     </div>

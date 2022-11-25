@@ -14,71 +14,71 @@
 <title>cluster_ScrollToTopModule</title>
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="8,-32.8 8,-230.8 404,-230.8 404,-32.8 8,-32.8"/>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_ScrollToTopModule_exports</title>
-<polygon fill="none" stroke="black" points="83,-170.8 83,-222.8 255,-222.8 255,-170.8 83,-170.8"/>
+<g id="clust4" class="cluster">
+<title>cluster_ScrollToTopModule_imports</title>
+<polygon fill="none" stroke="black" points="192,-40.8 192,-92.8 396,-92.8 396,-40.8 192,-40.8"/>
 </g>
 <g id="clust2" class="cluster">
 <title>cluster_ScrollToTopModule_declarations</title>
-<polygon fill="none" stroke="black" points="228,-40.8 228,-92.8 396,-92.8 396,-40.8 228,-40.8"/>
+<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 184,-92.8 184,-40.8 16,-40.8"/>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_ScrollToTopModule_imports</title>
-<polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 220,-92.8 220,-40.8 16,-40.8"/>
+<g id="clust5" class="cluster">
+<title>cluster_ScrollToTopModule_exports</title>
+<polygon fill="none" stroke="black" points="156,-170.8 156,-222.8 328,-222.8 328,-170.8 156,-170.8"/>
 </g>
 <!-- ScrollToTopComponent -->
 <g id="node1" class="node">
 <title>ScrollToTopComponent</title>
-<polygon fill="#ffffb3" stroke="black" points="388.38,-84.8 235.62,-84.8 235.62,-48.8 388.38,-48.8 388.38,-84.8"/>
-<text text-anchor="middle" x="312" y="-62.6" font-family="Times,serif" font-size="14.00">ScrollToTopComponent</text>
+<polygon fill="#ffffb3" stroke="black" points="176.38,-84.8 23.62,-84.8 23.62,-48.8 176.38,-48.8 176.38,-84.8"/>
+<text text-anchor="middle" x="100" y="-62.6" font-family="Times,serif" font-size="14.00">ScrollToTopComponent</text>
 </g>
 <!-- ScrollToTopModule -->
 <g id="node2" class="node">
 <title>ScrollToTopModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="234.6,-149.8 231.6,-153.8 210.6,-153.8 207.6,-149.8 103.4,-149.8 103.4,-113.8 234.6,-113.8 234.6,-149.8"/>
-<text text-anchor="middle" x="169" y="-127.6" font-family="Times,serif" font-size="14.00">ScrollToTopModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="307.6,-149.8 304.6,-153.8 283.6,-153.8 280.6,-149.8 176.4,-149.8 176.4,-113.8 307.6,-113.8 307.6,-149.8"/>
+<text text-anchor="middle" x="242" y="-127.6" font-family="Times,serif" font-size="14.00">ScrollToTopModule</text>
 </g>
 <!-- ScrollToTopComponent&#45;&gt;ScrollToTopModule -->
 <g id="edge1" class="edge">
 <title>ScrollToTopComponent&#45;&gt;ScrollToTopModule</title>
-<path fill="none" stroke="black" d="M241.38,-84.91C241.38,-104.14 241.38,-131.8 241.38,-131.8 241.38,-131.8 240.71,-131.8 240.71,-131.8"/>
-<polygon fill="black" stroke="black" points="244.7,-128.3 234.7,-131.8 244.7,-135.3 244.7,-128.3"/>
+<path fill="none" stroke="black" d="M170.12,-84.91C170.12,-104.14 170.12,-131.8 170.12,-131.8 170.12,-131.8 170.74,-131.8 170.74,-131.8"/>
+<polygon fill="black" stroke="black" points="166.25,-135.3 176.25,-131.8 166.25,-128.3 166.25,-135.3"/>
 </g>
 <!-- ScrollToTopComponent  -->
 <g id="node5" class="node">
 <title>ScrollToTopComponent </title>
-<polygon fill="#fb8072" stroke="black" points="247.38,-214.8 90.62,-214.8 90.62,-178.8 247.38,-178.8 247.38,-214.8"/>
-<text text-anchor="middle" x="169" y="-192.6" font-family="Times,serif" font-size="14.00">ScrollToTopComponent </text>
+<polygon fill="#fb8072" stroke="black" points="320.38,-214.8 163.62,-214.8 163.62,-178.8 320.38,-178.8 320.38,-214.8"/>
+<text text-anchor="middle" x="242" y="-192.6" font-family="Times,serif" font-size="14.00">ScrollToTopComponent </text>
 </g>
 <!-- ScrollToTopModule&#45;&gt;ScrollToTopComponent  -->
 <g id="edge4" class="edge">
 <title>ScrollToTopModule&#45;&gt;ScrollToTopComponent </title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M169,-149.91C169,-149.91 169,-168.79 169,-168.79"/>
-<polygon fill="black" stroke="black" points="165.5,-168.79 169,-178.79 172.5,-168.79 165.5,-168.79"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M242,-149.91C242,-149.91 242,-168.79 242,-168.79"/>
+<polygon fill="black" stroke="black" points="238.5,-168.79 242,-178.79 245.5,-168.79 238.5,-168.79"/>
 </g>
 <!-- I18nModule -->
 <g id="node3" class="node">
 <title>I18nModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="211.71,-84.8 208.71,-88.8 187.71,-88.8 184.71,-84.8 126.29,-84.8 126.29,-48.8 211.71,-48.8 211.71,-84.8"/>
-<text text-anchor="middle" x="169" y="-62.6" font-family="Times,serif" font-size="14.00">I18nModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="387.71,-84.8 384.71,-88.8 363.71,-88.8 360.71,-84.8 302.29,-84.8 302.29,-48.8 387.71,-48.8 387.71,-84.8"/>
+<text text-anchor="middle" x="345" y="-62.6" font-family="Times,serif" font-size="14.00">I18nModule</text>
 </g>
 <!-- I18nModule&#45;&gt;ScrollToTopModule -->
 <g id="edge2" class="edge">
 <title>I18nModule&#45;&gt;ScrollToTopModule</title>
-<path fill="none" stroke="black" d="M169,-84.91C169,-84.91 169,-103.79 169,-103.79"/>
-<polygon fill="black" stroke="black" points="165.5,-103.79 169,-113.79 172.5,-103.79 165.5,-103.79"/>
+<path fill="none" stroke="black" d="M313.87,-84.91C313.87,-104.14 313.87,-131.8 313.87,-131.8 313.87,-131.8 313.26,-131.8 313.26,-131.8"/>
+<polygon fill="black" stroke="black" points="317.74,-128.3 307.74,-131.8 317.74,-135.3 317.74,-128.3"/>
 </g>
 <!-- IconModule -->
 <g id="node4" class="node">
 <title>IconModule</title>
-<polygon fill="#8dd3c7" stroke="black" points="108.43,-84.8 105.43,-88.8 84.43,-88.8 81.43,-84.8 23.57,-84.8 23.57,-48.8 108.43,-48.8 108.43,-84.8"/>
-<text text-anchor="middle" x="66" y="-62.6" font-family="Times,serif" font-size="14.00">IconModule</text>
+<polygon fill="#8dd3c7" stroke="black" points="284.43,-84.8 281.43,-88.8 260.43,-88.8 257.43,-84.8 199.57,-84.8 199.57,-48.8 284.43,-48.8 284.43,-84.8"/>
+<text text-anchor="middle" x="242" y="-62.6" font-family="Times,serif" font-size="14.00">IconModule</text>
 </g>
 <!-- IconModule&#45;&gt;ScrollToTopModule -->
 <g id="edge3" class="edge">
 <title>IconModule&#45;&gt;ScrollToTopModule</title>
-<path fill="none" stroke="black" d="M97.13,-84.91C97.13,-104.14 97.13,-131.8 97.13,-131.8 97.13,-131.8 97.74,-131.8 97.74,-131.8"/>
-<polygon fill="black" stroke="black" points="93.26,-135.3 103.26,-131.8 93.26,-128.3 93.26,-135.3"/>
+<path fill="none" stroke="black" d="M242,-84.91C242,-84.91 242,-103.79 242,-103.79"/>
+<polygon fill="black" stroke="black" points="238.5,-103.79 242,-113.79 245.5,-103.79 238.5,-103.79"/>
 </g>
 </g>
 </svg>

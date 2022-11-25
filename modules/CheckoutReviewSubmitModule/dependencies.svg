@@ -18,13 +18,13 @@
 <title>cluster_CheckoutReviewSubmitModule_declarations</title>
 <polygon fill="none" stroke="black" points="682,-40.8 682,-92.8 916,-92.8 916,-40.8 682,-40.8"/>
 </g>
-<g id="clust5" class="cluster">
-<title>cluster_CheckoutReviewSubmitModule_exports</title>
-<polygon fill="none" stroke="black" points="297,-170.8 297,-222.8 535,-222.8 535,-170.8 297,-170.8"/>
-</g>
 <g id="clust4" class="cluster">
 <title>cluster_CheckoutReviewSubmitModule_imports</title>
 <polygon fill="none" stroke="black" points="16,-40.8 16,-92.8 674,-92.8 674,-40.8 16,-40.8"/>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_CheckoutReviewSubmitModule_exports</title>
+<polygon fill="none" stroke="black" points="297,-170.8 297,-222.8 535,-222.8 535,-170.8 297,-170.8"/>
 </g>
 <!-- CheckoutReviewSubmitComponent -->
 <g id="node1" class="node">
