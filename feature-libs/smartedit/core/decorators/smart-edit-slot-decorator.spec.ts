@@ -24,7 +24,7 @@ describe('SmartEditSlotDecorator', () => {
   });
 
   it('should be created', () => {
-    expect(decorator).toBeFalsy();
+    expect(decorator).toBeTruthy();
   });
 
   it('should call addSmartEditContract', () => {
