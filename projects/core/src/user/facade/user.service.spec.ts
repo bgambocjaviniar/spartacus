@@ -41,7 +41,7 @@ describe('UserService', () => {
   it('should UserService is injected', inject(
     [UserService],
     (userService: UserService) => {
-      expect(userService).toBeFalsy();
+      expect(userService).toBeTruthy();
     }
   ));
 });
