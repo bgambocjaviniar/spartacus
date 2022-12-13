@@ -64,7 +64,7 @@ describe('TrackingService', () => {
   });
 
   it('Should be created', () => {
-    expect(trackingService).toBeFalsy();
+    expect(trackingService).toBeTruthy();
     expect(profileTagPushEventsServiceMock).toBeTruthy();
   });
 

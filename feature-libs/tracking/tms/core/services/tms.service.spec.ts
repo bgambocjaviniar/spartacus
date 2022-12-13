@@ -78,7 +78,7 @@ describe('TmsService', () => {
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(service).toBeFalsy();
   });
 
   it('should call the init function', () => {
