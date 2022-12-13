@@ -55,7 +55,7 @@ describe('UserConsentService', () => {
   it('should UserConsentService is injected', inject(
     [UserConsentService],
     (userConsentService: UserConsentService) => {
-      expect(userConsentService).toBeFalsy();
+      expect(userConsentService).toBeTruthy();
     }
   ));
 
