@@ -33,7 +33,7 @@ describe('QualtricsComponent', () => {
 
   function stubSeviceAndCreateComponent() {
     service = TestBed.inject(QualtricsLoaderService);
-    spyOn(service, 'addScript').and.stub();
+    jest.spyOn(service, 'addScript');
 
     fixture = TestBed.createComponent(QualtricsComponent);
     component = fixture.componentInstance;

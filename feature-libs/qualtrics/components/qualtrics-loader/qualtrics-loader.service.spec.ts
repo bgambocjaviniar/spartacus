@@ -24,7 +24,7 @@ const mockedWindowRef = {
     addEventListener: (event, listener) => {
       eventListener[event] = listener;
     },
-    removeEventListener: jasmine.createSpy('removeEventListener'),
+    removeEventListener: jest.fn(),
     QSI: mockQsiJsApi,
   },
   document: {
@@ -81,12 +81,12 @@ describe('QualtricsLoaderService', () => {
   });
 
   describe('Consume Qualtrics API', () => {
-    let qsiRun: jasmine.Spy<any>;
-    let qsiUnload: jasmine.Spy<any>;
+    let qsiRun: jest.SpyInstance<any>;
+    let qsiUnload: jest.SpyInstance<any>;
 
     beforeEach(() => {
-      qsiRun = spyOn(winRef.nativeWindow['QSI'].API, 'run').and.stub();
-      qsiUnload = spyOn(winRef.nativeWindow['QSI'].API, 'unload').and.stub();
+      qsiRun = jest.spyOn(winRef.nativeWindow['QSI'].API, 'run');
+      qsiUnload = jest.spyOn(winRef.nativeWindow['QSI'].API, 'unload');
     });
 
     it('should not load Qualtrics when the qsi_js_loaded event is not triggered', () => {
@@ -112,7 +112,9 @@ describe('QualtricsLoaderService', () => {
       });
 
       it('should unload when a script is alread in the DOM', () => {
-        spyOn(winRef.document, 'querySelector').and.returnValue({} as Element);
+        jest
+          .spyOn(winRef.document, 'querySelector')
+          .mockReturnValue({} as Element);
         service.addScript(mockScript);
         expect(qsiUnload).toHaveBeenCalled();
       });
@@ -121,7 +123,7 @@ describe('QualtricsLoaderService', () => {
 
   describe('addScript()', () => {
     beforeEach(() => {
-      spyOn(scriptLoader, 'embedScript').and.callThrough();
+      jest.spyOn(scriptLoader, 'embedScript');
       loadQsi();
     });
 
@@ -134,7 +136,9 @@ describe('QualtricsLoaderService', () => {
 
     it('should not add the same script twice', () => {
       // simulate script has been added
-      spyOn(winRef.document, 'querySelector').and.returnValue({} as Element);
+      jest
+        .spyOn(winRef.document, 'querySelector')
+        .mockReturnValue({} as Element);
       service.addScript(mockScript);
       expect(scriptLoader.embedScript).not.toHaveBeenCalled();
     });
@@ -143,7 +147,7 @@ describe('QualtricsLoaderService', () => {
   describe('custom service', () => {
     it('should invoke custom data collector', () => {
       const customService = TestBed.inject(CustomQualtricsLoaderService);
-      spyOn(customService, 'collectData').and.callThrough();
+      jest.spyOn(customService, 'collectData');
 
       eventListener[QUALTRICS_EVENT_NAME](new Event(QUALTRICS_EVENT_NAME));
 

@@ -16,11 +16,9 @@
       }
     },
     "test": {
-      "executor": "@angular-devkit/build-angular:karma",
+      "builder": "@nrwl/jest:jest",
       "options": {
-        "main": "feature-libs/qualtrics/test.ts",
-        "tsConfig": "feature-libs/qualtrics/tsconfig.spec.json",
-        "karmaConfig": "feature-libs/qualtrics/karma.conf.js"
+        "jestConfig": "feature-libs/qualtrics/jest.config.js"
       }
     },
     "lint": {
