@@ -114,8 +114,9 @@ describe('SavedCart Effects', () => {
         b: completion1,
         c: completion2,
       });
-      expect(effects.loadSavedCart$).toBeObservable('expected');
-      expect(connector.get).toHaveBeenCalledWith('mockUserId', mockCartId);
+
+      expect(effects.loadSavedCart$).toBeObservable(expected);
+      expect(connector.get).toHaveBeenCalledWith(mockUserId, mockCartId);
     });
   });
 
