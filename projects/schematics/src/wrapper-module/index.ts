@@ -217,7 +217,6 @@ function createWrapperModule(options: SpartacusWrapperOptions): Rule {
 /**
  * Changes the dynamic import to point to the wrapper module.
  * E.g. instead of:
- * `import('@spartacus/user/profile').then((m) => m.UserProfileModule),`
  * it will be changed to:
  * `import('./profile-wrapper.module').then((m) => m.ProfileWrapperModule),`
  *
@@ -416,8 +415,6 @@ export function cleanupConfig(spartacusProvider: CallExpression): void {
 
 /**
  * Replaces the given dynamic import's path.
- * E.g. for the given `() => import('@spartacus/checkout/base')`
- * it replaces it with the given path: `() => import('./checkout-wrapper.module')`.
  */
 function updateDynamicImportPath(
   dynamicImport: ArrowFunction,
@@ -430,8 +427,6 @@ function updateDynamicImportPath(
 
 /**
  * Replaces the given dynamic import's module name.
- * E.g. for the given `(m) => m.CheckoutModule`
- * it replaces it with the given module name: `(m) => m.CheckoutWrapperModule`.
  */
 function updateDynamicImportModuleName(
   dynamicImport: ArrowFunction,
