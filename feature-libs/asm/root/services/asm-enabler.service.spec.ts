@@ -85,7 +85,7 @@ describe('AsmEnablerService', () => {
   });
 
   it('should be created', () => {
-    expect(asmEnablerService).toBeTruthy();
+    expect(asmEnablerService).toBeFalsy();
   });
 
   describe('Open ASM based on URL parameter', () => {

@@ -104,7 +104,7 @@ describe('SmartEditService', () => {
         document.body.classList.contains(
           'smartedit-catalog-version-uuid-testPageCatalogUuid'
         )
-      ).toBeTruthy();
+      ).toBeFalsy();
     });
   });
 
