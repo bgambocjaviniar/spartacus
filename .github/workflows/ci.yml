@@ -20,9 +20,7 @@ concurrency:
 
 name: Spartacus build pipeline
 jobs:
-  unit_tests_core:
-    needs: no_retries
-    name: Unit tests for core Spartacus libs
+  main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
