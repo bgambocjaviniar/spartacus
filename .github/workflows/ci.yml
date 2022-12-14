@@ -42,13 +42,13 @@ jobs:
           restore-keys: nodemodules-${{ github.event.pull_request.base.sha }}
       - run: pwd
       - name: Cache dist
-          id: dist
-          uses: actions/cache@v2
-          with:
-            path: | 
-              dist
-            key: dist-${{ github.event.pull_request.base.sha }}
-            restore-keys: dist-${{ github.event.pull_request.base.sha }}
+        id: dist
+        uses: actions/cache@v2
+        with:
+          path: | 
+            dist
+          key: dist-${{ github.event.pull_request.base.sha }}
+          restore-keys: dist-${{ github.event.pull_request.base.sha }}
       - run: pwd
       - name: Package installation
         run: yarn --frozen-lockfile
