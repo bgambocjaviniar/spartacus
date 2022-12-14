@@ -24,6 +24,7 @@ jobs:
       - name: Installing cypress dependencies
         working-directory: projects/storefrontapp-e2e-cypress
         run: yarn --frozen-lockfile
+      - run: yarn build:libs
       - name: Cache node_modules
         id: cache-node-modules
         uses: actions/cache@v2
@@ -32,4 +33,5 @@ jobs:
             node_modules
             projects/storefrontapp-e2e-cypress/node_modules
             ~/.cache/Cypress
+            dist
           key: nodemodules-${{ github.sha }}
