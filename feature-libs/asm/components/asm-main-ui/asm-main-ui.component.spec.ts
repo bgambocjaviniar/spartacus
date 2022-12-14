@@ -190,6 +190,7 @@ describe('AsmMainUiComponent', () => {
   });
 
   it('should create', () => {
+    console.log('ghi');
     expect(component).toBeTruthy();
   });
 
