@@ -57,5 +57,4 @@ jobs:
       - name: Package installation
         run: yarn --frozen-lockfile
       - run: npx nx print-affected
-      - run: npx nx affected --target=test
       - run: yarn build:core
