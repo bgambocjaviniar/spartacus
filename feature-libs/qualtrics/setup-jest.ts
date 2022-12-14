@@ -7,10 +7,9 @@
 globalThis.ngJest = {
   testEnvironmentOptions: {
     teardown: {
-      destroyAfterEach: true,
+      destroyAfterEach: false,
     },
   },
 };
 
 import 'jest-preset-angular/setup-jest';
-import 'zone.js';

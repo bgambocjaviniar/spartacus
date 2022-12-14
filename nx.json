@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "spartacus",
   "affected": {
     "defaultBase": "develop"
@@ -22,6 +23,9 @@
     "build": {
       "dependsOn": ["^build"]
     }
+  },
+  "cli": {
+    "packageManager": "yarn"
   },
   "workspaceLayout": {
     "appsDir": "projects/storefrontapp",

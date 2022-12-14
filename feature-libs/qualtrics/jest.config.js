@@ -1,14 +1,13 @@
 const { pathsToModuleNameMapper } = require('ts-jest');
 const { compilerOptions } = require('./tsconfig.spec.json');
 
-// globalThis.ngJest = {
-//   testEnvironmentOptions: {
-//     teardown: {
-//       destroyAfterEach: true,
-//     },
-//   },
-// };
-
+globalThis.ngJest = {
+  testEnvironmentOptions: {
+    teardown: {
+      destroyAfterEach: false,
+    },
+  },
+};
 module.exports = {
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
@@ -23,7 +22,7 @@ module.exports = {
   },
   collectCoverage: false,
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
-  coverageDirectory: '<rootDir>/../../coverage/qualtrics/components',
+  coverageDirectory: '<rootDir>/../../coverage/qualtrics',
   coverageThreshold: {
     global: {
       statements: 90,

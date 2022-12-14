@@ -5,10 +5,11 @@
     "outDir": "../../out-tsc/spec",
     "strict": false,
     "module": "CommonJs",
-    "types": ["jest"],
+    "types": ["jest", "node"],
     "paths": {
       "@spartacus/core": ["../../projects/core/public_api"]
     }
   },
-  "include": ["**/*.spec.ts", "**/*.d.ts"]
+  "files": ["setup-test.ts"],
+  "include": ["jest.config.js", " **/*.spec.ts", "**/*.d.ts"]
 }

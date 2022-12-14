@@ -134,6 +134,7 @@
     "@babel/runtime": "^7.18.9",
     "@ngrx/store-devtools": "^14.3.0",
     "@nguniversal/builders": "^14.2.0",
+    "@nrwl/cypress": "15.1.1",
     "@nrwl/jest": "15.1.1",
     "@nrwl/workspace": "^15.1.1",
     "@sapui5/ts-types-esm": "1.98.0",
