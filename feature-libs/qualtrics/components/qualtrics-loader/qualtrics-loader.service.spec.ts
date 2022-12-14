@@ -77,7 +77,7 @@ describe('QualtricsLoaderService', () => {
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(service).toBeFalsy();
   });
 
   describe('Consume Qualtrics API', () => {
