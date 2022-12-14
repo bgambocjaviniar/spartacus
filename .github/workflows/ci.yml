@@ -50,5 +50,5 @@ jobs:
       - run: ls -al
       - name: Package installation
         run: yarn --frozen-lockfile
-      - run: yarn nx print-affected --base=${{ github.event.pull_request.base.sha }} --head=${{ github.event.pull_request.base.sha }}
+      - run: yarn nx print-affected --base=[${{ github.event.pull_request.base.sha }}] --head=[${{ github.event.pull_request.base.sha }}]
       - run: yarn build:core
