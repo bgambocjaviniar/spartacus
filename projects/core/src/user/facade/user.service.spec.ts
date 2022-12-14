@@ -17,7 +17,7 @@ class MockUserIdService implements Partial<UserIdService> {
 
 describe('UserService', () => {
   let store: Store<StateWithUser>;
-
+  console.log('abc');
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [

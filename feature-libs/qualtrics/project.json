@@ -1,0 +1,34 @@
+{
+  "projectType": "library",
+  "sourceRoot": "feature-libs/qualtrics",
+  "prefix": "cx",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "tsConfig": "feature-libs/qualtrics/tsconfig.lib.json",
+        "project": "feature-libs/qualtrics/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "feature-libs/qualtrics/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "builder": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "feature-libs/qualtrics/jest.config.js"
+      }
+    },
+    "lint": {
+      "executor": "@angular-eslint/builder:lint",
+      "options": {
+        "lintFilePatterns": [
+          "feature-libs/qualtrics/**/*.ts",
+          "feature-libs/qualtrics/**/*.html"
+        ]
+      }
+    }
+  }
+}
