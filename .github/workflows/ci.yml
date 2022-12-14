@@ -24,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Setup node
         uses: actions/setup-node@v2
         with:
@@ -48,7 +50,12 @@ jobs:
           key: dist-${{ github.event.pull_request.base.sha }}
           restore-keys: dist-${{ github.event.pull_request.base.sha }}
       - run: ls -al
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: develop
       - name: Package installation
         run: yarn --frozen-lockfile
-      - run: yarn nx print-affected --base=[${{ github.event.pull_request.base.sha }}] --head=[${{ github.event.pull_request.base.sha }}]
+      - run: npx nx print-affected
+      - run: npx nx affected --target=test
       - run: yarn build:core
