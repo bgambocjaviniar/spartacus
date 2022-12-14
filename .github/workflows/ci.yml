@@ -26,7 +26,7 @@ jobs:
         with:
           main-branch-name: 'develop'
       - run: yarn install --frozen-lockfile
-
+      - run: npx add-nx-to-monorepo@latest
       - run: npx nx workspace-lint
       - run: npx nx format:check
       - run: npx nx print-affected
