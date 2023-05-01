@@ -143,28 +143,6 @@
       },
       "defaultConfiguration": "development"
     },
-    "test": {
-      "executor": "@angular-devkit/build-angular:karma",
-      "options": {
-        "main": "projects/storefrontapp/src/test.ts",
-        "polyfills": ["core-js/es/reflect", "zone.js"],
-        "tsConfig": "projects/storefrontapp/tsconfig.spec.json",
-        "karmaConfig": "projects/storefrontapp/karma.conf.js",
-        "styles": ["projects/storefrontapp/src/styles.scss"],
-        "scripts": [],
-        "assets": [
-          "projects/storefrontapp/src/favicon.ico",
-          "projects/storefrontapp/src/assets",
-          "projects/storefrontapp/src/manifest.json",
-          {
-            "glob": "**/*",
-            "input": "feature-libs/smartedit/assets",
-            "output": "assets/"
-          }
-        ],
-        "codeCoverageExclude": ["dist/**/*"]
-      }
-    },
     "lint": {
       "executor": "@angular-eslint/builder:lint",
       "options": {
