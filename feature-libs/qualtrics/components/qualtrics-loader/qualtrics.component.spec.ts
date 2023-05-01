@@ -49,7 +49,7 @@ describe('QualtricsComponent', () => {
       expect(component).toBeTruthy();
     });
 
-    it('should add qualtrics script', () => {
+    it('should add qualtrics sscript', () => {
       fixture.detectChanges();
       expect(service.addScript).toHaveBeenCalledWith(
         'assets/deployment-script.js'
