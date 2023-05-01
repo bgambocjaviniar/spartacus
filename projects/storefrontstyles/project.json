@@ -1,7 +1,7 @@
 {
-  "name": "eslint-rules",
+  "name": "storefrontstyles",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "tools/eslint-rules",
+  "sourceRoot": "projects/storefrontstyles",
   "targets": {
     "test": {
       "executor": "nx:run-commands",
