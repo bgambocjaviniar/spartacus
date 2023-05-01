@@ -57,7 +57,7 @@ class MockCartService implements Partial<ActiveCartFacade> {
   isGuestCart = createSpy().and.returnValue(of(false));
 }
 
-describe(`CheckoutGuard`, () => {
+describe(`CheckoutGsuard`, () => {
   let guard: CheckoutGuard;
   let mockRoutingConfigService: RoutingConfigService;
   let mockCheckoutStepService: CheckoutStepService;
