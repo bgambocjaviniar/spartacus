@@ -9,7 +9,7 @@ echo "-----"
 
 function run_affected_unit_tests {
     echo "Running JASMINE unit tests and code coverage for AFFECTED libraries"
-    npx nx affected --target=test --exclude="$EXCLUDE_JEST,$EXCLUDE_INTEGRATION_LIBS" --base=origin/develop-3299 --head=origin/feature-test-123-abc -- --no-watch --source-map --code-coverage --browsers ChromeHeadless
+    npx nx affected --target=test --exclude="$EXCLUDE_JEST,$EXCLUDE_INTEGRATION_LIBS" -- --no-watch --source-map --code-coverage --browsers ChromeHeadless
 
     echo "Running JEST (mostly schematics) unit tests and code coverage for AFFECTED libraries"
     npx nx affected --target=test-schematics -- --coverage --runInBand
