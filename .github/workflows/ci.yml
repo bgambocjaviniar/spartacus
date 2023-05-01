@@ -27,3 +27,5 @@ jobs:
           echo "  Branch = ${{ github.ref_name }}"
           echo " base = ${{ github.base_ref }}"
           echo " head = ${{ github.head_ref }}"
+          echo " 1 = ${{ github.event.pull_request.base.ref }}"
+          echo " 2 = ${{ github.event.pull_request.head.ref }}"
