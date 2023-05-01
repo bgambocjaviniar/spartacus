@@ -86,7 +86,7 @@ jobs:
         run: |
           ci-scripts/validate-lint.sh
   ci_result:
-    needs: [unit_tests_core, unit_tests, sonarqube_scan, linting]
+    needs: [unit_tests, sonarqube_scan, linting]
     name: CI - Result
     runs-on: ubuntu-latest
     if: ${{ always() }}
