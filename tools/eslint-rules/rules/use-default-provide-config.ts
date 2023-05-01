@@ -33,7 +33,7 @@ export const rule = ESLintUtils.RuleCreator(() => __filename)({
     schema: [],
     messages: {
       useDefaultProvideConfig:
-        '[Spartacus] provideConfig() is intended for library consumers. To allow for better extensibility, please provide default configs inside Spartacus libraries using provideDefaultConfig().',
+        '[Spartacus] provideConfig()a is intended for library consumers. To allow for better extensibility, please provide default configs inside Spartacus libraries using provideDefaultConfig().',
     },
   },
   defaultOptions: [],
