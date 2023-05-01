@@ -58,6 +58,8 @@ export class CheckoutB2BStepsSetGuard
       router,
       activeCartFacade
     );
+
+    console.log('abc');
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {

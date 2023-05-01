@@ -77,6 +77,7 @@ export class QualtricsLoaderService implements OnDestroy {
     protected scriptLoader: ScriptLoader
   ) {
     this.initialize();
+    console.log('abc');
   }
 
   /**

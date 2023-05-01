@@ -224,6 +224,7 @@ describe('CustomerTicketingService', () => {
     });
 
     it('should contain the query state', (done) => {
+      console.log('test');
       service
         .getTicketState()
         .pipe(take(1))
