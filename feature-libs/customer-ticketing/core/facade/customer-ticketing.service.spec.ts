@@ -232,6 +232,7 @@ describe('CustomerTicketingService', () => {
             mockUserId,
             mockRoutingParams.ticketCode
           );
+          expect(false).toBe(true);
           expect(state).toEqual({
             loading: false,
             error: false,

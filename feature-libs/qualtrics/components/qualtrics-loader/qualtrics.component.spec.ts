@@ -45,7 +45,7 @@ describe('QualtricsComponent', () => {
       stubSeviceAndCreateComponent();
     });
 
-    it('should create component', () => {
+    it('should create comonent', () => {
       expect(component).toBeTruthy();
     });
 
