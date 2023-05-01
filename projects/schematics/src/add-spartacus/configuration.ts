@@ -64,7 +64,7 @@ function addConfiguration(
   options: SpartacusOptions
 ): void {
   const { appSourceFiles } = createProgram(tree, basePath, tsconfigPath);
-
+  console.log('abc');
   for (const sourceFile of appSourceFiles) {
     if (
       sourceFile
