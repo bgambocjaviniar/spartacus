@@ -16,108 +16,23 @@ concurrency:
   group: ci-continuous-integration-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
-name: Continuous Integration
+name: abc terst
 jobs:
-  unit_tests_core:
-    name: CI - Unit tests for core Spartacus libs
+  no_retries:
+    name: Verify re-run of all jobs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Cache node_modules
-        id: cache-node-modules
-        uses: actions/cache@v2
-        with:
-          path: | 
-            node_modules
-            projects/storefrontapp-e2e-cypress/node_modules
-            ~/.cache/Cypress
-          key: nodemodules-${{ github.event.pull_request.base.sha }}
-          restore-keys: nodemodules-${{ github.event.pull_request.base.sha }}
-      - name: Package installation
-        run: npm ci
-      - name: Run unit tests for Spartacus libs
-        run: |
-          ci-scripts/unit-tests-core-lib.sh
-  unit_tests_libs:
-    name: CI - Unit tests for integration libs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Cache node_modules
-        id: cache-node-modules
-        uses: actions/cache@v2
-        with:
-          path: | 
-            node_modules
-            projects/storefrontapp-e2e-cypress/node_modules
-            ~/.cache/Cypress
-          key: nodemodules-${{ github.event.pull_request.base.sha }}
-          restore-keys: nodemodules-${{ github.event.pull_request.base.sha }}
-      - name: Package installation
-        run: npm ci
-      - name: Run unit tests for integration libs
-        run: |
-          ci-scripts/unit-tests.sh          
-  sonarqube_scan:
-    name: CI - SonarQube Scan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        with:
-          args: >
-            -Dsonar.qualitygate.wait=true
-            -Dsonar.projectKey=composable-storefront
+      - run: |
+          echo "Context Info:"
+          echo "  Event = ${{ github.event_name }}"
+          echo "  Branch = ${{ github.ref_name }}"
+          echo " base = ${{ github.base_ref }}"
+          echo " head = ${{ github.head_ref }}"
+          echo " 1 = ${{ github.event.pull_request.base.ref }}"
+          echo " 2 = ${{ github.event.pull_request.head.ref }}"
+          echo " 3 = ${{ github.event.pull_request.base.sha }}"
+          echo " 4 = ${{ github.event.pull_request.head.sha }}"
+      - name: ok
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonar.tools.sap
-    if: github.event_name == 'pull_request'
-  linting:
-    name: CI - Validations and static code checks
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Cache node_modules
-        id: cache-node-modules
-        uses: actions/cache@v2
-        with:
-          path: | 
-            node_modules
-            projects/storefrontapp-e2e-cypress/node_modules
-            ~/.cache/Cypress
-          key: nodemodules-${{ github.event.pull_request.base.sha }}
-          restore-keys: nodemodules-${{ github.event.pull_request.base.sha }}
-      - name: Package installation
-        run: npm ci
-      - name: Run linting validation
-        run: |
-          ci-scripts/validate-lint.sh
-  ci_result:
-    needs: [unit_tests_core, unit_tests_libs, sonarqube_scan, linting]
-    name: CI - Result
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    steps:
-      - name: Aggregate Required Job Results
-        run: |
-            exit 1
-        if: |
-          needs.unit_tests_core.result == 'failure' || needs.unit_tests_core.result == 'cancelled' ||
-          needs.unit_tests_libs.result == 'failure' || needs.unit_tests_libs.result == 'cancelled' || 
-          needs.sonarqube_scan.result == 'failure' || needs.sonarqube_scan.result == 'cancelled' ||
-          needs.linting.result == 'failure' || needs.linting.result == 'cancelled'
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
