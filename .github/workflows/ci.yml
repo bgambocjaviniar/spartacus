@@ -29,3 +29,8 @@ jobs:
           echo " head = ${{ github.head_ref }}"
           echo " 1 = ${{ github.event.pull_request.base.ref }}"
           echo " 2 = ${{ github.event.pull_request.head.ref }}"
+          - name: Dump GitHub context
+      - name: ok
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
