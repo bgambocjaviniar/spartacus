@@ -34,4 +34,8 @@ import { CmsConfig, provideConfig } from '@spartacus/core';
     }),
   ],
 })
-export class CdcFeatureModule {}
+export class CdcFeatureModule {
+  constructor() {
+    console.log('abc');
+  }
+}
