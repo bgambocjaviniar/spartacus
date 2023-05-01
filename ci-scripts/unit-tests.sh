@@ -24,6 +24,8 @@ function run_all_unit_tests {
 }
 
 if [ "${GITHUB_EVENT_NAME}" == "pull_request" ]; then
+    npx nx print-affected --select=projects
+
     if [[ "${GITHUB_HEAD_REF}" == epic/* ]]; then
         run_all_unit_tests
     else 
