@@ -1,0 +1,15 @@
+{
+  "name": "eslint-rules",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "tools/eslint-rules",
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "  npm run test --runInBand",
+        "cwd": "projects/storefrontstyles"
+      }
+    }
+  },
+  "tags": ["type:util"]
+}
