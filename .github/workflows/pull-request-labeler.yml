@@ -1,0 +1,13 @@
+on:
+  pull_request
+name: "Pull Request Labeler"
+jobs:
+  autoLabelPullRequest:
+    name: Auto label pull request
+    runs-on: ubuntu-latest
+    steps:
+    - uses: TimonVS/pr-labeler-action@v3
+      with: 
+        configuration-path: .github/pull-request.labeler.yml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
